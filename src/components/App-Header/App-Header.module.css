@@ -1,0 +1,28 @@
+.header_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1280px;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.left_menu {
+    display: flex;
+    position: absolute;
+    left: 0;
+}
+
+.right_menu {
+    position: absolute;
+    right: 0;
+}
+
+.global{
+    display: flex;
+    max-width: 1920px;
+    background: rgba(47, 47, 55, 1);
+    margin: 40px;
+}
+
