@@ -1,0 +1,14 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    width: calc(100%/2);
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+}
+
+.name {
+    text-align: center;
+}
