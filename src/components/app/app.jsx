@@ -1,24 +1,25 @@
 import styles from "./app.module.css";
 import AppHeader from "../App-Header/App-Header";
 import Tabs from "../Burger-Ingredients/Tabs/Tabs";
-import BurgerIngredients from "../Burger-Ingredients/Burger-Ingredients"
+import BurgerIngredients from "../Burger-Ingredients/Burger-Ingredients";
+import BurgerConstructor from "../Burger-Constructor/Burger-Constructor";
 
 function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
       <main className={`${styles.main} pl-10 pr-10`}>
-        <div className={styles.container}>
-          <h1 className="text text_type_main-large pb-5">
-          Соберите бургер
+        <section className={`${styles.section} pb-10`}>
+          <h1 className="text text_type_main-large mb-5">
+            Соберите бургер
           </h1>
           <Tabs />
           <BurgerIngredients />
-        </div>
+        </section>
 
-        <div className={styles.container}>
-          
-        </div>
+        <section className={`${styles.section} pt-15`}>
+          <BurgerConstructor />
+        </section>
       </main>
     </div>
   );
