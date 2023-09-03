@@ -1,6 +1,7 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import CardStyle from "./card.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components"
+import { cardPropType } from "../../../utils/prop-types";
 
 export default function Card(props) {
 
@@ -18,3 +19,5 @@ export default function Card(props) {
         </>
     )
 }
+
+Card.prototype = cardPropType;
