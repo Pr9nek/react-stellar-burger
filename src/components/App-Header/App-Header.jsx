@@ -29,7 +29,7 @@ export default function AppHeader() {
                 <div className={`${HeaderStyles.header_item} jc-f-e`}>
                     <Nav>
                     <ProfileIcon type="secondary"/>
-                    <p className="text text_type_main-default text_color_inactive pl-2">Лента заказов</p>
+                    <p className="text text_type_main-default text_color_inactive pl-2 ">Личный кабинет</p>
                     </Nav>
                 </div>
             </div>

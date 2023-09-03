@@ -8,16 +8,18 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <main className={`${styles.main} pl-10 pr-10`}>
+      <main className={`${styles.main} pl-5 pr-5`}>
         <section className={`${styles.section} pb-10`}>
           <h1 className="text text_type_main-large mb-5">
             Соберите бургер
           </h1>
-          <Tabs />
+          <div className="mb-10">
+            <Tabs />
+          </div>
           <BurgerIngredients />
         </section>
 
-        <section className={`${styles.section} pt-15`}>
+        <section className={`${styles.section} pt-15 pl-4 pb-10`}>
           <BurgerConstructor />
         </section>
       </main>

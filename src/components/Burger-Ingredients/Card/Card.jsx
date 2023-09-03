@@ -1,5 +1,6 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import CardStyle from "./card.module.css";
+import { Counter } from "@ya.praktikum/react-developer-burger-ui-components"
 
 export default function Card(props) {
 
@@ -12,6 +13,7 @@ export default function Card(props) {
                     <CurrencyIcon type="primary" />
                 </div>
                 <p className={`text text_type_main-default pb-6 ${CardStyle.name}`}>{props.name}</p>
+                {props.count && <Counter count={props.count} size="default" extraClass="m-1" className={CardStyle.counter}/>}
             </div>
         </>
     )
