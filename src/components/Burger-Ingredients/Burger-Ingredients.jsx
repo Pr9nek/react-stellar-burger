@@ -1,29 +1,13 @@
 import Card from "./Card/Card";
 import StylesIngrediets from "./Burger-Ingredients.module.css";
 import { data } from "../../utils/data";
+import { useMemo } from "react";
 
 export default function BurgerIngredients() {
-    // console.log(JSON.parse(data));
     const ingredients = JSON.parse(JSON.stringify(data));
-    let buns = [];
-    let mains = [];
-    let sauces = [];
-
-    ingredients.forEach((item) => {
-        switch (item.type) {
-            case "bun":
-                buns.push(item);
-                break;
-            case "sauce":
-                sauces.push(item);
-                break;
-            case "main":
-                mains.push(item);
-                break;
-            default:
-                break;
-        }
-    });
+    const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
+    const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
+    const sauces = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
 
     return (
         <>

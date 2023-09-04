@@ -3,31 +3,16 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import ListItem from "./List-Item/List-Item";
 import { data } from "../../utils/data";
 import StylesConstructor from "./Burger-Constructor.module.css";
-// import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import CurrencyIconBig from "../../images/CurrencyIconBig.png";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useMemo } from "react";
 
-export default function BurgerConstructor(props) {
+export default function BurgerConstructor() {
     const ingredients = JSON.parse(JSON.stringify(data));
-    let buns = [];
-    let mains = [];
-    let sauces = [];
-
-    ingredients.forEach((item) => {
-        switch (item.type) {
-            case "bun":
-                buns.push(item);
-                break;
-            case "sauce":
-                sauces.push(item);
-                break;
-            case "main":
-                mains.push(item);
-                break;
-            default:
-                break;
-        }
-    });
+    const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
+    const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
+    const sauces = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
+    const price = useMemo(() => ingredients.reduce((acc,i) => acc + i.price, 0),[ingredients]);
 
     let middles = [...mains, ...sauces];
 
@@ -36,9 +21,9 @@ export default function BurgerConstructor(props) {
             <div className={`${StylesConstructor.border} mr-4`}>
                 <ConstructorElement
                     type="top"
-                    isLocked={true}
+                    isLocked
                     text="Краторная булка N-200i (верх)"
-                    price={200}
+                    price={buns[0].price}
                     thumbnail={buns[0].image}
                 />
             </div >
@@ -53,14 +38,14 @@ export default function BurgerConstructor(props) {
             <div className={`${StylesConstructor.border} mr-4`}>
                 <ConstructorElement
                     type="bottom"
-                    isLocked={true}
+                    isLocked
                     text="Краторная булка N-200i (низ)"
-                    price={200}
-                    thumbnail={buns[0].image}
+                    price={buns[1].price}
+                    thumbnail={buns[1].image}
                 />
             </div>
             <div className={StylesConstructor.footer}>
-                <p className="text text_type_digits-medium pr-2">610</p>
+                <p className="text text_type_digits-medium pr-2">{price}</p>
                 <img src={CurrencyIconBig} alt="Значок цены" className="pr-10"  />
                 <Button htmlType="button" type="primary" size="large">
                     Оформить заказ
