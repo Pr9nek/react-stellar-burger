@@ -1,14 +1,14 @@
 
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import ListItem from "./List-Item/List-Item";
-import { data } from "../../utils/data";
+// import { data } from "../../utils/data";
 import StylesConstructor from "./Burger-Constructor.module.css";
 import CurrencyIconBig from "../../images/CurrencyIconBig.png";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
 
-export default function BurgerConstructor() {
-    const ingredients = JSON.parse(JSON.stringify(data));
+export default function BurgerConstructor(props) {
+    const ingredients = props.data;
     const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
     const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
     const sauces = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
