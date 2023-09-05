@@ -1,0 +1,21 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    width: calc(100%/2 - 44px);
+    position: relative;
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+}
+
+.name {
+    text-align: center;
+}
+
+.counter {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

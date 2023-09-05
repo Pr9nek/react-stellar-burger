@@ -1,0 +1,17 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 32px;
+    column-gap: 24px;
+}
+
+.lists {
+    list-style-type: none;
+    margin-left: 0; 
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 664px;
+    overflow-y: auto;
+}
