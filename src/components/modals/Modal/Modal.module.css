@@ -1,0 +1,17 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    height: 300px;
+    width: 300px;
+    background-color: aquamarine;
+}
+
+.closeIcon {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    /* transform: translate(-50%, -50%); */
+}

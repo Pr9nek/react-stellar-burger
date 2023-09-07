@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import ListItem from "./List-Item/List-Item";
 // import { data } from "../../utils/data";
@@ -6,13 +6,39 @@ import StylesConstructor from "./Burger-Constructor.module.css";
 import CurrencyIconBig from "../../images/CurrencyIconBig.png";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
+import Modal from "../modals/Modal/Modal";
 
 export default function BurgerConstructor(props) {
     const ingredients = props.data;
+    const [openModal, setOpenModal] = useState(false);
+
+    // useEffect(() => {
+    //     window.addEventListener("keydown", closeWithEsc);
+    //     return () => {
+    //     window.removeEventListener("keydown", closeWithEsc);
+    //     }
+    // }, []);
+
+    // function closeWithEsc(e) {
+    //     if (e.key === "Escape") {
+    //         setOpenModal(false);
+    //         console.log(666);
+    //     }
+    // }
+
+    function closeWithEsc() {
+        setOpenModal(false);
+    }
+
+    function CloseWithClick() {
+        setOpenModal(false);
+        console.log(123);
+    }
+
     const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
     const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
     const sauces = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
-    const price = useMemo(() => ingredients.reduce((acc,i) => acc + i.price, 0),[ingredients]);
+    const price = useMemo(() => ingredients.reduce((acc, i) => acc + i.price, 0), [ingredients]);
 
     let middles = [...mains, ...sauces];
 
@@ -46,10 +72,11 @@ export default function BurgerConstructor(props) {
             </div>
             <div className={StylesConstructor.footer}>
                 <p className="text text_type_digits-medium pr-2">{price}</p>
-                <img src={CurrencyIconBig} alt="Значок цены" className="pr-10"  />
-                <Button htmlType="button" type="primary" size="large">
+                <img src={CurrencyIconBig} alt="Значок цены" className="pr-10" />
+                <Button htmlType="button" type="primary" size="large" onClick={() => setOpenModal(true)}>
                     Оформить заказ
                 </Button>
+                {openModal && <Modal onClose={CloseWithClick} onKeyClose={closeWithEsc} />}
             </div>
         </>
     )
