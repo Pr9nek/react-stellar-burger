@@ -21,7 +21,7 @@ export default function Modal({ onClose, onKeyClose, header, children }) {
     return ReactDOM.createPortal(
         (
             <>
-                <div onKeyDown={onKeyClose} className={StylesModal.modal}>
+                <div className={StylesModal.modal}>
                     <h1>{header}</h1>
                     <div onClick={onClose}
                         className={StylesModal.closeIcon}
