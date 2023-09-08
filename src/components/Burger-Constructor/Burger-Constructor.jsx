@@ -12,25 +12,7 @@ export default function BurgerConstructor(props) {
     const ingredients = props.data;
     const [openModal, setOpenModal] = useState(false);
 
-    // useEffect(() => {
-    //     window.addEventListener("keydown", closeWithEsc);
-    //     return () => {
-    //     window.removeEventListener("keydown", closeWithEsc);
-    //     }
-    // }, []);
-
-    // function closeWithEsc(e) {
-    //     if (e.key === "Escape") {
-    //         setOpenModal(false);
-    //         console.log(666);
-    //     }
-    // }
-
-    function closeWithEsc() {
-        setOpenModal(false);
-    }
-
-    function CloseWithClick() {
+    function CloseModal() {
         setOpenModal(false);
         console.log(123);
     }
@@ -76,7 +58,7 @@ export default function BurgerConstructor(props) {
                 <Button htmlType="button" type="primary" size="large" onClick={() => setOpenModal(true)}>
                     Оформить заказ
                 </Button>
-                {openModal && <Modal onClose={CloseWithClick} onKeyClose={closeWithEsc} />}
+                {openModal && <Modal onClose={CloseModal} />}
             </div>
         </>
     )
