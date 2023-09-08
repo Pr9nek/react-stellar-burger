@@ -1,17 +1,24 @@
 .modal {
+    border-radius: 10px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
-    height: 300px;
-    width: 300px;
-    background-color: aquamarine;
+    background-color: rgba(28, 28, 33, 1);
+    min-width: 720px;}
+
+.close {
+   display: flex;
+   align-items: center;
 }
 
-.closeIcon {
-    position: absolute;
-    top: 60px;
-    right: 40px;
-    /* transform: translate(-50%, -50%); */
+.header {
+    padding-left: 40px;
+    padding-top: 40px;
+    padding-right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
 }

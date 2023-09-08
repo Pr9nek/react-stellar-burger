@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import StylesModal from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../Modal-Overlay/ModalOverlay";
+import { modalPropType } from "../../../utils/prop-types";
 
 export default function Modal({ onClose, header, children }) {
     const modalRoot = document.getElementById("react-modals");
@@ -11,22 +12,22 @@ export default function Modal({ onClose, header, children }) {
         const closeWithEsc = (e) => {
             if (e.key === "Escape") {
                 onClose();
-                console.log(666);
             }
         }
         window.addEventListener('keydown', closeWithEsc);
         return () => window.removeEventListener('keydown', closeWithEsc);
     }, [])
-    
+
     return ReactDOM.createPortal(
         (
             <>
                 <div className={StylesModal.modal}>
-                    <h1>{header}</h1>
+                    <div className={StylesModal.header}>
+                    <p className="text text_type_main-large">{header}</p>
                     <div onClick={onClose}
-                        className={StylesModal.closeIcon}
-                    >
+                        className={StylesModal.close}>
                         <CloseIcon type="primary" />
+                    </div>
                     </div>
                     {children}
                 </div>
@@ -38,3 +39,5 @@ export default function Modal({ onClose, header, children }) {
         modalRoot
     );
 } 
+
+Modal.propTypes = modalPropType;

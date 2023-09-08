@@ -29,7 +29,6 @@ function App() {
   }, [])
 
   const { isLoading, hasError, data } = dataState;
-  console.log(data);
 
   return (
     <div className={styles.app}>
