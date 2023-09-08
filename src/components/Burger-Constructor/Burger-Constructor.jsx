@@ -7,6 +7,7 @@ import CurrencyIconBig from "../../images/CurrencyIconBig.png";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
 import Modal from "../modals/Modal/Modal";
+import OrderDetails from "../modals/Order-Details/Order-Details";
 
 export default function BurgerConstructor(props) {
     const ingredients = props.data;
@@ -58,7 +59,10 @@ export default function BurgerConstructor(props) {
                 <Button htmlType="button" type="primary" size="large" onClick={() => setOpenModal(true)}>
                     Оформить заказ
                 </Button>
-                {openModal && <Modal onClose={CloseModal} />}
+                {openModal && <Modal onClose={CloseModal}>
+                    <OrderDetails price={price}/>
+                </Modal>
+                }
             </div>
         </>
     )

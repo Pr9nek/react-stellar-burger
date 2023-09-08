@@ -1,18 +1,21 @@
-// import ReactDOM from "react-dom";
-// import StylesOrder from "./Modal";
+import stylesOrder from "./Order-Details.module.css";
+import DoneIcon from "../../../images/done.png";
 
-// export default function Modal({onClose}) {
-//     const modalRoot = document.getElementById("react-modals");
+export default function OrderDetails({ price }) {
+    return (
+        <div className={`${stylesOrder.container} mt-4`}>
+            <p className="text text_type_digits-large">{price}</p>
+            <p className="text text_type_main-medium mt-8 mb-15">
+                идентификатор заказа
+            </p>
+            <img src={DoneIcon} alt="Знак выполненного заказа" className="mb-15" />
+            <p className="text text_type_main-default mb-2">
+                Ваш заказ начали готовить
+            </p>
+            <p className="text text_type_main-default text_color_inactive mb-30">
+                Дождитесь готовности на орбитальной станции
+            </p>
 
-//     return ReactDOM.createPortal(
-//         (
-//             <>
-//                 <div className={StylesOrder.modal}>
-//                     <p>бугага</p>
-//                     <button onClick={onClose}>пососи</button>
-//                 </div>
-//             </>
-//         ),
-//         modalRoot
-//     );
-// } 
+        </div>
+    )
+}
