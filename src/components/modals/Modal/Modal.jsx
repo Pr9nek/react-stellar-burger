@@ -23,11 +23,11 @@ export default function Modal({ onClose, header, children }) {
             <>
                 <div className={StylesModal.modal}>
                     <div className={StylesModal.header}>
-                    <p className="text text_type_main-large">{header}</p>
-                    <div onClick={onClose}
-                        className={StylesModal.close}>
-                        <CloseIcon type="primary" />
-                    </div>
+                        <p className="text text_type_main-large">{header}</p>
+                        <div onClick={onClose}
+                            className={StylesModal.close}>
+                            <CloseIcon type="primary" />
+                        </div>
                     </div>
                     {children}
                 </div>
@@ -38,6 +38,6 @@ export default function Modal({ onClose, header, children }) {
         ),
         modalRoot
     );
-} 
+}
 
 Modal.propTypes = modalPropType;

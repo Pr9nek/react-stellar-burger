@@ -2,10 +2,10 @@ import Card from "./Card/Card";
 import StylesIngrediets from "./Burger-Ingredients.module.css";
 // import { data } from "../../utils/data";
 import { useMemo } from "react";
+import  {burgerPropType} from "../../utils/prop-types";
 
-export default function BurgerIngredients(props) {
-    const ingredients = props.data;
-    console.log(ingredients);
+export default function BurgerIngredients({data}) {
+    const ingredients = data;
     const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
     const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
     const sauces = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
@@ -36,3 +36,5 @@ export default function BurgerIngredients(props) {
         </>
     )
 }
+
+BurgerIngredients.propTypes = burgerPropType;

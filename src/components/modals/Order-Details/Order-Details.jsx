@@ -1,5 +1,6 @@
 import stylesOrder from "./Order-Details.module.css";
 import DoneIcon from "../../../images/done.png";
+import {orderPropType} from "../../../utils/prop-types";
 
 export default function OrderDetails({ price }) {
     return (
@@ -19,3 +20,5 @@ export default function OrderDetails({ price }) {
         </div>
     )
 }
+
+OrderDetails.propTypes = orderPropType;
