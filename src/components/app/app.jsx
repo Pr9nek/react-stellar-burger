@@ -4,9 +4,7 @@ import AppHeader from "../App-Header/App-Header";
 import Tabs from "../Burger-Ingredients/Tabs/Tabs";
 import BurgerIngredients from "../Burger-Ingredients/Burger-Ingredients";
 import BurgerConstructor from "../Burger-Constructor/Burger-Constructor";
-import {getData} from "../../utils/api";
-
-// const Api = "https://norma.nomoreparties.space/api/ingredients";
+import { getData } from "../../utils/api";
 
 function App() {
   const [dataState, setDataState] = useState({
