@@ -4,8 +4,9 @@ import AppHeader from "../App-Header/App-Header";
 import Tabs from "../Burger-Ingredients/Tabs/Tabs";
 import BurgerIngredients from "../Burger-Ingredients/Burger-Ingredients";
 import BurgerConstructor from "../Burger-Constructor/Burger-Constructor";
+import {getData} from "../../utils/api";
 
-const Api = "https://norma.nomoreparties.space/api/ingredients";
+// const Api = "https://norma.nomoreparties.space/api/ingredients";
 
 function App() {
   const [dataState, setDataState] = useState({
@@ -17,9 +18,7 @@ function App() {
   useEffect(() => {
     const getIngredients = () => {
       setDataState({ ...dataState, isLoading: true });
-
-      fetch(Api)
-        .then(res => res.json())
+      getData()
         .then(res => setDataState({ ...dataState, data: res.data, isLoading: false }))
         .catch(e => {
           setDataState({ ...dataState, hasError: true, isLoading: false });
