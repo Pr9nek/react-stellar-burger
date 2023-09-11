@@ -9,3 +9,8 @@ body {
 .jc-f-e {
   justify-content: flex-end;
 }
+
+#react-modals {
+  display: flex;
+  justify-content: center;
+}
