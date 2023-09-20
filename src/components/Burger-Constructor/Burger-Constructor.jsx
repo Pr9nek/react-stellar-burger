@@ -11,19 +11,19 @@ import { ConstructorContext } from "../../services/constructorContext";
 // import { constructorPropType } from "../../utils/prop-types";
 
 export default function BurgerConstructor() {
-    const { burgerConstructor, setBurgerConstructor } = useContext(ConstructorContext);
+    const { burgerConstructor } = useContext(ConstructorContext);
     const [openModal, setOpenModal] = useState(false);
 
     function CloseModal() {
         setOpenModal(false);
     }
 
-    // const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
-    // const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
-    // const sauces = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
-    // let middles = [...mains, ...sauces];
-    // const price = useMemo(() => ingredients.reduce((acc, i) => acc + i.price, 0) + bun.price * 2, [burgerConstructor]);
     const { bun, ingredients } = burgerConstructor;
+
+    const price = useMemo(() => 
+        bun !== null && ingredients !== null ?
+        ingredients.reduce((acc, i) => acc + i.price, 0) + bun.price * 2 : 0
+    , [burgerConstructor]); 
 
     return (
         <>
@@ -58,7 +58,7 @@ export default function BurgerConstructor() {
                 />}
             </div>
             <div className={StylesConstructor.footer}>
-                <p className="text text_type_digits-medium pr-2">0</p>
+                <p className="text text_type_digits-medium pr-2">{price}</p>
                 <img src={CurrencyIconBig} alt="Значок цены" className="pr-10" />
                 <Button htmlType="button" type="primary" size="large" onClick={() => setOpenModal(true)}>
                     Оформить заказ
