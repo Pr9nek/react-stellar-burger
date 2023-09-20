@@ -8,9 +8,9 @@ export const cardPropType = {
 //   data: PropTypes.array.isRequired
 // }
 
-export const constructorPropType = {
-  data: PropTypes.array.isRequired
-}
+// export const constructorPropType = {
+//   data: PropTypes.array.isRequired
+// }
 
 export const orderPropType = {
   price: PropTypes.number.isRequired

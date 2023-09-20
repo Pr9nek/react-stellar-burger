@@ -15,7 +15,10 @@ function App() {
     ingredients: null
   });
 
-  //const
+  const [burgerConstructor, setBurgerConstructor] = useState({
+    bun: null,
+    ingredients: []
+  });
 
   useEffect(() => {
     const getIngredients = () => {
@@ -35,7 +38,7 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <IngredientsContext.Provider value={ingredients}>
-        <ConstructorContext.Provider >
+        <ConstructorContext.Provider value={{burgerConstructor, setBurgerConstructor}}>
           <main className={`${styles.main} pl-5 pr-5`}>
             <section className={`${styles.section} pb-10`}>
               <h1 className="text text_type_main-large mb-5">
@@ -56,7 +59,7 @@ function App() {
               {hasError && 'Произошла ошибка'}
               {!isLoading &&
                 !hasError &&
-                ingredients !== null && <BurgerConstructor data={ingredients} />}
+                ingredients !== null && <BurgerConstructor />}
             </section>
           </main>
         </ConstructorContext.Provider>
