@@ -5,10 +5,12 @@ import { useContext } from "react";
 import StylesIngrediets from "./Burger-Ingredients.module.css";
 import { useMemo } from "react";
 import { IngredientsContext } from "../../services/ingredientsContext";
+// import { ConstructorContext } from "../../services/constructorContext";
 
 export default function BurgerIngredients() {
     // const ingredients = ingredients;
     const ingredients = useContext(IngredientsContext);
+    // const { burgerConstructor, setBurgerConstructor } = useContext(ConstructorContext);
 
     const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
     const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);

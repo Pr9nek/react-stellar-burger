@@ -7,7 +7,7 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
 import Modal from "../modals/Modal/Modal";
 import OrderDetails from "../modals/Order-Details/Order-Details";
-import { ConstructorContext } from "../../services/constructorContext"
+import { ConstructorContext } from "../../services/constructorContext";
 // import { constructorPropType } from "../../utils/prop-types";
 
 export default function BurgerConstructor() {
@@ -22,9 +22,8 @@ export default function BurgerConstructor() {
     // const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
     // const sauces = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
     // let middles = [...mains, ...sauces];
-    const { bun, ingredients } = burgerConstructor;
-    console.log(ingredients);
     // const price = useMemo(() => ingredients.reduce((acc, i) => acc + i.price, 0) + bun.price * 2, [burgerConstructor]);
+    const { bun, ingredients } = burgerConstructor;
 
     return (
         <>
