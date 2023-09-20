@@ -1,11 +1,15 @@
-import Card from "./Card/Card";
-import StylesIngrediets from "./Burger-Ingredients.module.css";
 // import { data } from "../../utils/data";
+// import  {burgerPropType} from "../../utils/prop-types";
+import Card from "./Card/Card";
+import { useContext } from "react";
+import StylesIngrediets from "./Burger-Ingredients.module.css";
 import { useMemo } from "react";
-import  {burgerPropType} from "../../utils/prop-types";
+import { IngredientsContext } from "../../services/ingredientsContext";
 
-export default function BurgerIngredients({data}) {
-    const ingredients = data;
+export default function BurgerIngredients() {
+    // const ingredients = ingredients;
+    const ingredients = useContext(IngredientsContext);
+
     const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
     const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
     const sauces = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
@@ -37,4 +41,4 @@ export default function BurgerIngredients({data}) {
     )
 }
 
-BurgerIngredients.propTypes = burgerPropType;
+// BurgerIngredients.propTypes = burgerPropType;

@@ -4,9 +4,9 @@ export const cardPropType = {
   ingredient: PropTypes.object.isRequired
 };
 
-export const burgerPropType = {
-  data: PropTypes.array.isRequired
-}
+// export const burgerPropType = {
+//   data: PropTypes.array.isRequired
+// }
 
 export const constructorPropType = {
   data: PropTypes.array.isRequired
