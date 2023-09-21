@@ -8,7 +8,6 @@ import { useMemo } from "react";
 import Modal from "../modals/Modal/Modal";
 import OrderDetails from "../modals/Order-Details/Order-Details";
 import { ConstructorContext } from "../../services/constructorContext";
-// import { constructorPropType } from "../../utils/prop-types";
 
 export default function BurgerConstructor() {
     const { burgerConstructor } = useContext(ConstructorContext);

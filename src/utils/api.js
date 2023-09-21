@@ -21,6 +21,3 @@ export const makeOrder = (IDs) => {
     })
     .then(onResponse)
 }
-
-
-// 

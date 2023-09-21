@@ -3,7 +3,6 @@ import stylesOrder from "./Order-Details.module.css";
 import DoneIcon from "../../../images/done.png";
 import { makeOrder } from "../../../utils/api";
 import { ConstructorContext } from "../../../services/constructorContext";
-// import {orderPropType} from "../../../utils/prop-types";
 
 export default function OrderDetails() {
     const { burgerConstructor } = useContext(ConstructorContext);
@@ -14,18 +13,14 @@ export default function OrderDetails() {
         order: null
     });
 
-
     const ingredientIds = useMemo(() =>
-        // bun !== null && ingredients !== null ?
-        ingredients.map((ingredient) => ingredient._id) 
+        ingredients.map((ingredient) => ingredient._id)
         , [burgerConstructor]);
 
-    const ids = useMemo(() => 
-    bun !== null && ingredients.length !== 0 ?
-    [bun._id, ...ingredientIds, bun._id] : null
-    , [burgerConstructor]);
-
-    console.log(ids);
+    const ids = useMemo(() =>
+        bun !== null && ingredients.length !== 0 ?
+            [bun._id, ...ingredientIds, bun._id] : null
+        , [burgerConstructor]);
 
     useEffect(() => {
         const getOrder = () => {
@@ -35,7 +30,7 @@ export default function OrderDetails() {
                     setDataState({ ...dataState, hasError: true });
                 });
         }
-       getOrder();
+        getOrder();
     }, [])
 
     return (
@@ -55,5 +50,3 @@ export default function OrderDetails() {
         </div>
     )
 }
-
-// OrderDetails.propTypes = orderPropType;
