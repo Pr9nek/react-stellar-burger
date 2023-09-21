@@ -35,7 +35,8 @@ export default function OrderDetails() {
 
     return (
         <div className={`${stylesOrder.container} mt-4`}>
-            <p className="text text_type_digits-large">{dataState.order}</p>
+            {dataState.order === null ? "Соберите бургер" :
+            <p className="text text_type_digits-large"> {dataState.order}</p>}
             <p className="text text_type_main-medium mt-8 mb-15">
                 идентификатор заказа
             </p>
