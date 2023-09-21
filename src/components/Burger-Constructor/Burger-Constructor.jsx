@@ -20,10 +20,9 @@ export default function BurgerConstructor() {
 
     const { bun, ingredients } = burgerConstructor;
 
-    const price = useMemo(() => 
-        bun !== null && ingredients !== null ?
-        ingredients.reduce((acc, i) => acc + i.price, 0) + bun.price * 2 : 0
-    , [burgerConstructor]); 
+    const price = useMemo(() =>
+        bun !== null && ingredients !== null ? ingredients.reduce((acc, i) => acc + i.price, 0) + bun.price * 2 : ingredients.reduce((acc, i) => acc + i.price, 0)
+        , [burgerConstructor]);
 
     return (
         <>
@@ -64,7 +63,7 @@ export default function BurgerConstructor() {
                     Оформить заказ
                 </Button>
                 {openModal && <Modal onClose={CloseModal}>
-                    <OrderDetails price='0' />
+                    <OrderDetails price={price} />
                 </Modal>}
             </div>
         </>

@@ -12,9 +12,9 @@ export const cardPropType = {
 //   data: PropTypes.array.isRequired
 // }
 
-export const orderPropType = {
-  price: PropTypes.number.isRequired
-};
+// export const orderPropType = {
+//   price: PropTypes.number.isRequired
+// };
 
 export const listItemPropType = PropTypes.shape({
   image: PropTypes.string.isRequired,

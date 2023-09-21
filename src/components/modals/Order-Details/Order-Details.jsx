@@ -1,11 +1,46 @@
+import { useState, useContext, useEffect, useMemo } from "react";
 import stylesOrder from "./Order-Details.module.css";
 import DoneIcon from "../../../images/done.png";
-import {orderPropType} from "../../../utils/prop-types";
+import { makeOrder } from "../../../utils/api";
+import { ConstructorContext } from "../../../services/constructorContext";
+// import {orderPropType} from "../../../utils/prop-types";
 
-export default function OrderDetails({ price }) {
+export default function OrderDetails() {
+    const { burgerConstructor } = useContext(ConstructorContext);
+    const { bun, ingredients } = burgerConstructor;
+
+    const [dataState, setDataState] = useState({
+        hasError: false,
+        order: null
+    });
+
+
+    const ingredientIds = useMemo(() =>
+        // bun !== null && ingredients !== null ?
+        ingredients.map((ingredient) => ingredient._id) 
+        , [burgerConstructor]);
+
+    const ids = useMemo(() => 
+    bun !== null && ingredients.length !== 0 ?
+    [bun._id, ...ingredientIds, bun._id] : null
+    , [burgerConstructor]);
+
+    console.log(ids);
+
+    useEffect(() => {
+        const getOrder = () => {
+            makeOrder(ids)
+                .then(res => setDataState({ ...dataState, order: res.order.number }))
+                .catch(e => {
+                    setDataState({ ...dataState, hasError: true });
+                });
+        }
+       getOrder();
+    }, [])
+
     return (
         <div className={`${stylesOrder.container} mt-4`}>
-            <p className="text text_type_digits-large">{price}</p>
+            <p className="text text_type_digits-large">{dataState.order}</p>
             <p className="text text_type_main-medium mt-8 mb-15">
                 идентификатор заказа
             </p>
@@ -21,4 +56,4 @@ export default function OrderDetails({ price }) {
     )
 }
 
-OrderDetails.propTypes = orderPropType;
+// OrderDetails.propTypes = orderPropType;
