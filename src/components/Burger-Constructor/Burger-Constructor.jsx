@@ -20,13 +20,13 @@ export default function BurgerConstructor() {
     const { bun, ingredients } = burgerConstructor;
 
     const price = useMemo(() =>
-        bun !== null && ingredients !== null ? ingredients.reduce((acc, i) => acc + i.price, 0) + bun.price * 2 : ingredients.reduce((acc, i) => acc + i.price, 0)
+        bun ? ingredients.reduce((acc, i) => acc + i.price, 0) + bun.price * 2 : ingredients.reduce((acc, i) => acc + i.price, 0)
         , [burgerConstructor]);
 
     return (
         <>
             <div className={`${StylesConstructor.border} mr-4`}>
-                {bun !== null && <ConstructorElement
+                {bun && <ConstructorElement
                     type="top"
                     isLocked
                     text="Краторная булка N-200i (верх)"
