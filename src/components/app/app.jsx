@@ -1,26 +1,23 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import styles from "./app.module.css";
 import AppHeader from "../App-Header/App-Header";
 import Tabs from "../Burger-Ingredients/Tabs/Tabs";
 import BurgerIngredients from "../Burger-Ingredients/Burger-Ingredients";
 import BurgerConstructor from "../Burger-Constructor/Burger-Constructor";
-import { getData } from "../../utils/api";
-import { IngredientsContext } from "../../services/ingredientsContext";
+/* import { getData } from "../../utils/api"; */
+/* import { IngredientsContext } from "../../services/ingredientsContext"; */
 import { ConstructorContext } from "../../services/constructorContext";
+import {getIngredients} from '../../services/actions/ingredients/actions';
 
 function App() {
-  const [dataState, setDataState] = useState({
+  /* const [dataState, setDataState] = useState({
     isLoading: false,
     hasError: false,
     ingredients: null
-  });
+  }); */
 
-  const [burgerConstructor, setBurgerConstructor] = useState({
-    bun: null,
-    ingredients: []
-  });
-
-  useEffect(() => {
+  /*  useEffect(() => {
     const getIngredients = () => {
       setDataState({ ...dataState, isLoading: true });
       getData()
@@ -30,14 +27,27 @@ function App() {
         });
     }
     getIngredients();
-  }, [])
+  }, []) */
 
-  const { isLoading, hasError, ingredients } = dataState;
+  /* const { isLoading, hasError, ingredients } = dataState; */
+
+ const { isLoading, Error, ingredients } = useSelector(store => store.ingredients);
+ const dispatch = useDispatch();
+
+  const [burgerConstructor, setBurgerConstructor] = useState({
+    bun: null,
+    ingredients: []
+  });
+
+  useEffect(()=> {
+    dispatch(getIngredients());
+    console.log(isLoading);
+}, [])
 
   return (
     <div className={styles.app}>
       <AppHeader />
-      <IngredientsContext.Provider value={ingredients}>
+      {/* <IngredientsContext.Provider value={ingredients}> */}
         <ConstructorContext.Provider value={{burgerConstructor, setBurgerConstructor}}>
           <main className={`${styles.main} pl-5 pr-5`}>
             <section className={`${styles.section} pb-10`}>
@@ -48,22 +58,22 @@ function App() {
                 <Tabs />
               </div>
               {isLoading && 'Загрузка...'}
-              {hasError && 'Произошла ошибка'}
+              {Error && 'Произошла ошибка'}
               {!isLoading &&
-                !hasError &&
+                !Error &&
                 ingredients !== null && <BurgerIngredients />}
             </section>
 
             <section className={`${styles.section} pt-15 pl-4 pb-10`}>
               {isLoading && 'Загрузка...'}
-              {hasError && 'Произошла ошибка'}
+              {Error && 'Произошла ошибка'}
               {!isLoading &&
-                !hasError &&
+                !Error &&
                 ingredients !== null && <BurgerConstructor />}
             </section>
           </main>
         </ConstructorContext.Provider>
-      </IngredientsContext.Provider>
+      {/* </IngredientsContext.Provider> */}
     </div>
   );
 }

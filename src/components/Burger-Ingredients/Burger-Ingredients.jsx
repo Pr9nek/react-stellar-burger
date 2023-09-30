@@ -1,16 +1,17 @@
 // import { data } from "../../utils/data";
 // import  {burgerPropType} from "../../utils/prop-types";
-import Card from "./Card/Card";
+/* import { IngredientsContext } from "../../services/ingredientsContext"; */
 import { useContext } from "react";
+import Card from "./Card/Card";
+import { useSelector, useDispatch } from 'react-redux';
 import StylesIngrediets from "./Burger-Ingredients.module.css";
 import { useMemo } from "react";
-import { IngredientsContext } from "../../services/ingredientsContext";
-// import { ConstructorContext } from "../../services/constructorContext";
+import { ConstructorContext } from "../../services/constructorContext";
 
 export default function BurgerIngredients() {
-    // const ingredients = ingredients;
-    const ingredients = useContext(IngredientsContext);
-    // const { burgerConstructor, setBurgerConstructor } = useContext(ConstructorContext);
+    /* const ingredients = useContext(IngredientsContext); */
+    /* const { burgerConstructor, setBurgerConstructor } = useContext(ConstructorContext); */
+    const ingredients = useSelector(store => store.ingredients.ingredients);
 
     const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
     const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);

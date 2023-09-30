@@ -10,27 +10,25 @@ const initialState = {
     ingredients: null
 };
 
-
 export const ingredientsReducer = (state = initialState, action) => {
     switch (action.type) {
         case INGREDIENTS_LOADING:
             return {
                 ...state,
                 error: null,
-                isloading: true
+                isLoading: true,
             };
         case INGREDIENTS__LOAD_SUCCESS:
             return {
                 ...state,
                 ingredients: action.payload,
-                    isloading: false,
+                isLoading: false,
             };
-
         case INGREDIENTS_ERROR:
             return {
                 ...state,
                 error: action.payload,
-                    isloading: false,
+                isLoading: false,
             };
             default:
                 return state;
