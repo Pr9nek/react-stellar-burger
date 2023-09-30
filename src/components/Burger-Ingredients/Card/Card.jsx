@@ -6,7 +6,7 @@ import Modal from "../../modals/Modal/Modal";
 import { cardPropType } from "../../../utils/prop-types";
 import IngredientDetails from "../../modals/Ingredient-Details/Ingredient-Details";
 import { ConstructorContext } from "../../../services/constructorContext";
-
+import { useSelector, useDispatch } from 'react-redux';
 export default function Card({ ingredient }) {
 
     const { burgerConstructor, setBurgerConstructor } = useContext(ConstructorContext);
@@ -14,8 +14,12 @@ export default function Card({ ingredient }) {
 
     const [openModal, setOpenModal] = useState(false);
 
+    const dispatch = useDispatch();
+
     function closeModal() {
         setOpenModal(false);
+        dispatch({type: 'CLOSE_MODAL'});
+        console.log(123);
     }
 
     function add(ingredient) {
@@ -32,6 +36,7 @@ export default function Card({ ingredient }) {
         <>
             <div className={`${CardStyle.card} pl-4 pr-4`} onClick={() => {
                 setOpenModal(true);
+                dispatch({type: 'OPEN_MODAL', payload: ingredient});
                 add(ingredient);
             }}>
                 <img alt={ingredient.name} src={ingredient.image} className="pl-4 pr-4" />
@@ -45,14 +50,7 @@ export default function Card({ ingredient }) {
             {openModal &&
 
                 <Modal header="Детали ингредиента" onClose={closeModal}>
-                    <IngredientDetails
-                        image={ingredient.image_large}
-                        name={ingredient.name}
-                        calories={ingredient.calories}
-                        carbohydrates={ingredient.carbohydrates}
-                        fat={ingredient.fat}
-                        proteins={ingredient.proteins}
-                    />
+                    <IngredientDetails/>
                 </Modal>
             }
         </>

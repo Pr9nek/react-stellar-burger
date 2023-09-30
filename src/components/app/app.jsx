@@ -41,7 +41,6 @@ function App() {
 
   useEffect(()=> {
     dispatch(getIngredients());
-    console.log(isLoading);
 }, [])
 
   return (

@@ -3,7 +3,7 @@
 /* import { IngredientsContext } from "../../services/ingredientsContext"; */
 import { useContext } from "react";
 import Card from "./Card/Card";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import StylesIngrediets from "./Burger-Ingredients.module.css";
 import { useMemo } from "react";
 import { ConstructorContext } from "../../services/constructorContext";
