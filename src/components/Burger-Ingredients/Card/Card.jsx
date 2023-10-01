@@ -1,16 +1,15 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import CardStyle from "./card.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import Modal from "../../modals/Modal/Modal";
 import { cardPropType } from "../../../utils/prop-types";
 import IngredientDetails from "../../modals/Ingredient-Details/Ingredient-Details";
-import { ConstructorContext } from "../../../services/constructorContext";
 import { useSelector, useDispatch } from 'react-redux';
 export default function Card({ ingredient }) {
 
-    const { burgerConstructor, setBurgerConstructor } = useContext(ConstructorContext);
-    const { bun, ingredients } = burgerConstructor;
+    const modalka = useSelector(store => store.details.ingredientDetail);
+    // это чисто чтобы проверить ingredients при срабатывании модалки закрытия
 
     const [openModal, setOpenModal] = useState(false);
 
@@ -19,16 +18,16 @@ export default function Card({ ingredient }) {
     function closeModal() {
         setOpenModal(false);
         dispatch({type: 'CLOSE_MODAL'});
-        console.log(123);
+        console.log(modalka);
     }
 
     function add(ingredient) {
         ingredient.type === "bun" ?
-            setBurgerConstructor({
-                ...burgerConstructor, bun: ingredient
+        dispatch({
+            type: 'ADD_BUN_TO_CONSTRUCTOR', payload: ingredient
             }) :
-            setBurgerConstructor({
-                ...burgerConstructor, ingredients: [...ingredients, ingredient]
+            dispatch({
+                type: 'ADD_INGREDIENT_TO_CONSTRUCTOR', payload: ingredient   
             })
     }
 
@@ -36,7 +35,10 @@ export default function Card({ ingredient }) {
         <>
             <div className={`${CardStyle.card} pl-4 pr-4`} onClick={() => {
                 setOpenModal(true);
-                dispatch({type: 'OPEN_MODAL', payload: ingredient});
+                dispatch({
+                    type: 'OPEN_MODAL', 
+                    payload: ingredient
+                });
                 add(ingredient);
             }}>
                 <img alt={ingredient.name} src={ingredient.image} className="pl-4 pr-4" />

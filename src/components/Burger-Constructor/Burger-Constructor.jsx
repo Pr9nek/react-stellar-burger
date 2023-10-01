@@ -1,4 +1,5 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
+import { useSelector } from 'react-redux';
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import ListItem from "./List-Item/List-Item";
 import StylesConstructor from "./Burger-Constructor.module.css";
@@ -7,10 +8,9 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
 import Modal from "../modals/Modal/Modal";
 import OrderDetails from "../modals/Order-Details/Order-Details";
-import { ConstructorContext } from "../../services/constructorContext";
 
 export default function BurgerConstructor() {
-    const { burgerConstructor } = useContext(ConstructorContext);
+    const burgerConstructor = useSelector(store => store.burgerConstructor);
     const [openModal, setOpenModal] = useState(false);
 
     function CloseModal() {
