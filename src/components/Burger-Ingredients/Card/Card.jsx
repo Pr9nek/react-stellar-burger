@@ -26,7 +26,7 @@ export default function Card({ ingredient }) {
             <div className={`${CardStyle.card} pl-4 pr-4`} onClick={() => {
                 /* setOpenModal(true); */
                 dispatch({
-                    type: 'OPEN_MODAL', 
+                    type: 'SET_CURRENT_INGREDIENT', 
                     payload: ingredient
                 });
                 add(ingredient);

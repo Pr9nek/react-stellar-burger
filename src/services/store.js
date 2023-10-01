@@ -6,6 +6,6 @@ export const store = configureStore({
       ingredients: ingredientsReducer,
       details: ingredientDetailsReducer,
       burgerConstructor: burgerConstructorReducer,
-      order: orderReducer,
+      orderData: orderReducer,
     },
   });

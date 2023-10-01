@@ -1,42 +1,32 @@
-import { useState, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import stylesOrder from "./Order-Details.module.css";
 import DoneIcon from "../../../images/done.png";
 /* import { makeOrder } from "../../../utils/api"; */
 import { useSelector, useDispatch } from 'react-redux';
-import { getOrder } from '../../../services/actions/OrderDetails/actions';
 
 
 export default function OrderDetails() {
 
-    const burgerConstructor = useSelector(store => store.burgerConstructor);
-    const { bun, ingredients } = burgerConstructor;
+   /*  const burgerConstructor = useSelector(store => store.burgerConstructor);
+    const { bun, ingredients } = burgerConstructor; */
     
-    const orderData = useSelector(store => store.order);
-    const { order, isLoading } = orderData;
+    const order = useSelector(store => store.orderData.order);
+
+    const dispatch = useDispatch();
 
    /*  const order = useState({
         hasError: false,
         order: null
     }); */
-    const dispatch = useDispatch();
-   
 
-    const ingredientIds = useMemo(() =>
+    /* const ingredientIds = useMemo(() =>
         ingredients.map((ingredient) => ingredient._id)
         , [burgerConstructor]);
 
     const ids = useMemo(() =>
         bun !== null && ingredients.length !== 0 ?
             [bun._id, ...ingredientIds, bun._id] : null
-        , [burgerConstructor]);
-
-    console.log(orderData);
-    console.log(ids);
-    console.log(order);
-
-    useEffect(() => {
-        dispatch(getOrder(ids));
-    }, [])
+        , [burgerConstructor]); */
 
   /*   useEffect(() => {
         const getOrder = () => {

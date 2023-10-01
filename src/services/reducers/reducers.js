@@ -5,8 +5,8 @@ import {
 } from '../actions/ingredients/actions';
 
 import {
-    OPEN_MODAL,
-    CLOSE_MODAL
+    SET_CURRENT_INGREDIENT,
+    CLEAR_CURRENT_INGREDIENT
 } from '../actions/details/actions';
 
 import {
@@ -17,7 +17,8 @@ import {
 import {
     ORDER_LOADING,
     ORDER__LOAD_SUCCESS,
-    ORDER_ERROR
+    ORDER_ERROR,
+    CLEAR_ORDER
 } from '../actions/OrderDetails/actions';
 
 const initialState = {
@@ -57,11 +58,11 @@ const initialDetailState = {
 
 export const ingredientDetailsReducer = (state = initialDetailState, action) => {
     switch (action.type) {
-        case OPEN_MODAL:
+        case SET_CURRENT_INGREDIENT:
             return {
                 ingredientDetail: action.payload
             };
-        case CLOSE_MODAL:
+        case CLEAR_CURRENT_INGREDIENT:
             return {
                 ingredientDetail: null
             }
@@ -110,14 +111,19 @@ export const orderReducer = (state = initialOrderState, action) => {
             return {
                 ...state,
                 order: action.payload,
-                isLoading: false,
+                isLoading: false
             };
         case ORDER_ERROR:
             return {
                 ...state,
                 error: action.payload,
-                isLoading: false,
+                isLoading: false
             };
+        case CLEAR_ORDER:
+            return {
+                ...state,
+                order: null,
+            }
         default:
             return state;
     };

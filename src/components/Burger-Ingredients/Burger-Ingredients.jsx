@@ -12,7 +12,9 @@ export default function BurgerIngredients() {
     const dispatch = useDispatch();
 
     function closeModal() {
-        dispatch({type: 'CLOSE_MODAL'});
+        dispatch({
+            type: 'CLEAR_CURRENT_INGREDIENT'
+        });
     }
 
     const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);

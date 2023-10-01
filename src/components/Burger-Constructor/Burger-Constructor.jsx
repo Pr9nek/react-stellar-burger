@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import ListItem from "./List-Item/List-Item";
 import StylesConstructor from "./Burger-Constructor.module.css";
@@ -8,13 +8,16 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
 import Modal from "../modals/Modal/Modal";
 import OrderDetails from "../modals/Order-Details/Order-Details";
+import { getOrder } from '../../services/actions/OrderDetails/actions';
 
 export default function BurgerConstructor() {
     const burgerConstructor = useSelector(store => store.burgerConstructor);
-    const [openModal, setOpenModal] = useState(false);
+    const currentOrder = useSelector(store => store.orderData.order);
+    const dispatch = useDispatch();
+    /* const [openModal, setOpenModal] = useState(false); */
 
     function CloseModal() {
-        setOpenModal(false);
+        dispatch({ type: 'CLEAR_ORDER' });
     }
 
     const { bun, ingredients } = burgerConstructor;
@@ -22,6 +25,21 @@ export default function BurgerConstructor() {
     const price = useMemo(() =>
         bun ? ingredients.reduce((acc, i) => acc + i.price, 0) + bun.price * 2 : ingredients.reduce((acc, i) => acc + i.price, 0)
         , [burgerConstructor]);
+
+    const ingredientIds = useMemo(() =>
+        ingredients.map((ingredient) => ingredient._id)
+        , [burgerConstructor]);
+
+    const ids = useMemo(() =>
+        bun !== null && ingredients.length !== 0 ?
+            [bun._id, ...ingredientIds, bun._id] : null
+        , [burgerConstructor]);
+
+    console.log(currentOrder);
+
+    /*     useEffect(() => {
+            dispatch(getOrder(ids));
+        }, [burgerConstructor]) */
 
     return (
         <>
@@ -58,13 +76,16 @@ export default function BurgerConstructor() {
             <div className={StylesConstructor.footer}>
                 <p className="text text_type_digits-medium pr-2">{price}</p>
                 <img src={CurrencyIconBig} alt="Значок цены" className="pr-10" />
-                <Button htmlType="button" type="primary" size="large" onClick={() => setOpenModal(true)}>
+                <Button htmlType="button" type="primary" size="large" onClick={
+                    () => dispatch(getOrder(ids))}>
                     Оформить заказ
                 </Button>
-                {openModal && <Modal onClose={CloseModal}>
-                    <OrderDetails price={price} />
-                </Modal>}
             </div>
+            {currentOrder &&
+                <Modal onClose={CloseModal}>
+                    <OrderDetails price={price} />
+                </Modal>
+            }
         </>
     )
 }
