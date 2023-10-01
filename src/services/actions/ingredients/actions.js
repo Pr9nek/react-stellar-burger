@@ -20,7 +20,7 @@ export const getIngredients = (payload) => (dispatch) => {
         .catch(error => {
             dispatch({
                 type: INGREDIENTS_ERROR,
-                payload: error.message
+                payload: error
             })
         });
 };

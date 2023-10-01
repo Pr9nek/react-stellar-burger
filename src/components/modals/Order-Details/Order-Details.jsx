@@ -1,17 +1,25 @@
-import { useState, useContext, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import stylesOrder from "./Order-Details.module.css";
 import DoneIcon from "../../../images/done.png";
-import { makeOrder } from "../../../utils/api";
-import { ConstructorContext } from "../../../services/constructorContext";
+/* import { makeOrder } from "../../../utils/api"; */
+import { useSelector, useDispatch } from 'react-redux';
+import { getOrder } from '../../../services/actions/OrderDetails/actions';
+
 
 export default function OrderDetails() {
-    const { burgerConstructor } = useContext(ConstructorContext);
-    const { bun, ingredients } = burgerConstructor;
 
-    const [dataState, setDataState] = useState({
+    const burgerConstructor = useSelector(store => store.burgerConstructor);
+    const { bun, ingredients } = burgerConstructor;
+    
+    const orderData = useSelector(store => store.order);
+    const { order, isLoading } = orderData;
+
+   /*  const order = useState({
         hasError: false,
         order: null
-    });
+    }); */
+    const dispatch = useDispatch();
+   
 
     const ingredientIds = useMemo(() =>
         ingredients.map((ingredient) => ingredient._id)
@@ -22,7 +30,15 @@ export default function OrderDetails() {
             [bun._id, ...ingredientIds, bun._id] : null
         , [burgerConstructor]);
 
+    console.log(orderData);
+    console.log(ids);
+    console.log(order);
+
     useEffect(() => {
+        dispatch(getOrder(ids));
+    }, [])
+
+  /*   useEffect(() => {
         const getOrder = () => {
             makeOrder(ids)
                 .then(res => setDataState({ ...dataState, order: res.order.number }))
@@ -31,12 +47,12 @@ export default function OrderDetails() {
                 });
         }
         getOrder();
-    }, [])
+    }, []) */
 
     return (
         <div className={`${stylesOrder.container} mt-4`}>
-            {dataState.order === null ? "Соберите бургер" :
-            <p className="text text_type_digits-large"> {dataState.order}</p>}
+            {order === null ? "Соберите бургер" :
+            <p className="text text_type_digits-large"> {order}</p>}
             <p className="text text_type_main-medium mt-8 mb-15">
                 идентификатор заказа
             </p>

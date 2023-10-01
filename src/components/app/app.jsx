@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import styles from "./app.module.css";
 import AppHeader from "../App-Header/App-Header";
@@ -7,7 +7,7 @@ import BurgerIngredients from "../Burger-Ingredients/Burger-Ingredients";
 import BurgerConstructor from "../Burger-Constructor/Burger-Constructor";
 /* import { getData } from "../../utils/api"; */
 /* import { IngredientsContext } from "../../services/ingredientsContext"; */
-import { ConstructorContext } from "../../services/constructorContext";
+/* import { ConstructorContext } from "../../services/constructorContext"; */
 import {getIngredients} from '../../services/actions/ingredients/actions';
 
 function App() {
@@ -34,10 +34,10 @@ function App() {
  const { isLoading, Error, ingredients } = useSelector(store => store.ingredients);
  const dispatch = useDispatch();
 
-  const [burgerConstructor, setBurgerConstructor] = useState({
+ /*  const [burgerConstructor, setBurgerConstructor] = useState({
     bun: null,
     ingredients: []
-  });
+  }); */
 
   useEffect(()=> {
     dispatch(getIngredients());
@@ -47,7 +47,7 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       {/* <IngredientsContext.Provider value={ingredients}> */}
-        <ConstructorContext.Provider value={{burgerConstructor, setBurgerConstructor}}>
+        {/* <ConstructorContext.Provider value={{burgerConstructor, setBurgerConstructor}}> */}
           <main className={`${styles.main} pl-5 pr-5`}>
             <section className={`${styles.section} pb-10`}>
               <h1 className="text text_type_main-large mb-5">
@@ -71,7 +71,7 @@ function App() {
                 ingredients !== null && <BurgerConstructor />}
             </section>
           </main>
-        </ConstructorContext.Provider>
+        {/* </ConstructorContext.Provider> */}
       {/* </IngredientsContext.Provider> */}
     </div>
   );
