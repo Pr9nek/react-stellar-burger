@@ -1,3 +1,5 @@
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import styles from "./app.module.css";
@@ -49,6 +51,7 @@ function App() {
       {/* <IngredientsContext.Provider value={ingredients}> */}
         {/* <ConstructorContext.Provider value={{burgerConstructor, setBurgerConstructor}}> */}
           <main className={`${styles.main} pl-5 pr-5`}>
+          <DndProvider backend={HTML5Backend}>
             <section className={`${styles.section} pb-10`}>
               <h1 className="text text_type_main-large mb-5">
                 Соберите бургер
@@ -70,6 +73,7 @@ function App() {
                 !Error &&
                 ingredients !== null && <BurgerConstructor />}
             </section>
+            </DndProvider>
           </main>
         {/* </ConstructorContext.Provider> */}
       {/* </IngredientsContext.Provider> */}
