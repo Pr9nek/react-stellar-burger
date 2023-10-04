@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react';
 
-export default function ListItem({ name, price, image, index, moveIngredient }) {
+export default function ListItem({ name, price, image, index, moveIngredient, id }) {
 
     const dispatch = useDispatch();
 
@@ -48,6 +48,12 @@ export default function ListItem({ name, price, image, index, moveIngredient }) 
 
     // Make items being dragged transparent, so it's easier to see where we drop them
     const opacity = isDragging ? {opacity: 0 } : {opacity: 1 };
+    const deletItem = (id) => {
+        dispatch({
+            type: 'DELETE_INGREDIENT_FROM_CONSTRUCTOR',
+            payload: id
+        })
+    } 
     return (
 
         <div ref={dragDropRef} className={ListStyles.list} style={opacity}>
@@ -56,6 +62,7 @@ export default function ListItem({ name, price, image, index, moveIngredient }) 
                 text={name}
                 price={price}
                 thumbnail={image}
+                handleClose={(() => deletItem({id}))}
             /* handleClose={()=> dispatch({
                 type: 'DELETE_INGREDIENT_FROM_CONSTRUCTOR', 
                 payload: {props._id}

@@ -88,7 +88,7 @@ export default function BurgerConstructor() {
 
                         ingredients.map((ingredient, index) => (
                             <li className={StylesConstructor.lists_li} key={ingredient.id}>
-                                <ListItem name={ingredient.name} price={ingredient.price} image={ingredient.image} index={index} moveIngredient={moveIngredients} />
+                                <ListItem name={ingredient.name} price={ingredient.price} image={ingredient.image} index={index} moveIngredient={moveIngredients} id={ingredient.id}/>
                             </li>
                         ))
                     }

@@ -26,8 +26,8 @@ export const burgerConstructorReducer = (state = initialConstructorState, action
             return {
                 ...state,
                 ingredients: [...state.ingredients].filter(
-                    (item) => {
-                        return item.id !== action.id;
+                    (ingredient) => {
+                        return ingredient.id !== action.payload.id;
                     }
                 )
             };
