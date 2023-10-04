@@ -56,9 +56,9 @@ function App() {
               <h1 className="text text_type_main-large mb-5">
                 Соберите бургер
               </h1>
-              <div className="mb-10">
+              {<div className="mb-10">
                 <Tabs />
-              </div>
+              </div>}
               {isLoading && 'Загрузка...'}
               {Error && 'Произошла ошибка'}
               {!isLoading &&

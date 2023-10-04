@@ -22,7 +22,8 @@ export default function BurgerIngredients() {
     const sauces = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
 
     return (
-        <>
+        <>  
+            
             <div className={`${StylesIngrediets.lists} custom-scroll`}>
                 <p className="text text_type_main-medium">Булки</p>
                 <div className={`${StylesIngrediets.cards} pt-6 `}>
