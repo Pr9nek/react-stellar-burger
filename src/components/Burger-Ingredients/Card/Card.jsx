@@ -3,50 +3,68 @@ import CardStyle from "./card.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 /* import { useState } from "react"; */
 import { cardPropType } from "../../../utils/prop-types";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
+import { useMemo } from 'react';
 export default function Card({ ingredient }) {
 
     /* const [openModal, setOpenModal] = useState(false); */
     const dispatch = useDispatch();
 
-    const [{isDrag}, dragRef] = useDrag({
+    const [{ isDrag }, dragRef] = useDrag({
         type: "ingredient",
-        item: {ingredient},
+        item: { ingredient },
         collect: monitor => ({
             isDrag: monitor.isDragging()
         })
     });
 
-    /* const add = (ingredient) => {
-        ingredient.type === "bun" ?
-        dispatch({
-            type: 'ADD_BUN_TO_CONSTRUCTOR', payload: ingredient
-            }) :
-            dispatch({
-                type: 'ADD_INGREDIENT_TO_CONSTRUCTOR', payload: ingredient   
-            })
-    } */
+    const constructorItems = useSelector(store => store.burgerConstructor);
+    const { bun, ingredients } = constructorItems;
+    const apiIngredients = useSelector(store => store.ingredients.ingredients);
+    /* console.log(ingredients); */
+
+    const counter = useMemo(
+        () => (count = 0) => {
+            for (let { _id } of ingredients)
+                if (_id === ingredient._id) count++;
+
+            if (bun && bun._id === ingredient._id) return 2;
+            return count;
+        },
+        [ingredient._id, bun, ingredients] 
+    );
+
+   /*  const counter = useMemo(
+        () => (count = 0) => {
+            const item = apiIngredients.filter((item) => 
+            item._id = ingredient._id ? count++ :
+
+            bun && bun._id === ingredient._id ? 2 :
+            count)
+        },
+        [ingredient._id, bun, ingredients]
+    ); */
 
     return (
         <>
-            {!isDrag && 
-            <div className={`${CardStyle.card} pl-4 pr-4`} ref={dragRef} onClick={() => {
-                /* setOpenModal(true); */
-                dispatch({
-                    type: 'SET_CURRENT_INGREDIENT', 
-                    payload: ingredient
-                });
-                /* add(ingredient); */
-            }}>
-                <img alt={ingredient.name} src={ingredient.image} className="pl-4 pr-4" />
-                <div className={`${CardStyle.price} pb-1 pt-1`}>
-                    <p className="text text_type_digits-default pr-2 ">{ingredient.price}</p>
-                    <CurrencyIcon type="primary" />
-                </div>
-                <p className={`text text_type_main-default pb-6 ${CardStyle.name}`}>{ingredient.name}</p>
-                {ingredient.count && <Counter count={ingredient.count} size="default" extraClass="m-1" className={CardStyle.counter} />}
-            </div>}
+            {!isDrag &&
+                <div className={`${CardStyle.card} pl-4 pr-4`} ref={dragRef} onClick={() => {
+                    /* setOpenModal(true); */
+                    dispatch({
+                        type: 'SET_CURRENT_INGREDIENT',
+                        payload: ingredient
+                    });
+                    /* add(ingredient); */
+                }}>
+                    <img alt={ingredient.name} src={ingredient.image} className="pl-4 pr-4" />
+                    <div className={`${CardStyle.price} pb-1 pt-1`}>
+                        <p className="text text_type_digits-default pr-2 ">{ingredient.price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={`text text_type_main-default pb-6 ${CardStyle.name}`}>{ingredient.name}</p>
+                    {counter() > 0 && <Counter count={counter()} size="default" extraClass="m-1" className={CardStyle.counter} />}
+                </div>}
         </>
     )
 }

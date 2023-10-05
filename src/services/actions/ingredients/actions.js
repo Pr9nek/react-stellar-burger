@@ -5,6 +5,7 @@ import {
 export const INGREDIENTS_LOADING = 'INGREDIENTS_LOADING';
 export const INGREDIENTS__LOAD_SUCCESS = 'INGREDIENTS_LOAD_SUCCESS';
 export const INGREDIENTS_ERROR = 'INGREDIENTS_ERROR';
+export const SWITCHTAB = 'SWITCHTAB';
 
 export const getIngredients = (payload) => (dispatch) => {
     dispatch({

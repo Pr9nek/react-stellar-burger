@@ -1,13 +1,15 @@
 import {
     INGREDIENTS_LOADING,
     INGREDIENTS__LOAD_SUCCESS,
-    INGREDIENTS_ERROR
+    INGREDIENTS_ERROR,
+    SWITCHTAB
 } from '../actions/ingredients/actions';
 
 const initialState = {
     isLoading: false,
     error: null,
-    ingredients: null
+    ingredients: null,
+    currentTab: 'Булки'
 };
 
 export const ingredientsReducer = (state = initialState, action) => {
@@ -30,6 +32,11 @@ export const ingredientsReducer = (state = initialState, action) => {
                 error: action.payload,
                     isLoading: false,
             };
+        case SWITCHTAB:
+            return {
+                ...state,
+                currentTab: action.payload,
+            }
         default:
             return state;
     };
