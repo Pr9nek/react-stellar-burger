@@ -16,7 +16,6 @@ export default function BurgerConstructor() {
     const burgerConstructor = useSelector(store => store.burgerConstructor);
     const currentOrder = useSelector(store => store.orderData.order);
     const dispatch = useDispatch();
-    /* const [openModal, setOpenModal] = useState(false); */
 
     function CloseModal() {
         dispatch({ type: 'CLEAR_ORDER' });
@@ -53,18 +52,17 @@ export default function BurgerConstructor() {
             add(item.ingredient);
         },
         collect: monitor => ({
-            isHover: monitor.isOver() // Обратимся к методу isOver объекта monitor, он ведёт себя схожим образом с hover 
+            isHover: monitor.isOver()
         })
     });
 
-    const background = isHover ? {background: 'grey'} : {background: 'transparent'};
+    const background = isHover ? { background: 'grey' } : { background: 'transparent' };
 
     const moveIngredients = useCallback(
         (dragIndex, hoverIndex) => {
-            // Swap places of dragItem and hoverItem in the pets array
             dispatch({
                 type: 'MOVE_INGREDIENT',
-                payload: {dragIndex, hoverIndex},
+                payload: { dragIndex, hoverIndex },
             })
         }, [ingredients])
 
@@ -72,7 +70,6 @@ export default function BurgerConstructor() {
     return (
         <>
             <div ref={dropTarget} style={background}>
-                {/* <div></div> */}
                 <div className={`${StylesConstructor.border} mr-4`}>
                     {bun && <ConstructorElement
                         type="top"
@@ -88,7 +85,7 @@ export default function BurgerConstructor() {
 
                         ingredients.map((ingredient, index) => (
                             <li className={StylesConstructor.lists_li} key={ingredient.id}>
-                                <ListItem name={ingredient.name} price={ingredient.price} image={ingredient.image} index={index} moveIngredient={moveIngredients} id={ingredient.id}/>
+                                <ListItem name={ingredient.name} price={ingredient.price} image={ingredient.image} index={index} moveIngredient={moveIngredients} id={ingredient.id} />
                             </li>
                         ))
                     }
@@ -120,5 +117,3 @@ export default function BurgerConstructor() {
         </>
     )
 }
-
-// BurgerConstructor.propTypes = constructorPropType;

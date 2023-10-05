@@ -1,14 +1,12 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import CardStyle from "./card.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-/* import { useState } from "react"; */
 import { cardPropType } from "../../../utils/prop-types";
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
 import { useMemo } from 'react';
 export default function Card({ ingredient }) {
 
-    /* const [openModal, setOpenModal] = useState(false); */
     const dispatch = useDispatch();
 
     const [{ isDrag }, dragRef] = useDrag({
@@ -21,41 +19,22 @@ export default function Card({ ingredient }) {
 
     const constructorItems = useSelector(store => store.burgerConstructor);
     const { bun, ingredients } = constructorItems;
-    const apiIngredients = useSelector(store => store.ingredients.ingredients);
-    /* console.log(ingredients); */
 
     const counter = useMemo(
-        () => (count = 0) => {
-            for (let { _id } of ingredients)
-                if (_id === ingredient._id) count++;
-
-            if (bun && bun._id === ingredient._id) return 2;
-            return count;
+        () => () => {
+            return bun && bun._id === ingredient._id ? 2 : ingredients.filter((item) => item._id === ingredient._id).length;
         },
         [ingredient._id, bun, ingredients] 
     );
-
-   /*  const counter = useMemo(
-        () => (count = 0) => {
-            const item = apiIngredients.filter((item) => 
-            item._id = ingredient._id ? count++ :
-
-            bun && bun._id === ingredient._id ? 2 :
-            count)
-        },
-        [ingredient._id, bun, ingredients]
-    ); */
 
     return (
         <>
             {!isDrag &&
                 <div className={`${CardStyle.card} pl-4 pr-4`} ref={dragRef} onClick={() => {
-                    /* setOpenModal(true); */
                     dispatch({
                         type: 'SET_CURRENT_INGREDIENT',
                         payload: ingredient
                     });
-                    /* add(ingredient); */
                 }}>
                     <img alt={ingredient.name} src={ingredient.image} className="pl-4 pr-4" />
                     <div className={`${CardStyle.price} pb-1 pt-1`}>

@@ -1,43 +1,11 @@
-import { useEffect, useMemo } from "react";
 import stylesOrder from "./Order-Details.module.css";
 import DoneIcon from "../../../images/done.png";
-/* import { makeOrder } from "../../../utils/api"; */
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 export default function OrderDetails() {
-
-   /*  const burgerConstructor = useSelector(store => store.burgerConstructor);
-    const { bun, ingredients } = burgerConstructor; */
     
     const order = useSelector(store => store.orderData.order);
-
-    const dispatch = useDispatch();
-
-   /*  const order = useState({
-        hasError: false,
-        order: null
-    }); */
-
-    /* const ingredientIds = useMemo(() =>
-        ingredients.map((ingredient) => ingredient._id)
-        , [burgerConstructor]);
-
-    const ids = useMemo(() =>
-        bun !== null && ingredients.length !== 0 ?
-            [bun._id, ...ingredientIds, bun._id] : null
-        , [burgerConstructor]); */
-
-  /*   useEffect(() => {
-        const getOrder = () => {
-            makeOrder(ids)
-                .then(res => setDataState({ ...dataState, order: res.order.number }))
-                .catch(e => {
-                    setDataState({ ...dataState, hasError: true });
-                });
-        }
-        getOrder();
-    }, []) */
 
     return (
         <div className={`${stylesOrder.container} mt-4`}>

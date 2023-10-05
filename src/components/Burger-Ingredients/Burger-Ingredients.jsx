@@ -1,5 +1,4 @@
 import Card from "./Card/Card";
-import Tabs from "../Burger-Ingredients/Tabs/Tabs";
 import { useSelector, useDispatch } from 'react-redux';
 import StylesIngrediets from "./Burger-Ingredients.module.css";
 import { useMemo, useRef } from "react";
@@ -102,5 +101,3 @@ export default function BurgerIngredients() {
         </>
     )
 }
-
-// BurgerIngredients.propTypes = burgerPropType;

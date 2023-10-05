@@ -4,17 +4,6 @@ export const cardPropType = {
   ingredient: PropTypes.object.isRequired
 };
 
-// export const burgerPropType = {
-//   data: PropTypes.array.isRequired
-// }
-
-// export const constructorPropType = {
-//   data: PropTypes.array.isRequired
-// }
-
-// export const orderPropType = {
-//   price: PropTypes.number.isRequired
-// };
 
 export const listItemPropType = PropTypes.shape({
   image: PropTypes.string.isRequired,
@@ -28,8 +17,8 @@ export const navPropType = {
 };
 
 export const modalPropType = PropTypes.shape({
-  onClose: PropTypes.func.isRequired,
-  header: PropTypes.string.isRequired,
-  children: PropTypes.elementType.isRequired
+  onClose: PropTypes.func,
+  header: PropTypes.string,
+  children: PropTypes.elementType,
   //укажите здесь prop-types для ингридиента
 });
