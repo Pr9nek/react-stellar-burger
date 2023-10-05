@@ -4,12 +4,8 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import styles from "./app.module.css";
 import AppHeader from "../App-Header/App-Header";
-/* import Tabs from "../Burger-Ingredients/Tabs/Tabs"; */
 import BurgerIngredients from "../Burger-Ingredients/Burger-Ingredients";
 import BurgerConstructor from "../Burger-Constructor/Burger-Constructor";
-/* import { getData } from "../../utils/api"; */
-/* import { IngredientsContext } from "../../services/ingredientsContext"; */
-/* import { ConstructorContext } from "../../services/constructorContext"; */
 import {getIngredients} from '../../services/actions/ingredients/actions';
 
 function App() {
@@ -27,12 +23,6 @@ function App() {
           <main className={`${styles.main} pl-5 pr-5`}>
           <DndProvider backend={HTML5Backend}>
             <section className={`${styles.section} pb-10`}>
-              {/* <h1 className="text text_type_main-large mb-5">
-                Соберите бургер
-              </h1>
-              {<div className="mb-10">
-                <Tabs />
-              </div>} */}
               {isLoading && 'Загрузка...'}
               {Error && 'Произошла ошибка'}
               {!isLoading &&
