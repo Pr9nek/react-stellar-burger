@@ -2,7 +2,8 @@ import {
     ADD_BUN_TO_CONSTRUCTOR,
     ADD_INGREDIENT_TO_CONSTRUCTOR,
     DELETE_INGREDIENT_FROM_CONSTRUCTOR,
-    MOVE_INGREDIENT
+    MOVE_INGREDIENT,
+    RESET_CONSTRUCTOR_INGREDIENTS
 } from '../actions/burgerConstructor/actions';
 
 const initialConstructorState = {
@@ -32,19 +33,21 @@ export const burgerConstructorReducer = (state = initialConstructorState, action
                 )
             };
         case MOVE_INGREDIENT: {
-                const canDragIngredients = [...state.ingredients];
-                canDragIngredients.splice(
-                    action.payload.dragIndex, 
-                    0, 
-                    canDragIngredients.splice(action.payload.hoverIndex, 1)[0]
-                    );
-                    
-                return {
-                    ...state,
-                    ingredients: canDragIngredients
+            const canDragIngredients = [...state.ingredients];
+            canDragIngredients.splice(
+                action.payload.dragIndex,
+                0,
+                canDragIngredients.splice(action.payload.hoverIndex, 1)[0]
+            );
+
+            return {
+                ...state,
+                ingredients: canDragIngredients
             };
         }
-            default:
-                return state;
+        case RESET_CONSTRUCTOR_INGREDIENTS:
+            return initialConstructorState;
+        default:
+            return state;
     }
 }

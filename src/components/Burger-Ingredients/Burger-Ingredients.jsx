@@ -5,6 +5,8 @@ import { useMemo, useRef } from "react";
 import IngredientDetails from '../modals/Ingredient-Details/Ingredient-Details';
 import Modal from '../modals/Modal/Modal';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import {SWITCHTAB} from '../../services/actions/ingredients/actions';
+import {CLEAR_CURRENT_INGREDIENT} from '../../services/actions/details/actions';
 
 export default function BurgerIngredients() {
     const ingredients = useSelector(store => store.ingredients.ingredients);
@@ -37,7 +39,7 @@ export default function BurgerIngredients() {
         console.log(newTab);
         if (newTab!==currentTab) {
             dispatch({
-                type: 'SWITCHTAB', 
+                type: SWITCHTAB, 
                 payload: newTab,
             });
         }
@@ -45,7 +47,7 @@ export default function BurgerIngredients() {
 
     function closeModal() {
         dispatch({
-            type: 'CLEAR_CURRENT_INGREDIENT'
+            type: CLEAR_CURRENT_INGREDIENT
         });
     }
 
@@ -59,7 +61,7 @@ export default function BurgerIngredients() {
                 Соберите бургер
             </h1>
             <div ref={tabsRef} className="mb-10">
-                <div style={{ display: 'flex' }}>
+                <div className={StylesIngrediets.tabsContaiber}>
                 <Tab value="Булки" active={currentTab === 'Булки'} >
                     Булки
                 </Tab>

@@ -11,14 +11,17 @@ import OrderDetails from "../modals/Order-Details/Order-Details";
 import { getOrder } from '../../services/actions/OrderDetails/actions';
 import { useDrop } from "react-dnd";
 import { v4 as uuidv4 } from 'uuid';
+import {ADD_BUN_TO_CONSTRUCTOR, ADD_INGREDIENT_TO_CONSTRUCTOR, MOVE_INGREDIENT, RESET_CONSTRUCTOR_INGREDIENTS} from '../../services/actions/burgerConstructor/actions';
+import {CLEAR_ORDER} from '../../services/actions/OrderDetails/actions';
 
 export default function BurgerConstructor() {
     const burgerConstructor = useSelector(store => store.burgerConstructor);
     const currentOrder = useSelector(store => store.orderData.order);
+    const isLoading = useSelector(store => store.orderData.isLoading);
     const dispatch = useDispatch();
 
     function CloseModal() {
-        dispatch({ type: 'CLEAR_ORDER' });
+        dispatch({ type: CLEAR_ORDER });
     }
 
     const { bun, ingredients } = burgerConstructor;
@@ -39,10 +42,10 @@ export default function BurgerConstructor() {
     const add = (item) => {
         item.type === "bun" ?
             dispatch({
-                type: 'ADD_BUN_TO_CONSTRUCTOR', payload: item
+                type: ADD_BUN_TO_CONSTRUCTOR, payload: item
             }) :
             dispatch({
-                type: 'ADD_INGREDIENT_TO_CONSTRUCTOR', payload: { ...item, id: uuidv4() }
+                type: ADD_INGREDIENT_TO_CONSTRUCTOR, payload: { ...item, id: uuidv4() }
             })
     }
 
@@ -61,20 +64,22 @@ export default function BurgerConstructor() {
     const moveIngredients = useCallback(
         (dragIndex, hoverIndex) => {
             dispatch({
-                type: 'MOVE_INGREDIENT',
+                type: MOVE_INGREDIENT,
                 payload: { dragIndex, hoverIndex },
             })
         }, [ingredients])
 
 
     return (
-        <>
+        <>  
+            {isLoading && <div>Ваш заказ обрабатывается</div>}
             <div ref={dropTarget} style={background}>
+                {isLoading}
                 <div className={`${StylesConstructor.border} mr-4`}>
                     {bun && <ConstructorElement
                         type="top"
                         isLocked
-                        text={bun.name}
+                        text={`${bun.name} (верх)`}
                         price={bun.price}
                         thumbnail={bun.image}
                     />
@@ -95,19 +100,33 @@ export default function BurgerConstructor() {
                     {bun && <ConstructorElement
                         type="bottom"
                         isLocked
-                        text={bun.name}
+                        text={`${bun.name} (низ)`}
                         price={bun.price}
                         thumbnail={bun.image}
                     />}
                 </div>
+                {!bun &&  
+                     <div className={StylesConstructor.footer}>
+                        <p className="text text_type_digits-medium pr-2">{price}</p>
+                        <img src={CurrencyIconBig} alt="Значок цены" className="pr-10" />
+                    
+                        <Button htmlType="button" type="primary" size="large" disabled>Оформить заказ</Button>
+                    </div>
+                    }
+                {bun && 
                 <div className={StylesConstructor.footer}>
                     <p className="text text_type_digits-medium pr-2">{price}</p>
                     <img src={CurrencyIconBig} alt="Значок цены" className="pr-10" />
+                    
                     <Button htmlType="button" type="primary" size="large" onClick={
-                        () => dispatch(getOrder(ids))}>
+                        () => 
+                            {dispatch(getOrder(ids));
+                            dispatch({type: RESET_CONSTRUCTOR_INGREDIENTS});}
+                        }
+                    >
                         Оформить заказ
                     </Button>
-                </div>
+                </div>}
             </div>
             {currentOrder &&
                 <Modal onClose={CloseModal}>

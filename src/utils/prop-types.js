@@ -21,4 +21,4 @@ export const modalPropType = PropTypes.shape({
   header: PropTypes.string,
   children: PropTypes.elementType,
   //укажите здесь prop-types для ингридиента
-});
+}).isRequired;
