@@ -1,4 +1,4 @@
-import stylesOrder from "./Order-Details.module.css";
+import stylesOrder from "./order-details.module.css";
 import DoneIcon from "../../../images/done.png";
 import { useSelector } from 'react-redux';
 

@@ -1,4 +1,4 @@
-import stylesDetails from "./Ingredient-Details.module.css";
+import stylesDetails from "./ingredient-details.module.css";
 import { useSelector } from 'react-redux';
 
 export default function IngredientDetails() {

@@ -1,5 +1,5 @@
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import ListStyles from "./List-Item.module.css";
+import ListStyles from "./list-item.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { listItemPropType } from "../../../utils/prop-types";
 import { useDispatch } from 'react-redux';

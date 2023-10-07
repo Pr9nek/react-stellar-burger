@@ -1,9 +1,9 @@
-import Card from "./Card/Card";
+import Card from "./card/card";
 import { useSelector, useDispatch } from 'react-redux';
-import StylesIngrediets from "./Burger-Ingredients.module.css";
+import StylesIngrediets from "./burger-ingredients.module.css";
 import { useMemo, useRef } from "react";
-import IngredientDetails from '../modals/Ingredient-Details/Ingredient-Details';
-import Modal from '../modals/Modal/Modal';
+import IngredientDetails from '../modals/ingredient-details/ingredient-details';
+import Modal from '../modals/modal/modal';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import {SWITCHTAB} from '../../services/actions/ingredients/actions';
 import {CLEAR_CURRENT_INGREDIENT} from '../../services/actions/details/actions';

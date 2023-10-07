@@ -3,9 +3,9 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import styles from "./app.module.css";
-import AppHeader from "../App-Header/App-Header";
-import BurgerIngredients from "../Burger-Ingredients/Burger-Ingredients";
-import BurgerConstructor from "../Burger-Constructor/Burger-Constructor";
+import AppHeader from "../app-header/app-header";
+import BurgerIngredients from "../burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
 import {getIngredients} from '../../services/actions/ingredients/actions';
 
 function App() {

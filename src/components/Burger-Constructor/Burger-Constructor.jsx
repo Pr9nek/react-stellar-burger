@@ -1,18 +1,18 @@
 import { useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import ListItem from "./List-Item/List-Item";
-import StylesConstructor from "./Burger-Constructor.module.css";
+import ListItem from "./list-item/list-item";
+import StylesConstructor from "./burger-constructor.module.css";
 import CurrencyIconBig from "../../images/CurrencyIconBig.png";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
-import Modal from "../modals/Modal/Modal";
-import OrderDetails from "../modals/Order-Details/Order-Details";
-import { getOrder } from '../../services/actions/OrderDetails/actions';
+import Modal from "../modals/modal/modal";
+import OrderDetails from "../modals/order-details/order-details";
+import { getOrder } from '../../services/actions/orderDetails/actions';
 import { useDrop } from "react-dnd";
 import { v4 as uuidv4 } from 'uuid';
-import {ADD_BUN_TO_CONSTRUCTOR, ADD_INGREDIENT_TO_CONSTRUCTOR, MOVE_INGREDIENT, RESET_CONSTRUCTOR_INGREDIENTS} from '../../services/actions/burgerConstructor/actions';
-import {CLEAR_ORDER} from '../../services/actions/OrderDetails/actions';
+import { ADD_BUN_TO_CONSTRUCTOR, ADD_INGREDIENT_TO_CONSTRUCTOR, MOVE_INGREDIENT, RESET_CONSTRUCTOR_INGREDIENTS } from '../../services/actions/burgerConstructor/actions';
+import { CLEAR_ORDER } from '../../services/actions/orderDetails/actions';
 
 export default function BurgerConstructor() {
     const burgerConstructor = useSelector(store => store.burgerConstructor);
@@ -71,7 +71,7 @@ export default function BurgerConstructor() {
 
 
     return (
-        <>  
+        <>
             {isLoading && <div>Ваш заказ обрабатывается</div>}
             <div ref={dropTarget} style={background}>
                 {isLoading}
@@ -105,28 +105,29 @@ export default function BurgerConstructor() {
                         thumbnail={bun.image}
                     />}
                 </div>
-                {!bun &&  
-                     <div className={StylesConstructor.footer}>
+                {!bun &&
+                    <div className={StylesConstructor.footer}>
                         <p className="text text_type_digits-medium pr-2">{price}</p>
                         <img src={CurrencyIconBig} alt="Значок цены" className="pr-10" />
-                    
+
                         <Button htmlType="button" type="primary" size="large" disabled>Оформить заказ</Button>
                     </div>
-                    }
-                {bun && 
-                <div className={StylesConstructor.footer}>
-                    <p className="text text_type_digits-medium pr-2">{price}</p>
-                    <img src={CurrencyIconBig} alt="Значок цены" className="pr-10" />
-                    
-                    <Button htmlType="button" type="primary" size="large" onClick={
-                        () => 
-                            {dispatch(getOrder(ids));
-                            dispatch({type: RESET_CONSTRUCTOR_INGREDIENTS});}
+                }
+                {bun &&
+                    <div className={StylesConstructor.footer}>
+                        <p className="text text_type_digits-medium pr-2">{price}</p>
+                        <img src={CurrencyIconBig} alt="Значок цены" className="pr-10" />
+
+                        <Button htmlType="button" type="primary" size="large" onClick={
+                            () => {
+                                dispatch(getOrder(ids));
+                                dispatch({ type: RESET_CONSTRUCTOR_INGREDIENTS });
+                            }
                         }
-                    >
-                        Оформить заказ
-                    </Button>
-                </div>}
+                        >
+                            Оформить заказ
+                        </Button>
+                    </div>}
             </div>
             {currentOrder &&
                 <Modal onClose={CloseModal}>

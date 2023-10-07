@@ -3,7 +3,7 @@ import {
     ORDER__LOAD_SUCCESS,
     ORDER_ERROR,
     CLEAR_ORDER
-} from '../actions/OrderDetails/actions';
+} from '../actions/orderDetails/actions';
 
 const initialOrderState = {
     error: null,

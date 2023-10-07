@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom";
 import { useEffect } from "react";
-import StylesModal from "./Modal.module.css";
+import StylesModal from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import ModalOverlay from "../Modal-Overlay/ModalOverlay";
+import ModalOverlay from "../modal-overlay/modal-overlay";
 import { modalPropType } from "../../../utils/prop-types";
 
 export default function Modal({ onClose, header, children }) {
