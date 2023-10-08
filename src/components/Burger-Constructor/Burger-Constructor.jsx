@@ -10,9 +10,8 @@ import Modal from "../modals/modal/modal";
 import OrderDetails from "../modals/order-details/order-details";
 import { getOrder } from '../../services/actions/orderDetails/actions';
 import { useDrop } from "react-dnd";
-import { v4 as uuidv4 } from 'uuid';
-import { ADD_BUN_TO_CONSTRUCTOR, ADD_INGREDIENT_TO_CONSTRUCTOR, MOVE_INGREDIENT, RESET_CONSTRUCTOR_INGREDIENTS } from '../../services/actions/burgerConstructor/actions';
-import { CLEAR_ORDER } from '../../services/actions/orderDetails/actions';
+import { addBun, addIngredient, moveIngredient, resetConstructor } from '../../services/actions/burgerConstructor/actions';
+import { clearOrder } from '../../services/actions/orderDetails/actions';
 
 export default function BurgerConstructor() {
     const burgerConstructor = useSelector(store => store.burgerConstructor);
@@ -21,7 +20,7 @@ export default function BurgerConstructor() {
     const dispatch = useDispatch();
 
     function CloseModal() {
-        dispatch({ type: CLEAR_ORDER });
+        dispatch(clearOrder());
     }
 
     const { bun, ingredients } = burgerConstructor;
@@ -41,12 +40,8 @@ export default function BurgerConstructor() {
 
     const add = (item) => {
         item.type === "bun" ?
-            dispatch({
-                type: ADD_BUN_TO_CONSTRUCTOR, payload: item
-            }) :
-            dispatch({
-                type: ADD_INGREDIENT_TO_CONSTRUCTOR, payload: { ...item, id: uuidv4() }
-            })
+            dispatch(addBun(item)) :
+            dispatch(addIngredient(item))
     }
 
     const [{ isHover }, dropTarget] = useDrop({
@@ -63,10 +58,7 @@ export default function BurgerConstructor() {
 
     const moveIngredients = useCallback(
         (dragIndex, hoverIndex) => {
-            dispatch({
-                type: MOVE_INGREDIENT,
-                payload: { dragIndex, hoverIndex },
-            })
+            dispatch(moveIngredient(dragIndex, hoverIndex))
         }, [ingredients])
 
 
@@ -121,7 +113,7 @@ export default function BurgerConstructor() {
                         <Button htmlType="button" type="primary" size="large" onClick={
                             () => {
                                 dispatch(getOrder(ids));
-                                dispatch({ type: RESET_CONSTRUCTOR_INGREDIENTS });
+                                dispatch(resetConstructor());
                             }
                         }
                         >

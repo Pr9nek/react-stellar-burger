@@ -5,8 +5,8 @@ import { useMemo, useRef } from "react";
 import IngredientDetails from '../modals/ingredient-details/ingredient-details';
 import Modal from '../modals/modal/modal';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import {SWITCHTAB} from '../../services/actions/ingredients/actions';
-import {CLEAR_CURRENT_INGREDIENT} from '../../services/actions/details/actions';
+import {switchTab} from '../../services/actions/ingredients/actions';
+import {clearCurrent} from '../../services/actions/details/actions';
 
 export default function BurgerIngredients() {
     const ingredients = useSelector(store => store.ingredients.ingredients);
@@ -36,19 +36,13 @@ export default function BurgerIngredients() {
         const min = Math.min (bunsDelta, mainsDelta, saucesDelta);
         const newTab = min === bunsDelta ? 'Булки' : min === mainsDelta ? 'Начинки' : 'Соусы';
 
-        console.log(newTab);
         if (newTab!==currentTab) {
-            dispatch({
-                type: SWITCHTAB, 
-                payload: newTab,
-            });
+            dispatch(switchTab(newTab));
         }
     };
 
     function closeModal() {
-        dispatch({
-            type: CLEAR_CURRENT_INGREDIENT
-        });
+        dispatch(clearCurrent());
     }
 
     const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);

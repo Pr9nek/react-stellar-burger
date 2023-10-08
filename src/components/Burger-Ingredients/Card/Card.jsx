@@ -5,7 +5,7 @@ import { cardPropType } from "../../../utils/prop-types";
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
 import { useMemo } from 'react';
-import {SET_CURRENT_INGREDIENT} from '../../../services/actions/details/actions';
+import {setCurrent} from '../../../services/actions/details/actions';
 export default function Card({ ingredient }) {
 
     const dispatch = useDispatch();
@@ -32,10 +32,7 @@ export default function Card({ ingredient }) {
         <>
             {!isDrag &&
                 <div className={`${CardStyle.card} pl-4 pr-4`} ref={dragRef} onClick={() => {
-                    dispatch({
-                        type: SET_CURRENT_INGREDIENT,
-                        payload: ingredient
-                    });
+                    dispatch(setCurrent(ingredient));
                 }}>
                     <img alt={ingredient.name} src={ingredient.image} className="pl-4 pr-4" />
                     <div className={`${CardStyle.price} pb-1 pt-1`}>

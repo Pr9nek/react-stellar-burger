@@ -5,7 +5,7 @@ import { listItemPropType } from "../../../utils/prop-types";
 import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react';
-
+import { deleteItem } from '../../../services/actions/burgerConstructor/actions';
 export default function ListItem({ name, price, image, index, moveIngredient, id }) {
 
     const dispatch = useDispatch();
@@ -39,12 +39,7 @@ export default function ListItem({ name, price, image, index, moveIngredient, id
     const dragDropRef = dragRef(dropRef(ref))
 
     const opacity = isDragging ? { opacity: 0 } : { opacity: 1 };
-    const deletItem = (id) => {
-        dispatch({
-            type: 'DELETE_INGREDIENT_FROM_CONSTRUCTOR',
-            payload: id
-        })
-    }
+   
     return (
 
         <div ref={dragDropRef} className={ListStyles.list} style={opacity}>
@@ -53,7 +48,7 @@ export default function ListItem({ name, price, image, index, moveIngredient, id
                 text={name}
                 price={price}
                 thumbnail={image}
-                handleClose={(() => deletItem({ id }))}
+                handleClose={ () => dispatch(deleteItem({ id })) }
             />
         </div>
     )
