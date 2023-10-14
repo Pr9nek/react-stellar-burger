@@ -15,3 +15,7 @@
     height: 664px;
     overflow-y: auto;
 }
+
+.tabsContaiber {
+    display: flex;
+}

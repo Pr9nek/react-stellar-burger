@@ -1,4 +1,4 @@
-import stylesNav from './Nav.module.css';
+import stylesNav from './nav.module.css';
 import { navPropType } from '../../../utils/prop-types';
 
 export default function Nav(props) {

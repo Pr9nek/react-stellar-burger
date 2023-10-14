@@ -1,5 +1,5 @@
-import Nav from './Nav/Nav';
-import HeaderStyles from "./App-Header.module.css";
+import HeaderStyles from "./app-header.module.css";
+import Nav from './nav/nav';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
