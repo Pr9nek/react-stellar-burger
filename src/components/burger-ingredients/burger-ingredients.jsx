@@ -11,7 +11,7 @@ import {clearCurrent} from '../../services/actions/details/actions';
 export default function BurgerIngredients() {
     const ingredients = useSelector(store => store.ingredients.ingredients);
     const currentTab = useSelector(store => store.ingredients.currentTab);
-    const currentIngredient = useSelector(store => store.details.ingredientDetail);
+    // const currentIngredient = useSelector(store => store.details.ingredientDetail);
 
     const dispatch = useDispatch();
 
@@ -41,9 +41,9 @@ export default function BurgerIngredients() {
         }
     };
 
-    function closeModal() {
-        dispatch(clearCurrent());
-    }
+    // function closeModal() {
+    //     dispatch(clearCurrent());
+    // }
 
     const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
     const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
@@ -88,12 +88,12 @@ export default function BurgerIngredients() {
                     ))}
                 </div>
             </div>
-    {
+    {/* {
         currentIngredient &&
         <Modal header="Детали ингредиента" onClose={closeModal}>
             <IngredientDetails />
         </Modal>
-    }
+    } */}
         </>
     )
 }

@@ -10,11 +10,11 @@ import { getIngredients } from '../../services/actions/ingredients/actions';
 function Home() {
 
   const { isLoading, Error, ingredients } = useSelector(store => store.ingredients);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getIngredients());
+  // }, [])
 
   return (
     <main className={`${styles.main} pl-5 pr-5`}>
