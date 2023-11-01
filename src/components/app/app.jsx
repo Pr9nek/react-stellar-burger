@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import styles from "./app.module.css";
 import AppHeader from "../app-header/app-header";
 import Home from "../../pages/home/home";
+import Login from "../../pages/login/login";
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
       <AppHeader />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         {/* <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} /> */}
       </Routes>
