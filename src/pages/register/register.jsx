@@ -1,5 +1,5 @@
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import styles from "./register.module.css";
 import { Link } from 'react-router-dom';
 
@@ -13,15 +13,10 @@ export default function Register() {
         });
     };
 
-    const inputRef = useRef(null)
-    const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0)
-  }
-
     return (
         <div className={styles.container}>
             <h1 className="text text_type_main-medium pb-6">
-                Вход
+                Регистрация
             </h1>
             <form className={styles.form}>
                 <Input

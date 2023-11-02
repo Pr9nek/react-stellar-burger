@@ -7,8 +7,6 @@ function Login() {
 
     const [value, setValue] = useState({ email: '', password: '' });
     const onChange = (e) => {
-        // const name = e.target.name;
-        // const value = e.target.value;
         setValue({
             ...value,
             [e.target.name]: e.target.value,
