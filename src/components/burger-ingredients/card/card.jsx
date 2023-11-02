@@ -3,7 +3,7 @@ import CardStyle from "./card.module.css";
 import { useLocation, Link } from "react-router-dom";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { cardPropType } from "../../../utils/prop-types";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
 import { useMemo } from 'react';
 // import { setCurrent } from '../../../services/actions/details/actions';

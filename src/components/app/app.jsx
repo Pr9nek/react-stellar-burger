@@ -5,6 +5,7 @@ import styles from "./app.module.css";
 import AppHeader from "../app-header/app-header";
 import Home from "../../pages/home/home";
 import Login from "../../pages/login/login";
+import Register from "../../pages/register/register";
 import IngredientsDetails from "../modals/ingredient-details/ingredient-details";
 import Modal from "../modals/modal/modal";
 // import {clearCurrent} from '../../services/actions/details/actions';
@@ -36,7 +37,7 @@ function App() {
       <Routes location={background || location}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/ingredients/:id"
           element={ingredients?.length && (
             <IngredientsDetails ingredients={ingredients} />
