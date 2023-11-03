@@ -19,7 +19,6 @@ export default function Register() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(value);
 		dispatch(setUserRegistration(value.email, value.password, value.name));
     }
 

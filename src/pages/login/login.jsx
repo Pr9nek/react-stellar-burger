@@ -2,23 +2,32 @@ import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer
 import { useState } from 'react';
 import styles from "./login.module.css";
 import { Link } from 'react-router-dom';
+import { logInUser } from '../../services/actions/user/actions';
+import { useDispatch } from 'react-redux';
 
 function Login() {
 
-    const [value, setValue] = useState({ email: '', password: '' });
-    const onChange = (e) => {
-        setValue({
-            ...value,
-            [e.target.name]: e.target.value,
-        });
-    };
+        const [value, setValue] = useState({ email: '', password: '' });
+        const dispatch = useDispatch();
 
-    return (
+        const onChange = (e) => {
+            setValue({
+                ...value,
+                [e.target.name]: e.target.value,
+            });
+        };
+
+        const onSubmit = (e) => {
+            e.preventDefault();
+            dispatch(logInUser(value.email, value.password));
+        }
+
+        return (
             <div className={styles.container}>
                 <h1 className="text text_type_main-medium pb-6">
                     Вход
                 </h1>
-                <form className={styles.form}>
+                <form className={styles.form} onSubmit={onSubmit} >
                     <EmailInput
                         onChange={onChange}
                         value={value.email}
@@ -33,7 +42,7 @@ function Login() {
                     />
 
                     {value.email && value.password ?
-                        (<Button htmlType="button" type="primary" size="medium">
+                        (<Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
                             Войти
                         </Button>)
                         : (<Button htmlType="button" type="primary" size="medium" disabled>
@@ -49,7 +58,7 @@ function Login() {
                     </p>
                 </div>
             </div>
-    )
-}
+        )
+    }
 
 export default Login

@@ -1,7 +1,11 @@
 import {
     CHECK_USER_REGISTRATION,
     USER_REG_SUCCESS,
-    USER_REG_FAILED
+    USER_REG_FAILED,
+
+    CHECK_USER_LOGIN,
+    USER_LOGIN_SUCCESS,
+    USER_LOGIN_FAILED
 } from '../actions/user/actions';
 
 const initialUserState = {
@@ -9,7 +13,7 @@ const initialUserState = {
     user: null,
     registerUserRequest: false,
     registerUserError: null,
-    
+
     loginUserRequest: false,
     loginUserError: null,
 
@@ -39,6 +43,24 @@ export const userReducer = (state = initialUserState, action) => {
                 ...state,
                 registerUserError: action.payload,
                 registerUserRequest: false
+            };
+        case CHECK_USER_LOGIN:
+            return {
+                ...state,
+                isAuthChecked: true,
+                loginUserRequest: true,
+            };
+        case USER_LOGIN_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+                loginUserRequest: false
+            };
+            case USER_LOGIN_FAILED:
+            return {
+                ...state,
+                loginUserError: action.payload,
+                loginUserRequest: false
             };
         default:
             return state;
