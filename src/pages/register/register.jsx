@@ -2,10 +2,14 @@ import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-de
 import { useState } from 'react';
 import styles from "./register.module.css";
 import { Link } from 'react-router-dom';
+import { setUserRegistration } from '../../services/actions/user/actions';
+import { useDispatch } from 'react-redux';
 
 export default function Register() {
 
     const [value, setValue] = useState({ name: '', email: '', password: '' });
+    const dispatch = useDispatch();
+
     const onChange = (e) => {
         setValue({
             ...value,
@@ -13,12 +17,20 @@ export default function Register() {
         });
     };
 
+    const onSubmit = (e) => {
+        e.preventDefault();
+        console.log(value);
+		dispatch(setUserRegistration(value.email, value.password, value.name));
+    }
+
+    console.log(value.name);
+
     return (
         <div className={styles.container}>
             <h1 className="text text_type_main-medium pb-6">
                 Регистрация
             </h1>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={onSubmit}>
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
@@ -42,7 +54,7 @@ export default function Register() {
                 />
 
                 {value.email && value.password && value.name ?
-                    (<Button htmlType="button" type="primary" size="medium">
+                    (<Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
                         Зарегистрироваться
                     </Button>)
                     : (<Button htmlType="button" type="primary" size="medium" disabled>

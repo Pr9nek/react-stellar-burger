@@ -33,7 +33,7 @@ function ForgotPassword() {
                 </form>
                 <div className={styles.registery}>
                     <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?
-                        <Link className={styles.link} to='/register'>Войти</Link>
+                        <Link className={styles.link} to='/login'>Войти</Link>
                     </p>
                 </div>
             </div>

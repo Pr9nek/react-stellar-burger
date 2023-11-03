@@ -15,7 +15,7 @@ export function switchTab (tab) {
 }
 
 export const getIngredients = (payload) => (dispatch) => {
-    console.log(123);
+
     dispatch({
         type: INGREDIENTS_LOADING
     });
