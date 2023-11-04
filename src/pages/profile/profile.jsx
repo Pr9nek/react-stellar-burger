@@ -49,7 +49,7 @@ export default function ProfilePage() {
                 </ul>
             </nav>
             <p className={`${styles.text} mt-20 text text_type_main-default text_color_inactive`}>
-                В этом разделе вы можете 
+                В этом разделе вы можете    
                 изменить свои персональные данные
             </p>
         </div>
