@@ -15,38 +15,41 @@ export const USER_LOGIN_FAILED = 'USER_LOGIN_FAILED';
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
 export const SET_USER = "SET_USER";
 
-// export const setAuthChecked = (value) => ({
-//     type: SET_AUTH_CHECKED,
-//     payload: value,
-// });
-
-// export const setUser = (user) => ({
-//     type: SET_USER,
-//     payload: user,
-// });
+// export const checkUserAuth = () => (dispatch) => {
+//     return getUserRefresh()
+//         .then(res => {
+//          dispatch({
+//                 type: SET_USER,
+//                 payload: res.user,
+//             });
+//         })
+//         .catch(() => {
+//             localStorage.removeItem("accessToken");
+//             localStorage.removeItem("refreshToken");
+//             dispatch({
+//                 type: SET_USER,
+//                 payload: null,
+//             });
+//         })
+//         .finally(() => dispatch({
+//             type: SET_AUTH_CHECKED,
+//             payload: true,
+//         }));
+//     };
 
 export const checkUserAuth = () => (dispatch) => {
     return getUserRefresh()
         .then(res => {
-         dispatch({
-                type: SET_USER,
-                payload: res.user,
-            });
-        })
-        .catch(() => {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
             dispatch({
                 type: SET_USER,
-                payload: null,
+                payload: res.user,
             });
         })
         .finally(() => dispatch({
             type: SET_AUTH_CHECKED,
             payload: true,
         }));
-    };
-
+};
 
 export const logInUser = (email, password) => (dispatch) => {
     dispatch({
@@ -70,7 +73,7 @@ export const logInUser = (email, password) => (dispatch) => {
             dispatch({
                 type: USER_LOGIN_FAILED,
                 payload: error
-            })
+            });
         });
 }
 

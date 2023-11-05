@@ -2,12 +2,15 @@ import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-de
 import { useState } from 'react';
 import styles from "./profile.module.css";
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Profile() {
 
     const [value, setValue] = useState({ name: '', email: '', password: '' });
     const dispatch = useDispatch();
+
+    const name = useSelector((store) => store.user.user.name); 
+    const login = useSelector((store) => store.user.user.email); 
 
     const onChange = (e) => {
         setValue({
@@ -30,7 +33,7 @@ export default function Profile() {
                     type={'text'}
                     placeholder={'Имя'}
                     onChange={onChange}
-                    value={value.name}
+                    value={name}
                     name={'name'}
                     error={false}
                     size={'default'}
@@ -39,7 +42,7 @@ export default function Profile() {
                 <EmailInput
                     placeholder={'Логин'}
                     onChange={onChange}
-                    value={value.email}
+                    value={login}
                     name={'email'}
                     isIcon={false}
                     icon={'EditIcon'}
