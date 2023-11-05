@@ -3,9 +3,11 @@ import { useState } from 'react';
 import styles from "./login.module.css";
 import { Link } from 'react-router-dom';
 import { logInUser } from '../../services/actions/user/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
+        const user = useSelector((store) => store.user.user); 
+console.log(user);
 
         const [value, setValue] = useState({ email: '', password: '' });
         const dispatch = useDispatch();

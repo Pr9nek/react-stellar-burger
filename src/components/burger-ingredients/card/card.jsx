@@ -10,7 +10,6 @@ import { useMemo } from 'react';
 export default function Card({ ingredient }) {
     const location = useLocation();
     const id = ingredient['_id'];
-    console.log(id);
 
     // const dispatch = useDispatch();
 

@@ -15,26 +15,34 @@ import { getIngredients } from '../../services/actions/ingredients/actions';
 import ProfilePage from "../../pages/profile-page/profile-page";
 import Profile from "../profile/profile";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
+import { checkUserAuth } from "../../services/actions/user/actions";
+import { refreshToken } from "../../utils/api";
 
 
 function App() {
 
   const location = useLocation();
+  const token = localStorage.getItem('accessToken');
+  const refreshToken = localStorage.getItem('refreshToken');
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const background = location.state?.background;
   const { ingredients } = useSelector(store => store.ingredients);
 
-
+  console.log(token);
+  console.log(refreshToken);
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки
     navigate(-1);
   };
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getIngredients());
   }, []);
+
+  useEffect(() => {
+      dispatch(checkUserAuth());
+  }, [dispatch, token, refreshToken]);
 
   return (
     <div className={styles.app}>

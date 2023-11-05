@@ -51,6 +51,17 @@ export const logIn = (email, password) => {
     .then(onResponse);
 }
 
+// export const getUser = () => {
+//     return fetch(`${Api.url}/auth/user`, {
+// 		method: 'GET',
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 			Authorization: 'Bearer ' + localStorage.getItem("accessToken"),
+// 		},
+// 	})
+// 		.then(onResponse);
+// }
+
 export const refreshToken = () => {
     return fetch(`${Api}/auth/token`, {
         method: "POST",
@@ -62,6 +73,7 @@ export const refreshToken = () => {
         }),
     }).then(onResponse);
 };
+
 
 export const fetchWithRefresh = async (url, options) => {
     try {
@@ -83,3 +95,11 @@ export const fetchWithRefresh = async (url, options) => {
         }
     }
 };
+
+export const getUserRefresh = () => fetchWithRefresh(`${Api}/auth/user`, {
+    method: 'GET',
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: 'Bearer ' + localStorage.getItem("accessToken"),
+    }
+})
