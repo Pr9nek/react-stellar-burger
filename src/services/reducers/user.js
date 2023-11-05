@@ -41,6 +41,7 @@ export const userReducer = (state = initialUserState, action) => {
         case USER_REG_FAILED:
             return {
                 ...state,
+                isAuthChecked: false,
                 registerUserError: action.payload,
                 registerUserRequest: false
             };
@@ -59,6 +60,7 @@ export const userReducer = (state = initialUserState, action) => {
             case USER_LOGIN_FAILED:
             return {
                 ...state,
+                isAuthChecked: false,
                 loginUserError: action.payload,
                 loginUserRequest: false
             };

@@ -12,7 +12,8 @@ import IngredientsDetails from "../modals/ingredient-details/ingredient-details"
 import Modal from "../modals/modal/modal";
 // import {clearCurrent} from '../../services/actions/details/actions';
 import { getIngredients } from '../../services/actions/ingredients/actions';
-import ProfilePage from "../../pages/profile/profile";
+import ProfilePage from "../../pages/profile-page/profile-page";
+import Profile from "../profile/profile";
 
 
 function App() {
@@ -40,7 +41,7 @@ function App() {
       <Routes location={background || location}>  
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<ProfilePage />}>
-          {/* <Route path index element={<Profile />} /> */}
+          <Route index element={<Profile />} />
           {/* <Route path="/profile/orders" element={<Orders />} />
           <Route path="/profile/orders/:id" element={<Order />} /> */}
         </Route>

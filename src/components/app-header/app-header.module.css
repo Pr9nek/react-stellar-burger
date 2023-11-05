@@ -20,3 +20,14 @@
     flex-grow: 1;
 }
 
+.inactive {
+    text-decoration: none;
+    /* color: rgba(133, 133, 173, 1); */
+}
+
+.active {
+    text-decoration: none;
+    color: rgba(242, 242, 243, 1);
+}
+
+
