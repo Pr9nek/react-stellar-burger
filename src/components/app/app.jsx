@@ -14,6 +14,7 @@ import Modal from "../modals/modal/modal";
 import { getIngredients } from '../../services/actions/ingredients/actions';
 import ProfilePage from "../../pages/profile-page/profile-page";
 import Profile from "../profile/profile";
+import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 
 
 function App() {
@@ -40,13 +41,13 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>  
         <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<ProfilePage />}>
-          <Route index element={<Profile />} />
+        <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} >
+          <Route index element={<OnlyAuth component={<Profile />} />} />
           {/* <Route path="/profile/orders" element={<Orders />} />
           <Route path="/profile/orders/:id" element={<Order />} /> */}
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
+        <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/ingredients/:id"
