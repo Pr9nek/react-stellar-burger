@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function Profile() {
 
-    const [value, setValue] = useState({ name: '', email: '', password: '' });
+    const [value, setValue] = useState({ name: '', email: '', password: '******' });
     const dispatch = useDispatch();
 
     const name = useSelector((store) => store.user.user.name); 
@@ -28,12 +28,12 @@ export default function Profile() {
 
     return (
         <div className={styles.container}>
-            <form className={styles.form} onSubmit={onSubmit}>
+            <form className={styles.form} onSubmit={onSubmit} onChange={onChange}>
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
                     onChange={onChange}
-                    value={name}
+                    value={''}
                     name={'name'}
                     error={false}
                     size={'default'}
@@ -42,14 +42,14 @@ export default function Profile() {
                 <EmailInput
                     placeholder={'Логин'}
                     onChange={onChange}
-                    value={login}
+                    value={''}
                     name={'email'}
                     isIcon={false}
                     icon={'EditIcon'}
                 />
                 <PasswordInput
                     onChange={onChange}
-                    value={value.password}
+                    value={''}
                     name={'password'}
                     extraClass="mb-2"
                     icon={'EditIcon'}

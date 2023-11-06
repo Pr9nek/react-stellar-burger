@@ -22,8 +22,7 @@ import { refreshToken } from "../../utils/api";
 function App() {
 
   const location = useLocation();
-  const token = localStorage.getItem('accessToken');
-  const refreshToken = localStorage.getItem('refreshToken');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const background = location.state?.background;
@@ -31,7 +30,9 @@ function App() {
 
   const user = useSelector((store) => store.user.user);
   const getUserError = useSelector((store) => store.user.getUserError);
-  const accessToken = localStorage.getItem("accessToken");
+
+  const token = localStorage.getItem('accessToken');
+  const refreshToken = localStorage.getItem('refreshToken');
 
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки
@@ -43,9 +44,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if(accessToken){
+    if(token){
     dispatch(checkUserAuth());}
   }, [dispatch, token, refreshToken]);
+
+  console.log(token);
+  console.log(refreshToken);
+
 
   return (
     <div className={styles.app}>
@@ -59,8 +64,8 @@ function App() {
         </Route>
         <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
         <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
+        <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
         <Route path="/ingredients/:id"
           element={ingredients?.length && (
             <IngredientsDetails ingredients={ingredients} />

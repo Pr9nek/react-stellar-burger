@@ -34,8 +34,8 @@ export const checkUserAuth = () => (dispatch) => {
             dispatch({
                 type: GET_USER_ERROR,
                 payload: error.message
-              });
-            })
+            });
+        })
         .finally(() => dispatch({
             type: SET_AUTH_CHECKED,
             payload: true,
@@ -43,29 +43,29 @@ export const checkUserAuth = () => (dispatch) => {
 };
 
 export const logInUser = (email, password) => (dispatch) => {
+    dispatch({
+        type: CHECK_USER_LOGIN
+    });
+return logIn(email, password)
+    .then(res => {
+        const accessToken = res.accessToken.split('Bearer ')[1];
+        const refreshToken = res.refreshToken;
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        return res;
+    })
+    .then((res) => {
         dispatch({
-            type: CHECK_USER_LOGIN
+            type: USER_LOGIN_SUCCESS,
+            payload: res.user
         });
-    return logIn(email, password)
-        .then(res => {
-            const accessToken = res.accessToken.split('Bearer ')[1];
-            const refreshToken = res.refreshToken;
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', refreshToken);
-            return res;
-        })
-        .then((res) => {
-            dispatch({
-                type: USER_LOGIN_SUCCESS,
-                payload: res.user
-            });
-        })
-        .catch(error => {
-            dispatch({
-                type: USER_LOGIN_FAILED,
-                payload: error
-            });
+    })
+    .catch(error => {
+        dispatch({
+            type: USER_LOGIN_FAILED,
+            payload: error
         });
+    });
 }
 
 export const logOutUser = (token) => (dispatch) => {
@@ -73,18 +73,18 @@ export const logOutUser = (token) => (dispatch) => {
         type: CHEK_USER_LOGOUT
     });
     return logOut(token)
-    .then(res => {
-        dispatch({
-            type: USER_LOGOUT_SUCCESS
+        .then(res => {
+            dispatch({
+                type: USER_LOGOUT_SUCCESS
+            });
+            return res;
+        })
+        .catch(error => {
+            dispatch({
+                type: USER_LOGOUT_ERROR,
+                payload: error
+            });
         });
-        return res;
-    })
-    .catch(error => {
-        dispatch({
-            type: USER_LOGOUT_ERROR,
-            payload: error
-        });
-    });
 };
 
 export const setUserRegistration = (email, password, name) => (dispatch) => {

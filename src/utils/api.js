@@ -52,20 +52,20 @@ export const logIn = (email, password) => {
 }
 
 export const logOut = (token) => {
-return fetch(`${Api}/auth/logout`, {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify({
-        "token": localStorage.getItem("refreshToken"),
-    })
-}).then(res => {
-    onResponse(res);
-    localStorage.removeItem("resetPassword");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("accessToken");
-});
+    return fetch(`${Api}/auth/logout`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+            "token": localStorage.getItem("refreshToken"),
+        })
+    }).then(res => {
+        onResponse(res);
+        localStorage.removeItem("resetPassword");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("accessToken");
+    });
 };
 
 // export const getUser = () => {
@@ -130,8 +130,9 @@ export const fetchWithRefresh = async (url, options) => {
     } catch (err) {
         console.log(err.message);
         if (err.message === "jwt expired") {
-
+            console.log(localStorage.getItem("refreshToken"));
             const refreshData = await refreshToken(); //обновляем токен
+
             if (!refreshData.success) {
                 return Promise.reject(refreshData);
             }
