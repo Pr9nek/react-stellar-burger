@@ -1,7 +1,7 @@
 const Api = "https://norma.nomoreparties.space/api";
 
 function onResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
 export const getData = () => {
