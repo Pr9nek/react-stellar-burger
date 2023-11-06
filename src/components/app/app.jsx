@@ -29,8 +29,10 @@ function App() {
   const background = location.state?.background;
   const { ingredients } = useSelector(store => store.ingredients);
 
-  console.log(token);
-  console.log(refreshToken);
+  const user = useSelector((store) => store.user.user);
+  const getUserError = useSelector((store) => store.user.getUserError);
+  const accessToken = localStorage.getItem("accessToken");
+
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки
     navigate(-1);
@@ -41,13 +43,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-      dispatch(checkUserAuth());
+    if(accessToken){
+    dispatch(checkUserAuth());}
   }, [dispatch, token, refreshToken]);
 
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes location={background || location}>  
+      <Routes location={background || location}>
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} >
           <Route index element={<OnlyAuth component={<Profile />} />} />

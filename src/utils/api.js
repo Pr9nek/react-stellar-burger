@@ -39,17 +39,34 @@ export const setRegistration = (email, password, name) => {
 
 export const logIn = (email, password) => {
     return fetch(`${Api}/auth/login`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            "email": email,
-            "password": password
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "email": email,
+                "password": password
+            })
         })
-    })
-    .then(onResponse);
+        .then(onResponse);
 }
+
+export const logOut = (token) => {
+return fetch(`${Api}/auth/logout`, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify({
+        "token": localStorage.getItem("refreshToken"),
+    })
+}).then(res => {
+    onResponse(res);
+    localStorage.removeItem("resetPassword");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
+});
+};
 
 // export const getUser = () => {
 //     return fetch(`${Api.url}/auth/user`, {
@@ -62,6 +79,37 @@ export const logIn = (email, password) => {
 // 		.then(onResponse);
 // }
 
+export const resetPassword = (email) => {
+    return fetch(`${Api}/password-reset`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+            "mail": email,
+        })
+    }).then(res => {
+        onResponse(res);
+        localStorage.setItem("resetPassword", "true");
+    });
+};
+
+export const getPassword = (newPassword, token) => {
+    return fetch(`${Api}/password-reset/reset`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+            "password": newPassword,
+            "token": token
+        })
+    }).then(res => {
+        onResponse(res);
+        localStorage.setItem("resetPassword", "false");
+    });
+};
+
 export const refreshToken = () => {
     return fetch(`${Api}/auth/token`, {
         method: "POST",
@@ -69,7 +117,7 @@ export const refreshToken = () => {
             "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify({
-            token: localStorage.getItem("refreshToken"),
+            "token": localStorage.getItem("refreshToken"),
         }),
     }).then(onResponse);
 };
@@ -80,14 +128,18 @@ export const fetchWithRefresh = async (url, options) => {
         const res = await fetch(url, options);
         return await onResponse(res);
     } catch (err) {
+        console.log(err.message);
         if (err.message === "jwt expired") {
+
             const refreshData = await refreshToken(); //обновляем токен
             if (!refreshData.success) {
                 return Promise.reject(refreshData);
             }
             localStorage.setItem("refreshToken", refreshData.refreshToken);
             localStorage.setItem("accessToken", refreshData.accessToken);
+            console.log(refreshData.refreshToken);
             options.headers.authorization = refreshData.accessToken;
+            console.log(options.headers.authorization);
             const res = await fetch(url, options); //повторяем запрос
             return await onResponse(res);
         } else {

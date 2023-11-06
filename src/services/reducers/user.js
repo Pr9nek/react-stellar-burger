@@ -8,12 +8,19 @@ import {
     USER_LOGIN_FAILED,
 
     SET_AUTH_CHECKED,
-    SET_USER
+    GET_USER,
+    GET_USER_ERROR,
+
+    CHEK_USER_LOGOUT,
+    USER_LOGOUT_SUCCESS,
+    USER_LOGOUT_ERROR
+
 } from '../actions/user/actions';
 
 const initialUserState = {
     isAuthChecked: false,
     user: null,
+
     registerUserRequest: false,
     registerUserError: null,
 
@@ -25,6 +32,9 @@ const initialUserState = {
 
     updateUserRequest: false,
     updateUserError: null,
+
+    logoutUserRequest: false,
+    logoutUserError: null,
 }
 
 export const userReducer = (state = initialUserState, action) => {
@@ -32,12 +42,19 @@ export const userReducer = (state = initialUserState, action) => {
         case SET_AUTH_CHECKED:
             return {
                 ...state,
-                isAuthChecked: action.payload
+                isAuthChecked: action.payload,
             };
-        case SET_USER:
+        case GET_USER:
             return {
                 ...state,
-                user: action.payload
+                user: action.payload,
+                    getUserRequest: false
+            };
+        case GET_USER_ERROR:
+            return {
+                ...state,
+                getUserError: action.payload,
+                    user: null
             };
         case CHECK_USER_REGISTRATION:
             return {
@@ -76,6 +93,24 @@ export const userReducer = (state = initialUserState, action) => {
                 isAuthChecked: false,
                     loginUserError: action.payload,
                     loginUserRequest: false
+            };
+        case CHEK_USER_LOGOUT:
+            return {
+                ...state,
+                logoutUserRequest: true
+            };
+        case USER_LOGOUT_SUCCESS:
+            return {
+                ...state,
+                isAuthChecked: false,
+                    logoutUserRequest: false,
+                    user: null
+            };
+        case USER_LOGOUT_ERROR:
+            return {
+                ...state,
+                logoutUserError: action.payload,
+                    logoutUserRequest: false
             };
         default:
             return state;

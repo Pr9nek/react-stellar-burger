@@ -1,17 +1,29 @@
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
 import styles from "./reset-password.module.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getPassword } from '../../utils/api';
+
 
 export default function ResetPassword() {
 
     const [value, setValue] = useState({ password: '', code: '' });
+    const navigate = useNavigate();
     const onChange = (e) => {
         setValue({
             ...value,
             [e.target.name]: e.target.value,
         });
     };
+    const resetFlag = localStorage.getItem("resetPassword");
+    const onSubmit = (e) => {
+        e.preventDefault();
+        getPassword(value.password, value.code)
+            .then (()=>{
+                const resetFlag = localStorage.getItem("resetPassword");
+                if (resetFlag === 'false') { navigate("/");}
+            })
+    }
 
     return (
         <div className={styles.container}>
@@ -37,7 +49,7 @@ export default function ResetPassword() {
                 />
 
                 {value.password && value.code ?
-                    (<Button htmlType="button" type="primary" size="medium">
+                    (<Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
                         Сохранить
                     </Button>)
                     : (<Button htmlType="button" type="primary" size="medium" disabled>

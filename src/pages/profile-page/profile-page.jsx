@@ -1,7 +1,17 @@
 import { NavLink, Outlet } from "react-router-dom";
 import styles from "./profile-page.module.css";
+import { useDispatch } from "react-redux";
+import { logOutUser } from "../../services/actions/user/actions";
+import { Link } from 'react-router-dom';
 
 export default function ProfilePage() {
+
+const refreshToken = localStorage.getItem("refreshToken");
+const dispatch = useDispatch();
+const logOut = (e) => {
+    e.preventDefault();
+    dispatch(logOutUser(refreshToken));
+}
 
     return (
         <div className={styles.main}>
@@ -43,7 +53,9 @@ export default function ProfilePage() {
                                         isActive ? `${styles.active} text text_type_main-medium` : `${styles.inactive} text text_type_main-medium text_color_inactive`,
                                         isTransitioning ? "" : "",
                                     ].join(" ")
-                                }>
+                                }
+                                onClick={logOut}
+                                >
                                 <span>Выход</span>
                             </NavLink>
                         </li>

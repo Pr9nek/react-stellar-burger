@@ -11,12 +11,9 @@ export default function AppHeader() {
     return (
         <header className={HeaderStyles.header}>
             <div className={`${HeaderStyles.header_container} pb-4 pt-4`}>
-
                 <div className={HeaderStyles.header_item}>
                     <Nav>
-                        
-                            <BurgerIcon type={location.pathname === '/' ? "primary" : "secondary"} />
-
+                        <BurgerIcon type={location.pathname === '/' ? "primary" : "secondary"} />
                         <NavLink
                             to="/"
                             className={({ isActive }) =>
@@ -28,16 +25,9 @@ export default function AppHeader() {
                         </NavLink>
                     </Nav>
                     <Nav>
-                       
-                            <BurgerIcon type={location.pathname === '/lenta' ? "primary" : "secondary"}/>
-
+                        <BurgerIcon type={location.pathname === '/lenta' ? "primary" : "secondary"} />
                         <NavLink
                             to="/lenta"
-                            type={({ isActive }) =>
-                                [
-                                    isActive ? "primary" : "secondary",
-                                ].join(" ")
-                            }
                             className={({ isActive }) =>
                                 [
                                     isActive ? `${HeaderStyles.active} text text_type_main-default pl-2` : `${HeaderStyles.inactive} text text_type_main-default pl-2 text_color_inactive`,
@@ -47,18 +37,14 @@ export default function AppHeader() {
                         </NavLink>
                     </Nav>
                 </div>
-
                 <div className={`${HeaderStyles.header_item} jc-c`}>
                     <div className='mt-2 mb-2'>
                         <Logo />
                     </div>
                 </div>
-
                 <div className={`${HeaderStyles.header_item} jc-f-e`}>
                     <Nav>
-                       
-                            <ProfileIcon type={location.pathname === '/profile' ? "primary" : "secondary"}/>
-
+                        <ProfileIcon type={location.pathname === '/profile' ? "primary" : "secondary"} />
                         <NavLink
                             to="/profile"
                             className={({ isActive }) =>
