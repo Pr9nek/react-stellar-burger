@@ -23,15 +23,12 @@ function ForgotPassword() {
             })
     }
 
-    // console.log(resetFlag);
-
-    // (<Navigate to='/reset-password' />)
     return (
     <div className={styles.container}>
         <h1 className="text text_type_main-medium pb-6">
             Восстановление пароля
         </h1>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={onSubmit}>
             <EmailInput
                 onChange={onChange}
                 value={value}
@@ -40,7 +37,7 @@ function ForgotPassword() {
             />
 
             {value ?
-                (<Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
+                (<Button htmlType="button" type="primary" size="medium" htmlType="submit">
                     Восстановить
                 </Button>)
                 : (<Button htmlType="button" type="primary" size="medium" disabled>

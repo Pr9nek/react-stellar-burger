@@ -42,7 +42,7 @@ function Login() {
                     />
 
                     {value.email && value.password ?
-                        (<Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
+                        (<Button htmlType="button" type="primary" size="medium" htmlType="submit">
                             Войти
                         </Button>)
                         : (<Button htmlType="button" type="primary" size="medium" disabled>

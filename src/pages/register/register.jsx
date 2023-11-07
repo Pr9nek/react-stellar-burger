@@ -53,7 +53,7 @@ export default function Register() {
                 />
 
                 {value.email && value.password && value.name ?
-                    (<Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
+                    (<Button htmlType="button" type="primary" size="medium" htmlType="submit">
                         Зарегистрироваться
                     </Button>)
                     : (<Button htmlType="button" type="primary" size="medium" disabled>

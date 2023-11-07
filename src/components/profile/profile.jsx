@@ -8,8 +8,8 @@ export default function Profile() {
 
     const dispatch = useDispatch();
 
-    const name = useSelector((store) => store.user.user.name); 
-    const login = useSelector((store) => store.user.user.email); 
+    const name = useSelector((store) => store.user.user.name);
+    const login = useSelector((store) => store.user.user.email);
     const [value, setValue] = useState({ name: name, email: login, password: '******' });
 
     const onChange = (e) => {
@@ -21,18 +21,18 @@ export default function Profile() {
 
     const onReset = (e) => {
         setValue({
-            name: '', email: '', password: '' 
+            name: name, email: login, password: '******'
         });
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(editUser(value.name, value.email, value.password)); 
+        dispatch(editUser(value.name, value.email, value.password));
     }
 
     return (
         <div className={styles.container}>
-            <form className={styles.form} onChange={onChange}>
+            <form className={styles.form} onChange={onChange} onSubmit={onSubmit}>
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
@@ -59,16 +59,20 @@ export default function Profile() {
                     icon={'EditIcon'}
                 />
                 <div className={styles.buttons}>
-                <Button htmlType="button" type="secondary" size="medium" onClick={onReset}>
-                    Отмена
-                </Button>
-                {value.email && value.password && value.password!=="******" && value.name ?
-                    (<Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
-                        Сохранить
-                    </Button>)
-                    : (<Button htmlType="button" type="primary" size="medium" disabled>
-                        Сохранить
-                    </Button>)}
+                    {(value.email || value.email !== login) && (value.name || value.name !== name) && value.password && value.password !== "******" ?
+                        (<Button htmlType="button" type="secondary" size="medium" onClick={onReset}>
+                            Отмена
+                        </Button>)
+                        : (<Button htmlType="button" type="secondary" size="medium" disabled>
+                            Отмена
+                        </Button>)}
+                    {(value.email || value.email !== login) && (value.name || value.name !== name) && value.password && value.password !== "******" ?
+                        (<Button htmlType="button" type="primary" size="medium" htmlType="submit">
+                            Сохранить
+                        </Button>)
+                        : (<Button htmlType="button" type="primary" size="medium" disabled>
+                            Сохранить
+                        </Button>)}
                 </div>
             </form>
         </div>
