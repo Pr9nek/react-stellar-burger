@@ -4,6 +4,7 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import styles from "./app.module.css";
 import AppHeader from "../app-header/app-header";
 import Home from "../../pages/home/home";
+import Lost from "../../pages/lost/lost";
 import Login from "../../pages/login/login";
 import Register from "../../pages/register/register";
 import ForgotPassword from "../../pages/forgot-password/forgot-password";
@@ -16,7 +17,6 @@ import ProfilePage from "../../pages/profile-page/profile-page";
 import Profile from "../profile/profile";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { checkUserAuth } from "../../services/actions/user/actions";
-import { refreshToken } from "../../utils/api";
 
 
 function App() {
@@ -32,6 +32,10 @@ function App() {
   const token = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
 
+  console.log(token);
+  console.log(refreshToken);
+  console.log(user);
+  
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки
     navigate(-1);
@@ -46,16 +50,13 @@ function App() {
     dispatch(checkUserAuth());}
   }, [dispatch, token, refreshToken]);
 
-  console.log(token);
-  console.log(refreshToken);
-  console.log(user);
-
 
   return (
     <div className={styles.app}>
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<Home />} />
+        <Route path="*" element={<Lost />} />
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} >
           <Route index element={<OnlyAuth component={<Profile />} />} />
           {/* <Route path="/profile/orders" element={<Orders />} />

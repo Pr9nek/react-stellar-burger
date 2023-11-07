@@ -1,5 +1,5 @@
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../../services/actions/user/actions';
@@ -19,12 +19,16 @@ export default function Profile() {
         });
     };
 
+    const onReset = (e) => {
+        setValue({
+            name: '', email: '', password: '' 
+        });
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
         dispatch(editUser(value.name, value.email, value.password)); 
     }
-
-    console.log(value.name);
 
     return (
         <div className={styles.container}>
@@ -55,7 +59,7 @@ export default function Profile() {
                     icon={'EditIcon'}
                 />
                 <div className={styles.buttons}>
-                <Button htmlType="button" type="secondary" size="medium">
+                <Button htmlType="button" type="secondary" size="medium" onClick={onReset}>
                     Отмена
                 </Button>
                 {value.email && value.password && value.password!=="******" && value.name ?

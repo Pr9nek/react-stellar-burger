@@ -9,19 +9,6 @@ export const getData = () => {
         .then(onResponse);
 }
 
-export const makeOrder = (IDs) => {
-    return fetch(`${Api}/orders`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                ingredients: IDs
-            })
-        })
-        .then(onResponse);
-}
-
 export const setRegistration = (email, password, name) => {
     return fetch(`${Api}/auth/register`, {
             method: 'POST',
@@ -119,17 +106,16 @@ export const fetchWithRefresh = async (url, options) => {
     } catch (err) {
         console.log(err.message);
         if (err.message === "jwt expired") {
-            console.log(localStorage.getItem("refreshToken"));
             const refreshData = await refreshToken(); //обновляем токен
 
             if (!refreshData.success) {
                 return Promise.reject(refreshData);
             }
             localStorage.setItem("refreshToken", refreshData.refreshToken);
-            localStorage.setItem("accessToken", refreshData.accessToken.split('Bearer ')[1]);
-            console.log(refreshData.refreshToken);
-            options.headers.authorization = 'Bearer ' + localStorage.getItem("accessToken");
-            console.log(options.headers.authorization);
+            localStorage.setItem("accessToken", refreshData.accessToken);
+            
+            options.headers.Authorization = refreshData.accessToken;
+            console.log(options);
 
             const res = await fetch(url, options); //повторяем запрос
             return await onResponse(res);
@@ -139,35 +125,49 @@ export const fetchWithRefresh = async (url, options) => {
     }
 };
 
-// export const getUser = () => {
-//     return fetch(`${Api.url}/auth/user`, {
-// 		method: 'GET',
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 			Authorization: 'Bearer ' + localStorage.getItem("accessToken"),
-// 		},
-// 	})
-// 		.then(onResponse);
-// }
-
 export const getUserRefresh = () => fetchWithRefresh(`${Api}/auth/user`, {
     method: 'GET',
     headers: {
         "Content-Type": "application/json",
-        Authorization: 'Bearer ' + localStorage.getItem("accessToken"),
+        Authorization: localStorage.getItem("accessToken")
     }
-})
+});
 
 
 export const patchUserRefresh = (name, email, password) => fetchWithRefresh(`${Api}/auth/user`, {
     method: 'PATCH',
     headers: {
         "Content-Type": "application/json",
-        Authorization: 'Bearer ' + localStorage.getItem("accessToken"),
+        Authorization: localStorage.getItem("accessToken")
     },
     body: JSON.stringify({
         "name": name,
         "email": email,
         "password": password
-    }),
-})
+    })
+});
+
+export const makeOrder = (IDs) => {
+    return fetch(`${Api}/orders`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                ingredients: IDs
+            })
+        })
+        .then(onResponse);
+}
+
+export const makeOrderRefresh = (IDs) => fetchWithRefresh(
+    `${Api}/orders`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("accessToken")
+        },
+        body: JSON.stringify({
+            ingredients: IDs
+        })
+    })

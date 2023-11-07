@@ -44,6 +44,10 @@ export const editUser = (name, email, password) => (dispatch) => {
 };
 
 export const checkUserAuth = () => (dispatch) => {
+    dispatch({
+        type: SET_AUTH_CHECKED,
+        payload: true,
+    });
     return getUserRefresh()
         .then(res => {
             console.log(res);
@@ -70,7 +74,7 @@ export const logInUser = (email, password) => (dispatch) => {
     });
     return logIn(email, password)
         .then(res => {
-            const accessToken = res.accessToken.split('Bearer ')[1];
+            const accessToken = res.accessToken;
             const refreshToken = res.refreshToken;
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
@@ -115,7 +119,7 @@ export const setUserRegistration = (email, password, name) => (dispatch) => {
     });
     return setRegistration(email, password, name)
         .then(res => {
-            const accessToken = res.accessToken.split('Bearer ')[1];
+            const accessToken = res.accessToken;
             const refreshToken = res.refreshToken;
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
