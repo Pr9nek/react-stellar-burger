@@ -43,12 +43,14 @@ export const userReducer = (state = initialUserState, action) => {
             return {
                 ...state,
                 isAuthChecked: action.payload,
+                getUserRequest: true
             };
         case GET_USER:
             return {
                 ...state,
                 user: action.payload,
-                    getUserRequest: false
+                getUserRequest: false,
+                isAuthChecked: true
             };
         case GET_USER_ERROR:
             return {

@@ -9,14 +9,14 @@ const Protected = ({ onlyUnAuth = false, component }) => {
     const user = useSelector((store) => store.user.user);
     const location = useLocation();
 
-    console.log(isAuthChecked);
-    console.log(user);
-    // if (!isAuthChecked) {
-    //     // Запрос еще выполняется
-    //     // Выводим прелоадер в ПР
-    //     // Здесь возвращается просто null для экономии времени
-    //     return null;
-    // }
+    // console.log(isAuthChecked);
+    // console.log(user);
+    if (!isAuthChecked) {
+        // Запрос еще выполняется
+        // Выводим прелоадер в ПР
+        // Здесь возвращается просто null для экономии времени
+        return null;
+    }
     
     if (onlyUnAuth && user) {
         // Пользователь авторизован, но роут предназначен для неавторизованного пользователя

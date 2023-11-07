@@ -1,16 +1,16 @@
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
 import styles from "./profile.module.css";
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { editUser } from '../../services/actions/user/actions';
 
 export default function Profile() {
 
-    const [value, setValue] = useState({ name: '', email: '', password: '******' });
     const dispatch = useDispatch();
 
     const name = useSelector((store) => store.user.user.name); 
     const login = useSelector((store) => store.user.user.email); 
+    const [value, setValue] = useState({ name: name, email: login, password: '******' });
 
     const onChange = (e) => {
         setValue({
@@ -21,19 +21,19 @@ export default function Profile() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        /* dispatch(setUserRegistration(value.email, value.password, value.name)); */
+        dispatch(editUser(value.name, value.email, value.password)); 
     }
 
     console.log(value.name);
 
     return (
         <div className={styles.container}>
-            <form className={styles.form} onSubmit={onSubmit} onChange={onChange}>
+            <form className={styles.form} onChange={onChange}>
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
                     onChange={onChange}
-                    value={''}
+                    value={value.name}
                     name={'name'}
                     error={false}
                     size={'default'}
@@ -42,14 +42,14 @@ export default function Profile() {
                 <EmailInput
                     placeholder={'Логин'}
                     onChange={onChange}
-                    value={''}
+                    value={value.email}
                     name={'email'}
                     isIcon={false}
                     icon={'EditIcon'}
                 />
                 <PasswordInput
                     onChange={onChange}
-                    value={''}
+                    value={value.password}
                     name={'password'}
                     extraClass="mb-2"
                     icon={'EditIcon'}
@@ -58,7 +58,7 @@ export default function Profile() {
                 <Button htmlType="button" type="secondary" size="medium">
                     Отмена
                 </Button>
-                {value.email && value.password && value.name ?
+                {value.email && value.password && value.password!=="******" && value.name ?
                     (<Button htmlType="button" type="primary" size="medium" onClick={onSubmit}>
                         Сохранить
                     </Button>)

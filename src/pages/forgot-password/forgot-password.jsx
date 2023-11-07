@@ -34,7 +34,7 @@ function ForgotPassword() {
         <form className={styles.form}>
             <EmailInput
                 onChange={onChange}
-                value={value.email}
+                value={value}
                 name={'email'}
                 isIcon={false}
             />

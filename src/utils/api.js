@@ -68,17 +68,6 @@ export const logOut = (token) => {
     });
 };
 
-// export const getUser = () => {
-//     return fetch(`${Api.url}/auth/user`, {
-// 		method: 'GET',
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 			Authorization: 'Bearer ' + localStorage.getItem("accessToken"),
-// 		},
-// 	})
-// 		.then(onResponse);
-// }
-
 export const resetPassword = (email) => {
     return fetch(`${Api}/password-reset`, {
         method: "POST",
@@ -137,10 +126,11 @@ export const fetchWithRefresh = async (url, options) => {
                 return Promise.reject(refreshData);
             }
             localStorage.setItem("refreshToken", refreshData.refreshToken);
-            localStorage.setItem("accessToken", refreshData.accessToken);
+            localStorage.setItem("accessToken", refreshData.accessToken.split('Bearer ')[1]);
             console.log(refreshData.refreshToken);
-            options.headers.authorization = refreshData.accessToken;
+            options.headers.authorization = 'Bearer ' + localStorage.getItem("accessToken");
             console.log(options.headers.authorization);
+
             const res = await fetch(url, options); //повторяем запрос
             return await onResponse(res);
         } else {
@@ -149,10 +139,35 @@ export const fetchWithRefresh = async (url, options) => {
     }
 };
 
+// export const getUser = () => {
+//     return fetch(`${Api.url}/auth/user`, {
+// 		method: 'GET',
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 			Authorization: 'Bearer ' + localStorage.getItem("accessToken"),
+// 		},
+// 	})
+// 		.then(onResponse);
+// }
+
 export const getUserRefresh = () => fetchWithRefresh(`${Api}/auth/user`, {
     method: 'GET',
     headers: {
         "Content-Type": "application/json",
         Authorization: 'Bearer ' + localStorage.getItem("accessToken"),
     }
+})
+
+
+export const patchUserRefresh = (name, email, password) => fetchWithRefresh(`${Api}/auth/user`, {
+    method: 'PATCH',
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: 'Bearer ' + localStorage.getItem("accessToken"),
+    },
+    body: JSON.stringify({
+        "name": name,
+        "email": email,
+        "password": password
+    }),
 })

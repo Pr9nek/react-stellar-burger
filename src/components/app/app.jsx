@@ -29,8 +29,6 @@ function App() {
   const { ingredients } = useSelector(store => store.ingredients);
 
   const user = useSelector((store) => store.user.user);
-  const getUserError = useSelector((store) => store.user.getUserError);
-
   const token = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
 
@@ -50,6 +48,7 @@ function App() {
 
   console.log(token);
   console.log(refreshToken);
+  console.log(user);
 
 
   return (
