@@ -1,15 +1,21 @@
 import stylesDetails from "./ingredient-details.module.css";
 // import { useSelector } from 'react-redux';
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 export default function IngredientDetails({ ingredients }) {
     const { id } = useParams();
     const ingredient = ingredients.find((item) => item._id === id);
     const { image, name, calories, proteins, fat, carbohydrates } = ingredient;
-    
+    const location = useLocation();
+
+    console.log(location.state);
+
     return (
         <div className={stylesDetails.container}>
-            <img src={image} />
+            {location.state === null &&(<p className={`${stylesDetails.header} text text_type_main-large`}>
+                Детали ингредиента
+            </p>)}
+            <img src={image} alt={name}/>
             <p className={` ${stylesDetails.name} text text_type_main-medium mt-4 mb-8`}>
                 {name}
             </p>

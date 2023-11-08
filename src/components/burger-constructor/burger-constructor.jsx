@@ -118,7 +118,6 @@ export default function BurgerConstructor() {
                                 if (!user) { navigate("/login");}
                                 else
                                 {dispatch(getOrder(ids));}
-                                // dispatch(resetConstructor());
                             }
                         }
                         >
@@ -126,7 +125,7 @@ export default function BurgerConstructor() {
                         </Button>
                     </div>}
             </div>
-            {currentOrder &&
+            {currentOrder && dispatch(resetConstructor()) &&
                 <Modal onClose={CloseModal}>
                     <OrderDetails price={price} />
                 </Modal>

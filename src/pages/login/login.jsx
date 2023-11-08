@@ -1,54 +1,45 @@
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
 import styles from "./login.module.css";
 import { Link } from 'react-router-dom';
 import { logInUser } from '../../services/actions/user/actions';
 import { useDispatch } from 'react-redux';
+import { useForm } from '../../hooks/useForm';
 
 function Login() {
+    const {values, handleChange} = useForm({email: '', password: '' });
+    const dispatch = useDispatch();
 
-        const [value, setValue] = useState({ email: '', password: '' });
-        const dispatch = useDispatch();
+    const onSubmit = (e) => {
+        e.preventDefault();
+        dispatch(logInUser(values.email, values.password));
+    }
 
-        const onChange = (e) => {
-            setValue({
-                ...value,
-                [e.target.name]: e.target.value,
-            });
-        };
-
-        const onSubmit = (e) => {
-            e.preventDefault();
-            dispatch(logInUser(value.email, value.password));
-        }
-
-        return (
-            <div className={styles.container}>
-                <h1 className="text text_type_main-medium pb-6">
-                    Вход
-                </h1>
-                <form className={styles.form} onSubmit={onSubmit} >
-                    <EmailInput
-                        onChange={onChange}
-                        value={value.email}
-                        name={'email'}
-                        isIcon={false}
-                    />
-                    <PasswordInput
-                        onChange={onChange}
-                        value={value.password}
-                        name={'password'}
-                        extraClass="mb-2"
-                    />
-
-                    {value.email && value.password ?
-                        (<Button htmlType="button" type="primary" size="medium" htmlType="submit">
-                            Войти
-                        </Button>)
-                        : (<Button htmlType="button" type="primary" size="medium" disabled>
-                            Войти
-                        </Button>)}
-                </form>
+    return (
+        <div className={styles.container}>
+            <h1 className="text text_type_main-medium pb-6">
+                Вход
+            </h1>
+            <form className={styles.form} onSubmit={onSubmit} >
+                <EmailInput
+                    onChange={handleChange}
+                    value={values.email}
+                    name={'email'}
+                    isIcon={false}
+                />
+                <PasswordInput
+                    onChange={handleChange}
+                    value={values.password}
+                    name={'password'}
+                    extraClass="mb-2"
+                />
+                <Button
+                    disabled={!(values.email && values.password)}
+                    type="primary"
+                    size="medium"
+                    htmlType="submit"
+                >
+                    Войти
+                </Button>
                 <div className={styles.registery}>
                     <p className="text text_type_main-default text_color_inactive">Вы — новый пользователь?
                         <Link className={styles.link} to='/register'>Зарегистрироваться</Link>
@@ -57,8 +48,9 @@ function Login() {
                         <Link className={styles.link} to='/forgot-password'>Восстановить пароль</Link>
                     </p>
                 </div>
-            </div>
-        )
-    }
+            </form>
+        </div>
+    )
+}
 
 export default Login

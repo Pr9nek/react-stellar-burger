@@ -1,27 +1,19 @@
 import { useEffect } from "react";
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
 import styles from "./reset-password.module.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { getPassword } from '../../utils/api';
-
-
+import { useForm } from '../../hooks/useForm';
 
 export default function ResetPassword() {
 
-    const [value, setValue] = useState({ password: '', code: '' });
+    const {values, handleChange} = useForm({password: '', code: ''});
     const navigate = useNavigate();
     const resetFlag = localStorage.getItem("resetPassword");
-    const onChange = (e) => {
-        setValue({
-            ...value,
-            [e.target.name]: e.target.value,
-        });
-    };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        getPassword(value.password, value.code)
+        getPassword(values.password, values.code)
             .then(() => {
                 const resetFlag = localStorage.getItem("resetPassword");
                 if (resetFlag === 'false') { navigate("/"); }
@@ -39,8 +31,8 @@ export default function ResetPassword() {
             </h1>
             <form className={styles.form} onSubmit={onSubmit}>
                 <PasswordInput
-                    onChange={onChange}
-                    value={value.password}
+                    onChange={handleChange}
+                    value={values.password}
                     name={'password'}
                     extraClass="mb-2"
                     placeholder={'Введите новый пароль'}
@@ -48,20 +40,21 @@ export default function ResetPassword() {
                 <Input
                     type={'text'}
                     placeholder={'Введите код из письма'}
-                    onChange={onChange}
-                    value={value.code}
+                    onChange={handleChange}
+                    value={values.code}
                     name={'code'}
                     error={false}
                     size={'default'}
                 />
-
-                {value.password && value.code ?
-                    (<Button htmlType="button" type="primary" size="medium" htmlType="submit">
-                        Сохранить
-                    </Button>)
-                    : (<Button htmlType="button" type="primary" size="medium" disabled>
-                        Сохранить
-                    </Button>)}
+                <Button
+                    disabled={!(values.password && values.code
+                    )}
+                    type="primary"
+                    size="medium"
+                    htmlType="submit"
+                >
+                    Сохранить
+                </Button>
             </form>
             <div className={styles.registery}>
                 <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?

@@ -11,7 +11,6 @@ import ForgotPassword from "../../pages/forgot-password/forgot-password";
 import ResetPassword from "../../pages/reset-password/reset-password";
 import IngredientsDetails from "../modals/ingredient-details/ingredient-details";
 import Modal from "../modals/modal/modal";
-// import {clearCurrent} from '../../services/actions/details/actions';
 import { getIngredients } from '../../services/actions/ingredients/actions';
 import ProfilePage from "../../pages/profile-page/profile-page";
 import Profile from "../profile/profile";
@@ -77,7 +76,7 @@ function App() {
           <Route
             path="/ingredients/:id"
             element={ingredients?.length && (
-              <Modal onClose={handleModalClose}>
+              <Modal onClose={handleModalClose} header="Детали ингредиента">
                 <IngredientsDetails ingredients={ingredients} />
               </Modal>
             )}

@@ -1,8 +1,8 @@
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState, useEffect } from 'react';
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../../services/actions/user/actions';
+import { useForm } from '../../hooks/useForm';
 
 export default function Profile() {
 
@@ -10,34 +10,27 @@ export default function Profile() {
 
     const name = useSelector((store) => store.user.user.name);
     const login = useSelector((store) => store.user.user.email);
-    const [value, setValue] = useState({ name: name, email: login, password: '******' });
-
-    const onChange = (e) => {
-        setValue({
-            ...value,
-            [e.target.name]: e.target.value,
-        });
-    };
+    const {values, handleChange, setValues} = useForm({name: name, email: login, password: '******'});
 
     const onReset = (e) => {
-        setValue({
+        setValues({
             name: name, email: login, password: '******'
         });
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(editUser(value.name, value.email, value.password));
+        dispatch(editUser(values.name, values.email, values.password));
     }
 
     return (
         <div className={styles.container}>
-            <form className={styles.form} onChange={onChange} onSubmit={onSubmit}>
+            <form className={styles.form} onSubmit={onSubmit}>
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
-                    onChange={onChange}
-                    value={value.name}
+                    onChange={handleChange}
+                    value={values.name}
                     name={'name'}
                     error={false}
                     size={'default'}
@@ -45,34 +38,39 @@ export default function Profile() {
                 />
                 <EmailInput
                     placeholder={'Логин'}
-                    onChange={onChange}
-                    value={value.email}
+                    onChange={handleChange}
+                    value={values.email}
                     name={'email'}
                     isIcon={false}
                     icon={'EditIcon'}
                 />
                 <PasswordInput
-                    onChange={onChange}
-                    value={value.password}
+                    onChange={handleChange}
+                    value={values.password}
                     name={'password'}
                     extraClass="mb-2"
                     icon={'EditIcon'}
                 />
                 <div className={styles.buttons}>
-                    {(value.email || value.email !== login) && (value.name || value.name !== name) && value.password && value.password !== "******" ?
-                        (<Button htmlType="button" type="secondary" size="medium" onClick={onReset}>
-                            Отмена
-                        </Button>)
-                        : (<Button htmlType="button" type="secondary" size="medium" disabled>
-                            Отмена
-                        </Button>)}
-                    {(value.email || value.email !== login) && (value.name || value.name !== name) && value.password && value.password !== "******" ?
-                        (<Button htmlType="button" type="primary" size="medium" htmlType="submit">
-                            Сохранить
-                        </Button>)
-                        : (<Button htmlType="button" type="primary" size="medium" disabled>
-                            Сохранить
-                        </Button>)}
+                    <Button
+                        disabled={!(values.email && values.name !== login && values.name && values.name !== name && values.password && values.password !== "******"
+                        )}
+                        type="secondary"
+                        size="medium"
+                        htmlType="submit"
+                        onClick={onReset}
+                    >
+                        Отмена
+                    </Button>
+                    <Button
+                        disabled={!(values.email && values.name !== login && values.name && values.name !== name && values.password && values.password !== "******"
+                        )}
+                        type="primary"
+                        size="medium"
+                        htmlType="submit"
+                    >
+                        Сохранить
+                    </Button>
                 </div>
             </form>
         </div>

@@ -1,28 +1,18 @@
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
 import styles from "./register.module.css";
 import { Link } from 'react-router-dom';
 import { setUserRegistration } from '../../services/actions/user/actions';
 import { useDispatch } from 'react-redux';
+import { useForm } from '../../hooks/useForm';
 
 export default function Register() {
-
-    const [value, setValue] = useState({ name: '', email: '', password: '' });
+    const {values, handleChange} = useForm({ name: '', email: '', password: '' });
     const dispatch = useDispatch();
-
-    const onChange = (e) => {
-        setValue({
-            ...value,
-            [e.target.name]: e.target.value,
-        });
-    };
 
     const onSubmit = (e) => {
         e.preventDefault();
-		dispatch(setUserRegistration(value.email, value.password, value.name));
+        dispatch(setUserRegistration(values.email, values.password, values.name));
     }
-
-    console.log(value.name);
 
     return (
         <div className={styles.container}>
@@ -33,32 +23,33 @@ export default function Register() {
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
-                    onChange={onChange}
-                    value={value.name}
+                    onChange={handleChange}
+                    value={values.name}
                     name={'name'}
                     error={false}
                     size={'default'}
                 />
                 <EmailInput
-                    onChange={onChange}
-                    value={value.email}
+                    onChange={handleChange}
+                    value={values.email}
                     name={'email'}
                     isIcon={false}
                 />
                 <PasswordInput
-                    onChange={onChange}
-                    value={value.password}
+                    onChange={handleChange}
+                    value={values.password}
                     name={'password'}
                     extraClass="mb-2"
                 />
-
-                {value.email && value.password && value.name ?
-                    (<Button htmlType="button" type="primary" size="medium" htmlType="submit">
-                        Зарегистрироваться
-                    </Button>)
-                    : (<Button htmlType="button" type="primary" size="medium" disabled>
-                        Зарегистрироваться
-                    </Button>)}
+                <Button
+                    disabled={!(values.email && values.password && values.name
+                    )}
+                    type="primary"
+                    size="medium"
+                    htmlType="submit"
+                >
+                    Зарегистрироваться
+                </Button>
             </form>
             <div className={styles.registery}>
                 <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы?
