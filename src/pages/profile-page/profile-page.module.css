@@ -1,0 +1,42 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    margin-top: 80px;
+    margin-left: 40px;
+}
+
+.container {
+    width: 320px;
+}
+
+
+.listcontainer {
+    /* text-decoration: none;
+    color: rgba(242, 242, 243, 1); */
+    height: 192px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+}
+
+.inactive {
+    text-decoration: none;
+}
+
+.active {
+    text-decoration: none;
+    color: rgba(242, 242, 243, 1);
+}
+
+.list {
+    list-style-type: none;
+}
+
+.text {
+    color: rgba(133, 133, 173, 0.4);
+    white-space: break-spaces;
+}
+

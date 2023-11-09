@@ -12,12 +12,15 @@ import { getOrder } from '../../services/actions/orderDetails/actions';
 import { useDrop } from "react-dnd";
 import { addBun, addIngredient, moveIngredient, resetConstructor } from '../../services/actions/burgerConstructor/actions';
 import { clearOrder } from '../../services/actions/orderDetails/actions';
+import { useNavigate } from 'react-router-dom';
 
 export default function BurgerConstructor() {
     const burgerConstructor = useSelector(store => store.burgerConstructor);
     const currentOrder = useSelector(store => store.orderData.order);
     const isLoading = useSelector(store => store.orderData.isLoading);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const user = useSelector(store => store.user.user);
 
     function CloseModal() {
         dispatch(clearOrder());
@@ -112,8 +115,9 @@ export default function BurgerConstructor() {
 
                         <Button htmlType="button" type="primary" size="large" onClick={
                             () => {
-                                dispatch(getOrder(ids));
-                                dispatch(resetConstructor());
+                                if (!user) { navigate("/login");}
+                                else
+                                {dispatch(getOrder(ids));}
                             }
                         }
                         >
@@ -121,7 +125,7 @@ export default function BurgerConstructor() {
                         </Button>
                     </div>}
             </div>
-            {currentOrder &&
+            {currentOrder && dispatch(resetConstructor()) &&
                 <Modal onClose={CloseModal}>
                     <OrderDetails price={price} />
                 </Modal>

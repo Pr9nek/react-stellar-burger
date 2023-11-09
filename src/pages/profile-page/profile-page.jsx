@@ -1,0 +1,72 @@
+import { NavLink, Outlet } from "react-router-dom";
+import styles from "./profile-page.module.css";
+import { useDispatch } from "react-redux";
+import { logOutUser } from "../../services/actions/user/actions";
+import { Link } from 'react-router-dom';
+
+export default function ProfilePage() {
+
+const refreshToken = localStorage.getItem("refreshToken");
+const dispatch = useDispatch();
+const logOut = (e) => {
+    e.preventDefault();
+    dispatch(logOutUser(refreshToken));
+}
+
+    return (
+        <div className={styles.main}>
+            <div className={styles.container}>
+                <nav>
+                    <ul className={styles.listcontainer}>
+                        <li className={styles.list}>
+                            <NavLink
+                                to="/profile"
+                                className={({ isActive, isPending, isTransitioning }) =>
+                                    [
+                                        isPending ? "" : "",
+                                        isActive ? `${styles.active} text text_type_main-medium` : `${styles.inactive} text text_type_main-medium text_color_inactive`,
+                                        isTransitioning ? "" : "",
+                                    ].join(" ")
+                                }>
+                                <span>Профиль</span>
+                            </NavLink>
+                        </li>
+                        <li className={styles.list}>
+                            <NavLink
+                                to="/profile/orders"
+                                className={({ isActive, isPending, isTransitioning }) =>
+                                    [
+                                        isPending ? "" : "",
+                                        isActive ? `${styles.active} text text_type_main-medium` : `${styles.inactive} text text_type_main-medium text_color_inactive`,
+                                        isTransitioning ? "" : "",
+                                    ].join(" ")
+                                }>
+                                <span>История заказов</span>
+                            </NavLink>
+                        </li>
+                        <li className={styles.list}>
+                            <NavLink
+                                to="/login"
+                                className={({ isActive, isPending, isTransitioning }) =>
+                                    [
+                                        isPending ? "" : "",
+                                        isActive ? `${styles.active} text text_type_main-medium` : `${styles.inactive} text text_type_main-medium text_color_inactive`,
+                                        isTransitioning ? "" : "",
+                                    ].join(" ")
+                                }
+                                onClick={logOut}
+                                >
+                                <span>Выход</span>
+                            </NavLink>
+                        </li>
+                    </ul>
+                </nav>
+                <p className={`${styles.text} mt-20 text text_type_main-default text_color_inactive`}>
+                    В этом разделе вы можете
+                    изменить свои персональные данные
+                </p>
+            </div>
+            <Outlet />
+        </div>
+    )
+}

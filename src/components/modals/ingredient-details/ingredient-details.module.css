@@ -4,6 +4,12 @@
     margin-left: auto;
     margin-right: auto;
     flex-direction: column;
+    height: 100%;
+    justify-content: center;
+}
+
+.header {
+    text-align: center;
 }
 
 .name {

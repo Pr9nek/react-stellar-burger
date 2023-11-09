@@ -3,6 +3,8 @@
     flex-direction: column;
     width: calc(100%/2 - 44px);
     position: relative;
+    text-decoration: none;
+    color: rgba(242, 242, 243, 1);
 }
 
 .price {

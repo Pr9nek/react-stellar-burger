@@ -1,4 +1,5 @@
 import {makeOrder} from '../../../utils/api';
+import { makeOrderRefresh } from '../../../utils/api';
 
 export const ORDER_LOADING = 'ORDER_LOADING';
 export const ORDER__LOAD_SUCCESS = 'ORDER__LOAD_SUCCESS';
@@ -11,11 +12,11 @@ export function clearOrder() {
     }
 }
 
-export const getOrder = (payload) => (dispatch) => {
+export const getOrder = (IDs) => (dispatch) => {
     dispatch({
         type: ORDER_LOADING
     });
-    return makeOrder(payload)
+    return makeOrderRefresh(IDs)
         .then((res) => {
             dispatch({
                 type: ORDER__LOAD_SUCCESS,
