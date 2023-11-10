@@ -30,10 +30,6 @@ function App() {
   const user = useSelector((store) => store.user.user);
   const token = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
-
-  console.log(token);
-  console.log(refreshToken);
-  console.log(user);
   
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки
