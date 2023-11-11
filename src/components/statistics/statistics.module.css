@@ -1,0 +1,31 @@
+.status {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+    padding-bottom: 60px;
+}
+
+.listcolor {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    color: rgba(0, 204, 204, 1);
+    min-width: 272px;
+}
+
+.list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    min-width: 272px;
+    flex-wrap: wrap;
+    max-height: 304px;
+}
+
+.digit {
+    list-style-type: none;
+}

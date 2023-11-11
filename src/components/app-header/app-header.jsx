@@ -27,7 +27,7 @@ export default function AppHeader() {
                     <Nav>
                         <BurgerIcon type={location.pathname === '/lenta' ? "primary" : "secondary"} />
                         <NavLink
-                            to="/lenta"
+                            to="/feed"
                             className={({ isActive }) =>
                                 [
                                     isActive ? `${HeaderStyles.active} text text_type_main-default pl-2` : `${HeaderStyles.inactive} text text_type_main-default pl-2 text_color_inactive`,

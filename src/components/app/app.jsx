@@ -16,6 +16,7 @@ import ProfilePage from "../../pages/profile-page/profile-page";
 import Profile from "../profile/profile";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { checkUserAuth } from "../../services/actions/user/actions";
+import Feed from "../../pages/feed/feed";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<Home />} />
+        <Route path="/feed" element={<Feed />} />
         <Route path="*" element={<Lost />} />
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} >
           <Route index element={<OnlyAuth component={<Profile />} />} />

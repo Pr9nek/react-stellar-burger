@@ -1,0 +1,29 @@
+.global {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.header {
+    width: 100%;
+    padding-left: 18px;
+}
+
+.section1 {
+    width: 100%;
+    max-width: 608px;
+  }
+
+  .section2 {
+    width: 100%;
+    max-width: 580px;
+  }
+  
+  .main {
+    display: flex;
+    justify-content: center;
+    column-gap: 60px;
+    /* width: 1280px; */
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
