@@ -11,6 +11,11 @@
 .section1 {
     width: 100%;
     max-width: 608px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 852px;
+    overflow-y: auto;
   }
 
   .section2 {

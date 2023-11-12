@@ -4,16 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import Statistics from "../../components/statistics/statistics";
 import { useEffect } from "react";
 import { connect, disconnect } from "../../services/actions/feed/actions";
+import CardOrder from "../../components/orders/card-order/card-order";
 
 function Feed() {
     const dispatch = useDispatch();
     const ORDERS_ALL_URL = "wss://norma.nomoreparties.space/orders/all";
     useEffect(() => {
-		dispatch(connect(ORDERS_ALL_URL));
-		return () => {
-			dispatch(disconnect(ORDERS_ALL_URL));
-		}
-	}, [dispatch]);
+        dispatch(connect(ORDERS_ALL_URL));
+        return () => {
+            dispatch(disconnect(ORDERS_ALL_URL));
+        }
+    }, [dispatch]);
 
     const { isLoading, Error, orders } = useSelector(store => store.feed);
     const { ingredients } = useSelector(store => store.ingredients);
@@ -24,13 +25,13 @@ function Feed() {
                 Лента заказов
             </h1>
             <main className={`${styles.main} `}>
-                <section className={`${styles.section1} pb-10`}>
+                <section className={`${styles.section1} pb-10 custom-scroll`}>
                     {isLoading && 'Загрузка...'}
-            {Error && 'Произошла ошибка'}
-            {!isLoading &&
-              !Error &&
-              ingredients !==null && orders !== null && <Orders />}
-                    
+                    {Error && 'Произошла ошибка'}
+                    {!isLoading &&
+                    !Error &&
+                    orders !== null && 
+                    orders.map((order) => <CardOrder key={order._id} order={order}/>)}
                 </section>
 
                 <section className={`${styles.section2} pb-10`}>

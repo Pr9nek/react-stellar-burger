@@ -50,7 +50,6 @@ export const checkUserAuth = () => (dispatch) => {
     });
     return getUserRefresh()
         .then(res => {
-            console.log(res);
             dispatch({
                 type: GET_USER,
                 payload: res.user,

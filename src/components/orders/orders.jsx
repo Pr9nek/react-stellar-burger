@@ -1,15 +1,11 @@
-import styles from "./orders.module.css";
-import CardOrder from "./card-order/card-order";
+// import styles from "./orders.module.css";
+// import CardOrder from "./card-order/card-order";
 
-export default function Orders() {
+// export default function Orders() {
 
-    return (
-        <div className={`${styles.container} custom-scroll`}>
-            <CardOrder />
-            <CardOrder />
-            <CardOrder />
-            <CardOrder />
-            <CardOrder />
-        </div>
-    )
-}
+//     return (
+//         <div className={`${styles.container} custom-scroll`}>
+//             <CardOrder />
+//         </div>
+//     )
+// }

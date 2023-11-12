@@ -11,6 +11,8 @@ const initialFeedState = {
     feedConnected: false,
     error: null,
     orders: [],
+    total: null,
+    totalToday: null
 }
 
 export const feedReducer = (state = initialFeedState, action) => {
