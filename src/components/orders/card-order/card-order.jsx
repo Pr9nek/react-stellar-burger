@@ -13,9 +13,8 @@ export default function CardOrder({ order }) {
             ))
         , [order?.ingredients, ingredients]);
 
-    console.log(orderIngredients);
+    console.log(order);
     const sliced = orderIngredients.slice(6).length;
-    console.log(sliced);
 
     const orderPrice = useMemo(() =>
         orderIngredients.reduce((acc, i) => acc + i.price, 0)

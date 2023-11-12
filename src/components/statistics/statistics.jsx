@@ -1,6 +1,13 @@
 import styles from "./statistics.module.css";
+import { useSelector } from 'react-redux';
 
 export default function Statistics() {
+
+    const { orders, total, totalToday } = useSelector(store => store.feed);
+    const done = orders.filter((i) => i.status === 'done')
+    const inwork = orders.filter((i) => i.status !== 'done')
+    console.log(orders);
+    console.log(inwork);
 
     return (
         <>
@@ -10,20 +17,13 @@ export default function Statistics() {
                         Готовы:
                     </p>
                     <ul className={styles.listcolor}>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        {/* <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li> */}
+                        {done.map((order, index) => {
+                            if (index < 50) {
+                                return (
+                                    <li className={styles.digit} key={order._id}><p key={order._id} className="text text_type_digits-default">{order.number}</p></li>
+                                )
+                            }}
+                            )}  
                     </ul>
                 </div>
 
@@ -32,23 +32,24 @@ export default function Statistics() {
                         В работе:
                     </p>
                     <ul className={styles.list}>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
-                        <li className={styles.digit}><p className="text text_type_digits-default">1234567890</p></li>
+                    {inwork.map((order, index) => {
+                            if (index < 30) {
+                                return (
+                                    <li className={styles.digit} key={order._id}><p key={order._id} className="text text_type_digits-default">{order.number}</p></li>
+                                )
+                            }}
+                            )}  
                     </ul>
                 </div>
             </div>
             <p className="text text_type_main-medium">
-            Выполнено за все время:
+                Выполнено за все время:
             </p>
-            <p className="text text_type_digits-large pb-15">28752</p>
+            <p className="text text_type_digits-large pb-15">{total}</p>
             <p className="text text_type_main-medium">
-            Выполнено за сегодня:
+                Выполнено за сегодня:
             </p>
-            <p className="text text_type_digits-large pb-15">138</p>
+            <p className="text text_type_digits-large pb-15">{totalToday}</p>
         </>
     )
 }

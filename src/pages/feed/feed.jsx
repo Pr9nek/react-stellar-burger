@@ -35,12 +35,12 @@ function Feed() {
                 </section>
 
                 <section className={`${styles.section2} pb-10`}>
-                    {/* {isLoading && 'Загрузка...'}
+                    {isLoading && 'Загрузка...'}
             {Error && 'Произошла ошибка'}
             {!isLoading &&
               !Error &&
-              ingredients !== null && <BurgerConstructor />} */}
-                    <Statistics />
+              orders !== null && <Statistics />}
+                    
                 </section>
 
             </main>

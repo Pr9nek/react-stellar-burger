@@ -3,6 +3,7 @@
     flex-direction: row;
     gap: 36px;
     padding-bottom: 60px;
+    flex-wrap: wrap;
 }
 
 .listcolor {
@@ -12,7 +13,11 @@
     gap: 8px;
     flex-direction: column;
     color: rgba(0, 204, 204, 1);
-    min-width: 272px;
+    /* min-width: 272px; */
+    height: 313px;
+    flex-wrap: wrap;
+    /* overflow-y: scroll; */
+    /* width: 50%; */
 }
 
 .list {
@@ -24,6 +29,7 @@
     min-width: 272px;
     flex-wrap: wrap;
     max-height: 304px;
+    /* width: 50%; */
 }
 
 .digit {
