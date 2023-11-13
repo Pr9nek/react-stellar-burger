@@ -15,6 +15,11 @@
     margin-right: 8px;
 }
 
+.cardheader {
+    display: flex;
+    justify-content: space-between;
+}
+
 .statusDone {
     color: rgba(0, 204, 204, 1);
 }

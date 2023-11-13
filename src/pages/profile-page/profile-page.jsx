@@ -5,14 +5,14 @@ import { logOutUser } from "../../services/actions/user/actions";
 
 export default function ProfilePage() {
 
-const refreshToken = localStorage.getItem("refreshToken");
-const dispatch = useDispatch();
-const logOut = (e) => {
-    e.preventDefault();
-    dispatch(logOutUser(refreshToken));
-}
+    const refreshToken = localStorage.getItem("refreshToken");
+    const dispatch = useDispatch();
+    const logOut = (e) => {
+        e.preventDefault();
+        dispatch(logOutUser(refreshToken));
+    }
 
-const isProfileInfo = useMatch("/profile");
+    const isProfileInfo = useMatch("/profile");
 
     return (
         <div className={styles.main}>
@@ -20,25 +20,25 @@ const isProfileInfo = useMatch("/profile");
                 <nav>
                     <ul className={styles.listcontainer}>
                         <li className={styles.list}>
-                        { !isProfileInfo ? (
-                            <NavLink
-                                
-                            to="/profile"
-                            className={`${styles.inactive} text text_type_main-medium text_color_inactive`}
-                               
-                            >
-                            <span>Профиль</span>
-                        </NavLink>
-                        ) : (
-                            <NavLink 
-                            to="/profile"
-                            className={`${styles.active} text text_type_main-medium`}
-                               
-                            >
-                            <span>Профиль</span>
-                        </NavLink>
-                        ) 
-                    }
+                            {!isProfileInfo ? (
+                                <NavLink
+
+                                    to="/profile"
+                                    className={`${styles.inactive} text text_type_main-medium text_color_inactive`}
+
+                                >
+                                    <span>Профиль</span>
+                                </NavLink>
+                            ) : (
+                                <NavLink
+                                    to="/profile"
+                                    className={`${styles.active} text text_type_main-medium`}
+
+                                >
+                                    <span>Профиль</span>
+                                </NavLink>
+                            )
+                            }
                             {/* <NavLink
                                 
                                 to="/profile"
@@ -49,7 +49,6 @@ const isProfileInfo = useMatch("/profile");
                                         isActive ? `${styles.active} text text_type_main-medium` : `${styles.inactive} text text_type_main-medium text_color_inactive`,
                                         isTransitioning ? "" : "",
                                     ].join(" ")
-                                   
                                 }>
                                 <span>Профиль</span>
                             </NavLink> */}
@@ -78,7 +77,7 @@ const isProfileInfo = useMatch("/profile");
                                     ].join(" ")
                                 }
                                 onClick={logOut}
-                                >
+                            >
                                 <span>Выход</span>
                             </NavLink>
                         </li>
@@ -86,17 +85,16 @@ const isProfileInfo = useMatch("/profile");
                 </nav>
                 {isProfileInfo ? (
                     <p className={`${styles.text} mt-20 text text_type_main-default text_color_inactive`}>
-                    В этом разделе вы можете
-                    изменить свои персональные данные
-                </p>
+                        В этом разделе вы можете
+                        изменить свои персональные данные
+                    </p>
                 ) : (
                     <p className={`${styles.text} mt-20 text text_type_main-default text_color_inactive`}>
-                    В этом разделе вы можете
-                    просмотреть свою историю заказов
-                </p>
+                        В этом разделе вы можете
+                        просмотреть свою историю заказов
+                    </p>
                 )
                 }
-                
             </div>
             <Outlet />
         </div>

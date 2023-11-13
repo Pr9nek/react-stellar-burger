@@ -1,5 +1,4 @@
 import styles from "./feed.module.css";
-import Orders from "../../components/orders/orders";
 import { useSelector, useDispatch } from 'react-redux';
 import Statistics from "../../components/statistics/statistics";
 import { useEffect } from "react";
@@ -17,7 +16,7 @@ function Feed() {
     }, [dispatch]);
 
     const { isLoading, Error, orders } = useSelector(store => store.feed);
-    const { ingredients } = useSelector(store => store.ingredients);
+    // const { ingredients } = useSelector(store => store.ingredients);
 
     return (
         <div className={styles.global}>
@@ -29,18 +28,18 @@ function Feed() {
                     {isLoading && 'Загрузка...'}
                     {Error && 'Произошла ошибка'}
                     {!isLoading &&
-                    !Error &&
-                    orders !== null && 
-                    orders.map((order) => <CardOrder key={order._id} order={order}/>)}
+                        !Error &&
+                        orders !== null &&
+                        orders.map((order) => <CardOrder key={order._id} order={order} />)}
                 </section>
 
                 <section className={`${styles.section2} pb-10`}>
                     {isLoading && 'Загрузка...'}
-            {Error && 'Произошла ошибка'}
-            {!isLoading &&
-              !Error &&
-              orders !== null && <Statistics />}
-                    
+                    {Error && 'Произошла ошибка'}
+                    {!isLoading &&
+                        !Error &&
+                        orders !== null && <Statistics />}
+
                 </section>
 
             </main>

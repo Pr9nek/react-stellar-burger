@@ -7,6 +7,7 @@ import { connect, disconnect } from "../../services/actions/profileFeed/actions"
 export default function Orders() {
     const dispatch = useDispatch();
     const { isLoading, Error, orders } = useSelector(store => store.profileFeed);
+    // const user = useSelector((store) => store.user.user);
 
     const token = localStorage.getItem("accessToken");
     const tokenShot = token.split('Bearer ')[1];
@@ -27,7 +28,7 @@ export default function Orders() {
                     {!isLoading &&
                     !Error &&
                     orders !== null && 
-                    orders.map((order) => <CardOrder key={order._id} order={order}/>)}
+                    [...orders].reverse().map((order) => <CardOrder key={order._id} order={order}/>)}
         </div>
     )
 }
