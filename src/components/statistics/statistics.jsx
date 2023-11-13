@@ -6,8 +6,8 @@ export default function Statistics() {
     const { orders, total, totalToday } = useSelector(store => store.feed);
     const done = orders.filter((i) => i.status === 'done')
     const inwork = orders.filter((i) => i.status !== 'done')
-    console.log(orders);
-    console.log(inwork);
+    // console.log(orders);
+    // console.log(inwork);
 
     return (
         <>

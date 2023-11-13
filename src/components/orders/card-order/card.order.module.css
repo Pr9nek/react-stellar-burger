@@ -15,6 +15,10 @@
     margin-right: 8px;
 }
 
+.statusDone {
+    color: rgba(0, 204, 204, 1);
+}
+
 .ingredients {
     display: flex;
     justify-content: space-between;

@@ -17,6 +17,7 @@ import Profile from "../profile/profile";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { checkUserAuth } from "../../services/actions/user/actions";
 import Feed from "../../pages/feed/feed";
+import Orders from "../orders/orders";
 
 
 function App() {
@@ -56,8 +57,8 @@ function App() {
         <Route path="*" element={<Lost />} />
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} >
           <Route index element={<OnlyAuth component={<Profile />} />} />
-          {/* <Route path="/profile/orders" element={<Orders />} />
-          <Route path="/profile/orders/:id" element={<Order />} /> */}
+          <Route path="orders" element={<OnlyAuth component={<Orders />} />} />
+          {/* <Route path="/profile/orders/:id" element={<Order />} />  */}
         </Route>
         <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
         <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />

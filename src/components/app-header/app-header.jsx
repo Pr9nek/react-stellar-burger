@@ -25,7 +25,7 @@ export default function AppHeader() {
                         </NavLink>
                     </Nav>
                     <Nav>
-                        <BurgerIcon type={location.pathname === '/lenta' ? "primary" : "secondary"} />
+                        <BurgerIcon type={location.pathname === '/feed' ? "primary" : "secondary"} />
                         <NavLink
                             to="/feed"
                             className={({ isActive }) =>
@@ -44,7 +44,7 @@ export default function AppHeader() {
                 </div>
                 <div className={`${HeaderStyles.header_item} jc-f-e`}>
                     <Nav>
-                        <ProfileIcon type={location.pathname === '/profile' ? "primary" : "secondary"} />
+                        <ProfileIcon type={location.pathname === '/profile' || location.pathname === '/profile/orders' ? "primary" : "secondary"} />
                         <NavLink
                             to="/profile"
                             className={({ isActive }) =>

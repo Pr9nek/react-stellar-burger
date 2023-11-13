@@ -2,6 +2,7 @@ import styles from "./card.order.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from 'react-redux';
 import { useMemo } from "react";
+import { useMatch } from "react-router-dom";
 
 export default function CardOrder({ order }) {
     const ingredients = useSelector(store => store.ingredients.ingredients);
@@ -13,20 +14,35 @@ export default function CardOrder({ order }) {
             ))
         , [order?.ingredients, ingredients]);
 
-    console.log(order);
+    // console.log(order);
     const sliced = orderIngredients.slice(6).length;
 
     const orderPrice = useMemo(() =>
         orderIngredients.reduce((acc, i) => acc + i.price, 0)
         , [orderIngredients]);
 
+    const isProfileInfo = useMatch("/profile/orders");
+
     return (
         <>
             <div className={styles.card}>
                 <p className="text text_type_digits-default">{`#0${order.number}`}</p>
-                <p className="text text_type_main-medium">
-                    {order.name}
-                </p>
+                <div>
+                    <p className="text text_type_main-medium">
+                        {order.name}
+                    </p>
+                    {isProfileInfo && 
+                        order.status === 'done' ? (
+                        <p className={`${styles.statusDone} text text_type_main-default`} >
+                        {order.status === 'done' ? 'Выполнен' : order.status === 'pending' ? 'Готовится' : order.status === 'created' ? 'Создан' : null}
+                      </p>
+                    ) : (
+                        <p className="text text_type_main-default" >
+                        {order.status === 'done' ? 'Выполнен' : order.status === 'pending' ? 'Готовится' : order.status === 'created' ? 'Создан' : null}
+                      </p>
+                    ) 
+                    }
+                </div>
 
                 <div className={styles.ingredients}>
                     <div className={styles.photos}>

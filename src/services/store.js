@@ -5,8 +5,10 @@ import { ingredientDetailsReducer } from './reducers/details';
 import { burgerConstructorReducer } from './reducers/burgerConstructor';
 import { userReducer } from './reducers/user';
 import { feedReducer } from './reducers/feed';
+import { profileFeedReducer } from './reducers/profileFeed';
 import { socketMiddleware } from './middleware/socket-middleware';
 import { FEED_CONNECT, FEED_WS_CONNECTING, FEED_WS_ERROR, FEED_WS_OPEN, FEED_WS_CLOSE, FEED_WS_GET_FEED, FEED_DISCONNECT } from "./actions/feed/actions";
+import { ORDERS_CONNECT, ORDERS_WS_CONNECTING, ORDERS_WS_ERROR, ORDERS_WS_OPEN, ORDERS_WS_CLOSE, ORDERS_WS_GET_FEED, ORDERS_DISCONNECT } from "./actions/profileFeed/actions";
 
 const feedMiddleware = socketMiddleware({
   wsConnect: FEED_CONNECT,
@@ -18,6 +20,16 @@ const feedMiddleware = socketMiddleware({
   onMessage: FEED_WS_GET_FEED
 });
 
+const profileFeedMiddleware = socketMiddleware({
+  wsConnect: ORDERS_CONNECT,
+  wsDisconnect: ORDERS_DISCONNECT,
+  wsConnecting: ORDERS_WS_CONNECTING,
+  onOpen: ORDERS_WS_OPEN,
+  onClose: ORDERS_WS_CLOSE,
+  onError: ORDERS_WS_ERROR,
+  onMessage: ORDERS_WS_GET_FEED
+});
+
 export const store = configureStore({
     reducer: {
       ingredients: ingredientsReducer,
@@ -26,8 +38,9 @@ export const store = configureStore({
       orderData: orderReducer,
       user: userReducer,
       feed: feedReducer,
+      profileFeed: profileFeedReducer,
     },
     middleware: (getDefaultMiddleware) => {
-      return getDefaultMiddleware().concat(feedMiddleware);
+      return getDefaultMiddleware().concat(feedMiddleware,profileFeedMiddleware);
   }
   });
