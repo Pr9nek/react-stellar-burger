@@ -35,7 +35,7 @@ export const socketMiddleware = (wsActions) => {
                 socket.onmessage = event => {
                     const { data } = event;
                     const parsedData = JSON.parse(data);
-                    if (data.message === "Invalid or missing token")
+                    if (parsedData.message === "Invalid or missing token")
                     {
                         dispatch (checkUserAuth());
                     }
