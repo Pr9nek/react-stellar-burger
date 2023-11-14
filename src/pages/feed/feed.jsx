@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { connect, disconnect } from "../../services/actions/feed/actions";
 import CardOrder from "../../components/orders/card-order/card-order";
 import { useLocation, Link } from "react-router-dom";
+import { getOrderWithNumber } from "../../utils/api";
 
 function Feed() {
     const dispatch = useDispatch();
@@ -18,7 +19,6 @@ function Feed() {
     }, [dispatch]);
 
     const { isLoading, Error, orders } = useSelector(store => store.feed);
-    // const { ingredients } = useSelector(store => store.ingredients);
 
     return (
         <div className={styles.global}>

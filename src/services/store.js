@@ -5,6 +5,7 @@ import { ingredientDetailsReducer } from './reducers/details';
 import { burgerConstructorReducer } from './reducers/burgerConstructor';
 import { userReducer } from './reducers/user';
 import { feedReducer } from './reducers/feed';
+import { currentOrderReducer } from './reducers/currentOrder';
 import { profileFeedReducer } from './reducers/profileFeed';
 import { socketMiddleware } from './middleware/socket-middleware';
 import { FEED_CONNECT, FEED_WS_CONNECTING, FEED_WS_ERROR, FEED_WS_OPEN, FEED_WS_CLOSE, FEED_WS_GET_FEED, FEED_DISCONNECT } from "./actions/feed/actions";
@@ -39,6 +40,7 @@ export const store = configureStore({
       user: userReducer,
       feed: feedReducer,
       profileFeed: profileFeedReducer,
+      currentOrder: currentOrderReducer
     },
     middleware: (getDefaultMiddleware) => {
       return getDefaultMiddleware().concat(feedMiddleware,profileFeedMiddleware);

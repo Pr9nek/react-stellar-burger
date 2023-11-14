@@ -9,9 +9,13 @@ function request(url, options) {
     return fetch(url, options).then(onResponse);
 }
 
+export const getOrderWithNumber = (number) => {
+    return request(`${Api}/orders/${number}`);
+};
+
 export const getData = () => {
-    return request(`${Api}/ingredients`)
-}
+    return request(`${Api}/ingredients`);
+};
 
 export const setRegistration = (email, password, name) => {
     return request(`${Api}/auth/register`, {
