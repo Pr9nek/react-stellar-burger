@@ -32,3 +32,8 @@
     margin: 0 auto;
     box-sizing: border-box;
   }
+
+  .link {
+    text-decoration: none;
+    color: rgba(242, 242, 243, 1);
+  }

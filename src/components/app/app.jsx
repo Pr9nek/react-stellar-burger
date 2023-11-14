@@ -18,6 +18,7 @@ import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { checkUserAuth } from "../../services/actions/user/actions";
 import Feed from "../../pages/feed/feed";
 import Orders from "../orders/orders";
+import OrderInfo from "../modals/order-info/order-info";
 
 
 function App() {
@@ -53,7 +54,9 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<Home />} />
-        <Route path="/feed" element={<Feed />} />
+        <Route path="/feed" element={<Feed />} >
+          <Route path=":number" element={<OrderInfo />} />
+        </Route>
         <Route path="*" element={<Lost />} />
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} >
           <Route index element={<OnlyAuth component={<Profile />} />} />
@@ -67,7 +70,8 @@ function App() {
         <Route path="/ingredients/:id"
           element={ingredients?.length && (
             <IngredientsDetails ingredients={ingredients} />
-          )} />
+          )} 
+        />
       </Routes>
 
       {background && (
@@ -79,6 +83,14 @@ function App() {
                 <IngredientsDetails ingredients={ingredients} />
               </Modal>
             )}
+          />
+          <Route
+            path="/feed/:number"
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderInfo />
+              </Modal>
+            }
           />
         </Routes>
       )

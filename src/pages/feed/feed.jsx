@@ -4,9 +4,11 @@ import Statistics from "../../components/statistics/statistics";
 import { useEffect } from "react";
 import { connect, disconnect } from "../../services/actions/feed/actions";
 import CardOrder from "../../components/orders/card-order/card-order";
+import { useLocation, Link } from "react-router-dom";
 
 function Feed() {
     const dispatch = useDispatch();
+    const location = useLocation();
     const ORDERS_ALL_URL = "wss://norma.nomoreparties.space/orders/all";
     useEffect(() => {
         dispatch(connect(ORDERS_ALL_URL));
@@ -30,7 +32,16 @@ function Feed() {
                     {!isLoading &&
                         !Error &&
                         orders !== null &&
-                        orders.map((order) => <CardOrder key={order._id} order={order} />)}
+                        orders.map((order) => (
+                            <Link
+                                className={styles.link}
+                                key={order.number}
+                                to={`/feed/${order.number}`}
+                                state={{ background: location }} >
+                                <CardOrder key={order._id} order={order} />
+                            </Link>
+                            )
+                        )}
                 </section>
 
                 <section className={`${styles.section2} pb-10`}>

@@ -20,6 +20,8 @@ export default function Orders() {
         }
     }, [dispatch]);
 
+    console.log(orders);
+
 
     return (
         <div className={`${styles.container} custom-scroll`}>
