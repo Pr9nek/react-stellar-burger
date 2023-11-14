@@ -11,11 +11,11 @@ export function setCurrent(ingredient) {
     }
 }
 
-// export function clearCurrent() {
-//     return {
-//         type: CLEAR_CURRENT_INGREDIENT,
-//     }
-// }
+export function clearCurrentOrder() {
+    return {
+        type: CLEAR_CURRENT_ORDER,
+    }
+}
 
 export const setCurrentOrder = (number) => (dispatch) => {
     return getOrderWithNumber(number)
