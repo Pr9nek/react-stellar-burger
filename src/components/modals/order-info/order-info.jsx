@@ -20,7 +20,7 @@ export default function OrderInfo() {
         if (order) {
             return order;
     }
-        return store.currentOrder.current.orders[0];
+        return store.currentOrder.current?.orders[0];
     });
 
     useEffect (() => {
@@ -35,7 +35,7 @@ export default function OrderInfo() {
     if(!order) {
         return null;
     }
-    
+
     return (
         <>
         прувэт

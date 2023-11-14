@@ -3,9 +3,11 @@ import CardOrder from "./card-order/card-order";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { connect, disconnect } from "../../services/actions/profileFeed/actions";
+import { useLocation, Link } from "react-router-dom";
 
 export default function Orders() {
     const dispatch = useDispatch();
+    const location = useLocation();
     const { isLoading, Error, orders } = useSelector(store => store.profileFeed);
     // const user = useSelector((store) => store.user.user);
 
@@ -20,17 +22,25 @@ export default function Orders() {
         }
     }, [dispatch]);
 
-    console.log(orders);
-
+    // console.log(orders);
 
     return (
         <div className={`${styles.container} custom-scroll`}>
             {isLoading && 'Загрузка...'}
-                    {Error && 'Произошла ошибка'}
-                    {!isLoading &&
-                    !Error &&
-                    orders !== null && 
-                    [...orders].reverse().map((order) => <CardOrder key={order._id} order={order}/>)}
+            {Error && 'Произошла ошибка'}
+            {!isLoading &&
+                !Error &&
+                orders !== null &&
+                [...orders].reverse().map((order) => (
+                    <Link
+                        className={styles.link}
+                        key={order.number}
+                        to={`/profile/orders/${order.number}`}
+                        state={{ background: location }} >
+                        <CardOrder key={order._id} order={order} />
+                    </Link>
+                )
+                )}
         </div>
     )
 }

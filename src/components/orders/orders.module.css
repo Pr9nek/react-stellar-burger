@@ -8,3 +8,8 @@
     margin-right: 40px;
     padding-left: 60px;
 }
+
+.link {
+    text-decoration: none;
+    color: rgba(242, 242, 243, 1);
+  }

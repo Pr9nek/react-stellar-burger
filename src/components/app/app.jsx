@@ -33,7 +33,7 @@ function App() {
   const user = useSelector((store) => store.user.user);
   const token = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
-  
+
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки
     navigate(-1);
@@ -44,8 +44,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if(token){
-    dispatch(checkUserAuth());}
+    if (token) {
+      dispatch(checkUserAuth());
+    }
   }, [dispatch, token, refreshToken]);
 
 
@@ -60,8 +61,8 @@ function App() {
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} >
           <Route index element={<OnlyAuth component={<Profile />} />} />
           <Route path="orders" element={<OnlyAuth component={<Orders />} />} />
-          {/* <Route path="/profile/orders/:id" element={<Order />} />  */}
         </Route>
+        <Route path="/profile/orders/:number" element={<OnlyAuth component={<OrderInfo />} />} />
         <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
         <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
         <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
@@ -69,7 +70,7 @@ function App() {
         <Route path="/ingredients/:id"
           element={ingredients?.length && (
             <IngredientsDetails ingredients={ingredients} />
-          )} 
+          )}
         />
       </Routes>
 
@@ -91,6 +92,13 @@ function App() {
               </Modal>
             }
           />
+          <Route
+            path="/profile/orders/:number"
+            element={
+              <OnlyAuth component=
+                {<Modal onClose={handleModalClose}>
+                  <OrderInfo />
+                </Modal>} />} />
         </Routes>
       )
       }
