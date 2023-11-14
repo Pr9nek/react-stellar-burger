@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { connect, disconnect } from "../../services/actions/feed/actions";
 import CardOrder from "../../components/orders/card-order/card-order";
 import { useLocation, Link } from "react-router-dom";
-import { getOrderWithNumber } from "../../utils/api";
 
 function Feed() {
     const dispatch = useDispatch();
