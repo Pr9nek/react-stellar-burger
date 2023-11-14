@@ -54,9 +54,8 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<Home />} />
-        <Route path="/feed" element={<Feed />} >
-          <Route path=":number" element={<OrderInfo />} />
-        </Route>
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/feed/:number" element={<OrderInfo />} />
         <Route path="*" element={<Lost />} />
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} >
           <Route index element={<OnlyAuth component={<Profile />} />} />
