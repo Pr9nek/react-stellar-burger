@@ -2,16 +2,17 @@ import { NavLink, Outlet, useMatch } from "react-router-dom";
 import styles from "./profile-page.module.css";
 import { useDispatch } from "react-redux";
 import { logOutUser } from "../../services/actions/user/actions";
+import { useSelector } from "react-redux";
 
 export default function ProfilePage() {
-
+    const isAuthChecked = useSelector((store) => store.user.isAuthChecked);
     const refreshToken = localStorage.getItem("refreshToken");
     const dispatch = useDispatch();
     const logOut = (e) => {
         e.preventDefault();
         dispatch(logOutUser(refreshToken));
     }
-
+    console.log(isAuthChecked);
     const isProfileInfo = useMatch("/profile");
 
     return (

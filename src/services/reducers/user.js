@@ -62,18 +62,19 @@ export const userReducer = (state = initialUserState, action) => {
             return {
                 ...state,
                 isAuthChecked: true,
-                    registerUserRequest: true,
+                registerUserRequest: true,
             };
         case USER_REG_SUCCESS:
             return {
                 ...state,
                 user: action.payload,
-                    registerUserRequest: false
+                registerUserRequest: false,
+                isAuthChecked: true
             };
         case USER_REG_FAILED:
             return {
                 ...state,
-                isAuthChecked: false,
+                isAuthChecked: true,
                     registerUserError: action.payload,
                     registerUserRequest: false
             };
@@ -81,18 +82,19 @@ export const userReducer = (state = initialUserState, action) => {
             return {
                 ...state,
                 isAuthChecked: true,
-                    loginUserRequest: true,
+                loginUserRequest: true,
             };
         case USER_LOGIN_SUCCESS:
             return {
                 ...state,
                 user: action.payload,
-                    loginUserRequest: false
+                isAuthChecked: true,
+                loginUserRequest: false
             };
         case USER_LOGIN_FAILED:
             return {
                 ...state,
-                isAuthChecked: false,
+                isAuthChecked: true,
                     loginUserError: action.payload,
                     loginUserRequest: false
             };
@@ -104,15 +106,15 @@ export const userReducer = (state = initialUserState, action) => {
         case USER_LOGOUT_SUCCESS:
             return {
                 ...state,
-                isAuthChecked: false,
-                    logoutUserRequest: false,
-                    user: null
+                // isAuthChecked: false,
+                logoutUserRequest: false,
+                user: null
             };
         case USER_LOGOUT_ERROR:
             return {
                 ...state,
                 logoutUserError: action.payload,
-                    logoutUserRequest: false
+                logoutUserRequest: false
             };
         default:
             return state;

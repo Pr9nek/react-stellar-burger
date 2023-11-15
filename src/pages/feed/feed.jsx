@@ -18,6 +18,7 @@ function Feed() {
     }, [dispatch]);
 
     const { isLoading, Error, orders } = useSelector(store => store.feed);
+    // const order = {"_id":"65523732c2cc61001b3d794f","ingredients":["643d69a5c3f7b9001cfa0943","643d69a5c3f7b9001cfa0943","643d69a5c3f7b9001cfa0945","643d69a5c3f7b9001cfa0940","643d69a5c3f7b9001cfa0947","643d69a5c3f7b9001cfa0947","643d69a5c3f7b9001cfa0947","643d69a5c3f7b9001cfa0947","643d69a5c3f7b9001cfa0947","643d69a5c3f7b9001cfa0947","643d69a5c3f7b9001cfa093d"],"status":"done","name":"Space флюоресцентный фалленианский антарианский метеоритный бургер","createdAt":"2023-11-13T14:48:18.637Z","updatedAt":"2023-11-13T14:48:18.858Z","number":25999};
 
     return (
         <div className={styles.global}>
@@ -39,7 +40,7 @@ function Feed() {
                                 state={{ background: location }} >
                                 <CardOrder key={order._id} order={order} />
                             </Link>
-                            )
+                        )
                         )}
                 </section>
 

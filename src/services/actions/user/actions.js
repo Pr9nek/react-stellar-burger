@@ -15,12 +15,22 @@ export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const USER_LOGIN_FAILED = 'USER_LOGIN_FAILED';
 
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
-export const GET_USER = "SET_USER";
+export const GET_USER = "GET_USER";
 export const GET_USER_ERROR = "GET_USER_ERROR";
 
 export const CHEK_USER_LOGOUT = "CHEK_USER_LOGOUT";
 export const USER_LOGOUT_SUCCESS = "GEUSER_LOGOUT_SUCCESST_USER_ERROR";
 export const USER_LOGOUT_ERROR = "USER_LOGOUT_ERROR";
+
+export const setAuthChecked = (value) => ({
+    type: SET_AUTH_CHECKED,
+    payload: value,
+});
+
+export const getUser = (user) => ({
+    type: GET_USER,
+    payload: user,
+});
 
 export const editUser = (name, email, password) => (dispatch) => {
     return patchUserRefresh(name, email, password)
@@ -44,10 +54,11 @@ export const editUser = (name, email, password) => (dispatch) => {
 };
 
 export const checkUserAuth = () => (dispatch) => {
-    dispatch({
-        type: SET_AUTH_CHECKED,
-        payload: true,
-    });
+    // dispatch({
+    //     type: SET_AUTH_CHECKED,
+    //     payload: true,
+    // });
+    if (localStorage.getItem("accessToken")) {
     return getUserRefresh()
         .then(res => {
             dispatch({
@@ -60,12 +71,15 @@ export const checkUserAuth = () => (dispatch) => {
                 type: GET_USER_ERROR,
                 payload: error.message
             });
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+            dispatch(getUser(null));
         })
-        .finally(() => dispatch({
-            type: SET_AUTH_CHECKED,
-            payload: true,
-        }));
-};
+        .finally(() => dispatch(setAuthChecked(true)));
+        } else {
+            dispatch(setAuthChecked(true));
+        }
+    };
 
 export const logInUser = (email, password) => (dispatch) => {
     dispatch({

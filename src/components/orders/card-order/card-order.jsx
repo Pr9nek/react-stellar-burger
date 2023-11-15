@@ -16,8 +16,6 @@ export default function CardOrder({ order }) {
             ))
         , [order?.ingredients, ingredients]);
 
-    console.log(orderIngredients);
-
     if (orderIngredients.includes(undefined)) {
         return null;
     }
