@@ -30,10 +30,10 @@ export default function CardOrder({ order }) {
     //     acc + i.price, 0)
     //     , [orderIngredients]);
 
-    const orderPrice = () =>
-        orderIngredients?.reduce((acc, i) =>
+    const orderPrice = () => {
+        return orderIngredients?.reduce((acc, i) =>
             acc + i.price, 0);
-
+        } 
 
     return (
         <>
@@ -74,7 +74,7 @@ export default function CardOrder({ order }) {
                         })}
                     </div>
                     <div className={`${styles.price} pb-1 pt-1`}>
-                        <p className="text text_type_digits-default pr-2 ">{orderPrice}</p>
+                        <p className="text text_type_digits-default pr-2 ">{orderPrice()}</p>
                         <CurrencyIcon type="primary" />
                     </div>
 
