@@ -24,7 +24,7 @@ export default function OrderInfo() {
         if (order) {
             return order;
         }
-        
+
         order = store.currentOrder.current?.orders.find((order) => order.number == number);
         if (order) {
             return order;
@@ -54,13 +54,30 @@ export default function OrderInfo() {
 
     // console.log(current);
 
+    const multiply = (ingredient) => {
+        let res = orderIngredients?.filter((x) => x._id === ingredient._id);
+        return res.length
+    }
+
+    const getUnique = (arr) => 
+        arr?.filter((el, ind) => ind === arr.indexOf(el));
+    
+
+    const uniqueOrderIngredients = getUnique(orderIngredients);
+    console.log(uniqueOrderIngredients);
+
+    const orderPrice = useMemo(() =>
+    orderIngredients?.reduce((acc, i) => acc + i.price, 0)
+    , [orderIngredients]);
+
     if (!order) {
         return null;
     }
 
     return (
         <div className={styles.container}>
-            <p className="text text_type_digits-default">{`#0${order.number}`}</p>
+            <p className={`${styles.number} text text_type_digits-default`}>{`#0${order.number}`}</p>
+            {/* <p className={`${styles.number}text text_type_digits-default`}>{`#0${order.number}`}</p> */}
             <p className="text text_type_main-medium mt-10 mb-3">
                 {order.name}
             </p>
@@ -78,7 +95,7 @@ export default function OrderInfo() {
                 Состав:
             </p>
             <div className={`${styles.cards} custom-scroll mb-10`}>
-                {orderIngredients?.map((ingredient) => (
+                {uniqueOrderIngredients?.map((ingredient) => (
                     <div className={styles.card} key={uuidv4()}>
                         <div className={styles.cardinfo}>
                             <div className={styles.imgbox}>
@@ -89,14 +106,20 @@ export default function OrderInfo() {
                             </p>
                         </div>
                         <div className={styles.price}>
-                            <p className="text text_type_digits-default pr-2">{ingredient.price}</p>
+                            <p className="text text_type_digits-default pr-2">{`${multiply(ingredient)} х ${ingredient.price}`}</p>
                             <CurrencyIcon type="primary" />
                         </div>
                     </div>
-                    )
+                )
                 )}
+            </div >
+            <div className={styles.totalprice}>
+            <p className="text text_type_main-default text_color_inactive"><FormattedDate date={new Date(order.createdAt)} /></p>
+            <div className={styles.price}>
+                            <p className="text text_type_digits-default pr-2">{orderPrice}</p>
+                            <CurrencyIcon type="primary" />
+                        </div>
             </div>
-            <p className="text text_type_main-default text_color_inactive"><FormattedDate date={new Date(order.createdAt)}/></p>
         </div>
     )
 }

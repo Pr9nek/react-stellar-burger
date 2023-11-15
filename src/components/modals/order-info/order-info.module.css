@@ -1,11 +1,17 @@
 .container {
     /* margin-top: 82px; */
-    display: flex;
+    /* display: flex; */
     margin-left: auto;
     margin-right: auto;
-    flex-direction: column;
+    /* flex-direction: column; */
     width: 640px;
     /* height: 100%; */
+}
+
+.number {
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 .statusDone {
@@ -51,4 +57,9 @@
 .price {
     display: flex;
     align-items: center;
+}
+
+.totalprice{
+    display: flex;
+    justify-content: space-between;
 }
