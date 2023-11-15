@@ -16,10 +16,10 @@ export default function CardOrder({ order }) {
             ))
         , [order?.ingredients, ingredients]);
 
-    const sliced = orderIngredients.slice(6).length;
+    const sliced = orderIngredients?.slice(6).length;
 
     const orderPrice = useMemo(() =>
-        orderIngredients.reduce((acc, i) => acc + i.price, 0)
+        orderIngredients?.reduce((acc, i) => acc + i.price, 0)
         , [orderIngredients]);
 
     const isProfileInfo = useMatch("/profile/orders");
