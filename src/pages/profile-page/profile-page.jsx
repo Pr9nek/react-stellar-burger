@@ -12,7 +12,6 @@ export default function ProfilePage() {
         e.preventDefault();
         dispatch(logOutUser(refreshToken));
     }
-    console.log(isAuthChecked);
     const isProfileInfo = useMatch("/profile");
 
     return (

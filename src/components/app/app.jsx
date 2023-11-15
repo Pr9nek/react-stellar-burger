@@ -44,9 +44,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (token) {
+   
       dispatch(checkUserAuth());
-    }
+    
   }, [dispatch, token, refreshToken]);
 
 
