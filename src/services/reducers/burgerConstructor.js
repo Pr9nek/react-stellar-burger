@@ -47,6 +47,7 @@ export const burgerConstructorReducer = (state = initialConstructorState, action
         }
         case RESET_CONSTRUCTOR_INGREDIENTS:
             return initialConstructorState;
+           
         default:
             return state;
     }

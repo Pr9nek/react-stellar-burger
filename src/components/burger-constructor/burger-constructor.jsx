@@ -125,7 +125,7 @@ export default function BurgerConstructor() {
                         </Button>
                     </div>}
             </div>
-            {currentOrder && dispatch(resetConstructor()) &&
+            {currentOrder && 
                 <Modal onClose={CloseModal}>
                     <OrderDetails price={price} />
                 </Modal>

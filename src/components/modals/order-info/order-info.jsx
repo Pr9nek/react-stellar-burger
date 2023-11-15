@@ -31,10 +31,6 @@ export default function OrderInfo() {
         }
     });
 
-    console.log(current);
-    console.log(feed);
-    console.log(order);
-
     const ingredients = useSelector(store => store.ingredients.ingredients);
 
     const orderIngredients = useMemo(() =>
@@ -44,7 +40,6 @@ export default function OrderInfo() {
             ))
         , [order?.ingredients, ingredients]);
 
-    console.log(orderIngredients);
 
     useEffect(() => {
         if (!order) {
@@ -52,7 +47,6 @@ export default function OrderInfo() {
         }
     }, []);
 
-    // console.log(current);
 
     const multiply = (ingredient) => {
         let res = orderIngredients?.filter((x) => x._id === ingredient._id);
@@ -64,7 +58,6 @@ export default function OrderInfo() {
     
 
     const uniqueOrderIngredients = getUnique(orderIngredients);
-    console.log(uniqueOrderIngredients);
 
     const orderPrice = useMemo(() =>
     orderIngredients?.reduce((acc, i) => acc + i.price, 0)
