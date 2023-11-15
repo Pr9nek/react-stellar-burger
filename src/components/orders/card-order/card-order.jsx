@@ -8,7 +8,7 @@ import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-component
 
 export default function CardOrder({ order }) {
     const ingredients = useSelector(store => store.ingredients.ingredients);
-
+    const isProfileInfo = useMatch("/profile/orders");
     const orderIngredients = useMemo(() =>
         order?.ingredients.map((ingredientId) =>
             ingredients?.find((ingredient) =>
@@ -18,25 +18,29 @@ export default function CardOrder({ order }) {
 
     console.log(orderIngredients);
 
-    const sliced = orderIngredients?.slice(6).length;
-
-    const orderPrice = useMemo(() =>
-        orderIngredients?.reduce((acc, i) => 
-        // if (!i) {return null;}
-        acc + i.price, 0)
-        , [orderIngredients]);
-
-    const isProfileInfo = useMatch("/profile/orders");
-
     if (orderIngredients.includes(undefined)) {
         return null;
     }
+
+    const sliced = orderIngredients?.slice(6).length;
+
+    // const orderPrice = useMemo(() =>
+    //     orderIngredients?.reduce((acc, i) => 
+    //     // if (!i) {return null;}
+    //     acc + i.price, 0)
+    //     , [orderIngredients]);
+
+    const orderPrice = () =>
+        orderIngredients?.reduce((acc, i) =>
+            acc + i.price, 0);
+
+
     return (
         <>
             <div className={styles.card}>
                 <div className={styles.cardheader}>
                     <p className="text text_type_digits-default">{`#0${order.number}`}</p>
-                    <p className="text text_type_main-default text_color_inactive"><FormattedDate date={new Date(order.createdAt)}/></p>
+                    <p className="text text_type_main-default text_color_inactive"><FormattedDate date={new Date(order.createdAt)} /></p>
                 </div>
                 <div>
                     <p className="text text_type_main-medium">
