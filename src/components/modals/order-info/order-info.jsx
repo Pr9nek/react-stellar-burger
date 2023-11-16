@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentOrder } from "../../../services/actions/currentOrder/actions";
 import { v4 as uuidv4 } from 'uuid';
@@ -7,9 +7,13 @@ import styles from "./order-info.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 
+
 export default function OrderInfo() {
     const dispatch = useDispatch();
     const { number } = useParams();
+    const location = useLocation();
+
+    const background = location.state?.background;
 
     const current = useSelector(store => store.currentOrder.current?.orders[0]);
     const feed = useSelector(store => store.feed?.orders);
@@ -67,10 +71,10 @@ export default function OrderInfo() {
         return null;
     }
 
+
     return (
-        <div className={styles.container}>
+        <div className={background ? styles.container : styles.page}>
             <p className={`${styles.number} text text_type_digits-default`}>{`#0${order.number}`}</p>
-            {/* <p className={`${styles.number}text text_type_digits-default`}>{`#0${order.number}`}</p> */}
             <p className="text text_type_main-medium mt-10 mb-3">
                 {order.name}
             </p>

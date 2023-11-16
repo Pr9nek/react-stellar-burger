@@ -30,7 +30,7 @@ function App() {
   const background = location.state?.background;
   const { ingredients } = useSelector(store => store.ingredients);
 
-  const user = useSelector((store) => store.user.user);
+  // const user = useSelector((store) => store.user.user);
   const token = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
 
@@ -44,9 +44,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-   
       dispatch(checkUserAuth());
-    
   }, [dispatch, token, refreshToken]);
 
 

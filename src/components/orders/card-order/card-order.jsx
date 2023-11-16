@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useMemo } from "react";
 import { useMatch } from "react-router-dom";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
+import { cardPrderPropType } from "../../../utils/prop-types";
 
 export default function CardOrder({ order }) {
     const ingredients = useSelector(store => store.ingredients.ingredients);
@@ -81,3 +82,5 @@ export default function CardOrder({ order }) {
         </>
     )
 }
+
+CardOrder.propTypes = cardPrderPropType;
