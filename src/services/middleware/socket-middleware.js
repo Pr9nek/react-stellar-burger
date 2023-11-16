@@ -33,6 +33,7 @@ export const socketMiddleware = (wsActions) => {
 
                 socket.onerror = () => {
                     dispatch({ type: onError, payload: 'Error' });
+                    dispatch({type: wsConnect});
                 };
 
                 socket.onmessage = event => {

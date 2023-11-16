@@ -6,6 +6,7 @@ import { useEffect, useMemo } from "react";
 import styles from "./order-info.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
+import { getIngredientsSelector } from "../../../utils/constants";
 
 
 export default function OrderInfo() {
@@ -14,11 +15,7 @@ export default function OrderInfo() {
     const location = useLocation();
 
     const background = location.state?.background;
-
-    const current = useSelector(store => store.currentOrder.current?.orders[0]);
-    const feed = useSelector(store => store.feed?.orders);
-
-    const order = useSelector(store => {
+    const findOrder = store => {
         let order;
         order = store.feed.orders?.find((order) => order.number == number);
         if (order) {
@@ -33,9 +30,10 @@ export default function OrderInfo() {
         if (order) {
             return order;
         }
-    });
+    };  
 
-    const ingredients = useSelector(store => store.ingredients.ingredients);
+    const order = useSelector(findOrder);
+    const ingredients = useSelector(getIngredientsSelector);
 
     const orderIngredients = useMemo(() =>
         order?.ingredients.map((ingredientId) =>

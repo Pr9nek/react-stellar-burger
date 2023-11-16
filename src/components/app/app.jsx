@@ -19,18 +19,17 @@ import { checkUserAuth } from "../../services/actions/user/actions";
 import Feed from "../../pages/feed/feed";
 import Orders from "../orders/orders";
 import OrderInfo from "../modals/order-info/order-info";
+import { getIngredientsSelector } from "../../utils/constants";
 
 
 function App() {
 
   const location = useLocation();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const background = location.state?.background;
-  const { ingredients } = useSelector(store => store.ingredients);
+  const ingredients = useSelector(getIngredientsSelector);
 
-  // const user = useSelector((store) => store.user.user);
   const token = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
 

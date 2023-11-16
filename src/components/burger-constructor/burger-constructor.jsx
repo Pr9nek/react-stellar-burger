@@ -13,14 +13,16 @@ import { useDrop } from "react-dnd";
 import { addBun, addIngredient, moveIngredient, resetConstructor } from '../../services/actions/burgerConstructor/actions';
 import { clearOrder } from '../../services/actions/orderDetails/actions';
 import { useNavigate } from 'react-router-dom';
+import { getUserSelector } from "../../utils/constants";
+import { getBurgerConstructorStore } from "../../utils/constants";
 
 export default function BurgerConstructor() {
-    const burgerConstructor = useSelector(store => store.burgerConstructor);
+    const burgerConstructor = useSelector(getBurgerConstructorStore);
     const currentOrder = useSelector(store => store.orderData.order);
     const isLoading = useSelector(store => store.orderData.isLoading);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector(store => store.user.user);
+    const user = useSelector(getUserSelector);
 
     function CloseModal() {
         dispatch(clearOrder());

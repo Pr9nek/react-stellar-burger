@@ -7,9 +7,10 @@ import { useForm } from '../../hooks/useForm';
 export default function Profile() {
 
     const dispatch = useDispatch();
-
-    const name = useSelector((store) => store.user.user.name);
-    const login = useSelector((store) => store.user.user.email);
+    const getUserNameSelector = store => store.user.user.name; 
+    const getUserEmailSelector = store => store.user.user.email; 
+    const name = useSelector(getUserNameSelector);
+    const login = useSelector(getUserEmailSelector);
     const {values, handleChange, setValues} = useForm({name: name, email: login, password: '******'});
 
     const onReset = (e) => {

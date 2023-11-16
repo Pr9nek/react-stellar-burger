@@ -9,7 +9,6 @@ export default function Orders() {
     const dispatch = useDispatch();
     const location = useLocation();
     const { isLoading, Error, orders } = useSelector(store => store.profileFeed);
-    // const user = useSelector((store) => store.user.user);
 
     const token = localStorage.getItem("accessToken");
     const tokenShot = token.split('Bearer ')[1];
