@@ -1,3 +1,5 @@
+import { profileOrdersRoute } from "./constants";
+
 const Api = "https://norma.nomoreparties.space/api";
 
 function onResponse(res) {
@@ -10,7 +12,7 @@ function request(url, options) {
 }
 
 export const getOrderWithNumber = (number) => {
-    return request(`${Api}/orders/${number}`);
+    return request(`${Api}/${profileOrdersRoute}/${number}`);
 };
 
 export const getData = () => {
@@ -148,7 +150,7 @@ export const patchUserRefresh = (name, email, password) => fetchWithRefresh(`${A
 });
 
 export const makeOrder = (IDs) => {
-    return request(`${Api}/orders`, {
+    return request(`${Api}/${profileOrdersRoute}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -160,7 +162,7 @@ export const makeOrder = (IDs) => {
 }
 
 export const makeOrderRefresh = (IDs) => fetchWithRefresh(
-    `${Api}/orders`, {
+    `${Api}/${profileOrdersRoute}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",

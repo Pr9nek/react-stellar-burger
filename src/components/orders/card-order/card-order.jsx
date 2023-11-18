@@ -7,10 +7,11 @@ import { useMatch } from "react-router-dom";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { cardPrderPropType } from "../../../utils/prop-types";
 import { getIngredientsSelector } from "../../../utils/constants";
+import { profileRoute, profileOrdersRoute } from "../../../utils/constants";
 
 export default function CardOrder({ order }) {
     const ingredients = useSelector(getIngredientsSelector);
-    const isProfileInfo = useMatch("/profile/orders");
+    const isProfileInfo = useMatch(`${profileRoute}/${profileOrdersRoute}`);
     const orderIngredients = useMemo(() =>
         order?.ingredients.map((ingredientId) =>
             ingredients?.find((ingredient) =>

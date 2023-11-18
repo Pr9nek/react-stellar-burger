@@ -4,6 +4,7 @@ import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink, useLocation } from 'react-router-dom';
+import { homeRoute, feedRoute, profileRoute } from "../../utils/constants";
 
 export default function AppHeader() {
     const location = useLocation();
@@ -15,7 +16,7 @@ export default function AppHeader() {
                     <Nav>
                         <BurgerIcon type={location.pathname === '/' ? "primary" : "secondary"} />
                         <NavLink
-                            to="/"
+                            to={homeRoute}
                             className={({ isActive }) =>
                                 [
                                     isActive ? `${HeaderStyles.active} text text_type_main-default pl-2` : `${HeaderStyles.inactive} text text_type_main-default pl-2 text_color_inactive`,
@@ -27,7 +28,7 @@ export default function AppHeader() {
                     <Nav>
                         <BurgerIcon type={location.pathname === '/feed' ? "primary" : "secondary"} />
                         <NavLink
-                            to="/feed"
+                            to={feedRoute}
                             className={({ isActive }) =>
                                 [
                                     isActive ? `${HeaderStyles.active} text text_type_main-default pl-2` : `${HeaderStyles.inactive} text text_type_main-default pl-2 text_color_inactive`,
@@ -46,7 +47,7 @@ export default function AppHeader() {
                     <Nav>
                         <ProfileIcon type={location.pathname === '/profile' || location.pathname === '/profile/orders' ? "primary" : "secondary"} />
                         <NavLink
-                            to="/profile"
+                            to={profileRoute}
                             className={({ isActive }) =>
                                 [
                                     isActive ? `${HeaderStyles.active} text text_type_main-default pl-2` : `${HeaderStyles.inactive} text text_type_main-default pl-2 text_color_inactive`,

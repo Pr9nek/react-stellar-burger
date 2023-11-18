@@ -2,6 +2,7 @@ import { NavLink, Outlet, useMatch } from "react-router-dom";
 import styles from "./profile-page.module.css";
 import { useDispatch } from "react-redux";
 import { logOutUser } from "../../services/actions/user/actions";
+import { profileRoute, profileOrdersRoute } from "../../utils/constants";
 
 export default function ProfilePage() {
     const refreshToken = localStorage.getItem("refreshToken");
@@ -10,7 +11,7 @@ export default function ProfilePage() {
         e.preventDefault();
         dispatch(logOutUser(refreshToken));
     }
-    const isProfileInfo = useMatch("/profile");
+    const isProfileInfo = useMatch(profileRoute);
 
     return (
         <div className={styles.main}>
@@ -21,7 +22,7 @@ export default function ProfilePage() {
                             {!isProfileInfo ? (
                                 <NavLink
 
-                                    to="/profile"
+                                    to={profileRoute}
                                     className={`${styles.inactive} text text_type_main-medium text_color_inactive`}
 
                                 >
@@ -29,7 +30,7 @@ export default function ProfilePage() {
                                 </NavLink>
                             ) : (
                                 <NavLink
-                                    to="/profile"
+                                    to={profileRoute}
                                     className={`${styles.active} text text_type_main-medium`}
 
                                 >
@@ -37,23 +38,10 @@ export default function ProfilePage() {
                                 </NavLink>
                             )
                             }
-                            {/* <NavLink
-                                
-                                to="/profile"
-                                exact
-                                className={({ isActive, isPending, isTransitioning }) => 
-                                    [
-                                        isPending ? "" : "",
-                                        isActive ? `${styles.active} text text_type_main-medium` : `${styles.inactive} text text_type_main-medium text_color_inactive`,
-                                        isTransitioning ? "" : "",
-                                    ].join(" ")
-                                }>
-                                <span>Профиль</span>
-                            </NavLink> */}
                         </li>
                         <li className={styles.list}>
                             <NavLink
-                                to="/profile/orders"
+                                to={`${profileRoute}/${profileOrdersRoute}`}
                                 className={({ isActive, isPending, isTransitioning }) =>
                                     [
                                         isPending ? "" : "",

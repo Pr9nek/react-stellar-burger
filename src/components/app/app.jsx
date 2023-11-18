@@ -20,6 +20,7 @@ import Feed from "../../pages/feed/feed";
 import Orders from "../orders/orders";
 import OrderInfo from "../modals/order-info/order-info";
 import { getIngredientsSelector } from "../../utils/constants";
+import { homeRoute, feedRoute, feedDynamicOrderRoute, lostRoute, profileRoute, profileOrdersRoute } from "../../utils/constants";
 
 
 function App() {
@@ -51,13 +52,13 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <Routes location={background || location}>
-        <Route path="/" element={<Home />} />
-        <Route path="/feed" element={<Feed />} />
-        <Route path="/feed/:number" element={<OrderInfo />} />
-        <Route path="*" element={<Lost />} />
-        <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} >
+        <Route path={homeRoute} element={<Home />} />
+        <Route path={feedRoute} element={<Feed />} />
+        <Route path={feedDynamicOrderRoute} element={<OrderInfo />} />
+        <Route path={lostRoute} element={<Lost />} />
+        <Route path={profileRoute} element={<OnlyAuth component={<ProfilePage />} />} >
           <Route index element={<OnlyAuth component={<Profile />} />} />
-          <Route path="orders" element={<OnlyAuth component={<Orders />} />} />
+          <Route path={profileOrdersRoute} element={<OnlyAuth component={<Orders />} />} />
         </Route>
         <Route path="/profile/orders/:number" element={<OnlyAuth component={<OrderInfo />} />} />
         <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
@@ -82,7 +83,7 @@ function App() {
             )}
           />
           <Route
-            path="/feed/:number"
+            path={feedDynamicOrderRoute}
             element={
               <Modal onClose={handleModalClose}>
                 <OrderInfo />

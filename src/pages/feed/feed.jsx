@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { connect, disconnect } from "../../services/actions/feed/actions";
 import CardOrder from "../../components/orders/card-order/card-order";
 import { useLocation, Link } from "react-router-dom";
+import { feedRoute } from "../../utils/constants";
 
 function Feed() {
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function Feed() {
                             <Link
                                 className={styles.link}
                                 key={order.number}
-                                to={`/feed/${order.number}`}
+                                to={`${feedRoute}/${order.number}`}
                                 state={{ background: location }} >
                                 <CardOrder key={order._id} order={order} />
                             </Link>
