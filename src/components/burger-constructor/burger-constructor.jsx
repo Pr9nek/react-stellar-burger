@@ -15,6 +15,7 @@ import { clearOrder } from '../../services/actions/orderDetails/actions';
 import { useNavigate } from 'react-router-dom';
 import { getUserSelector } from "../../utils/constants";
 import { getBurgerConstructorStore } from "../../utils/constants";
+import { loginRoute } from "../../utils/constants";
 
 export default function BurgerConstructor() {
     const burgerConstructor = useSelector(getBurgerConstructorStore);
@@ -117,7 +118,7 @@ export default function BurgerConstructor() {
 
                         <Button htmlType="button" type="primary" size="large" onClick={
                             () => {
-                                if (!user) { navigate("/login");}
+                                if (!user) { navigate(loginRoute);}
                                 else
                                 {dispatch(getOrder(ids));}
                             }

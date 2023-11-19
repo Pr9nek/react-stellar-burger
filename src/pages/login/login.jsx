@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { logInUser } from '../../services/actions/user/actions';
 import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
+import { registerRoute, forgotPasswordRoute } from '../../utils/constants';
 
 function Login() {
     const {values, handleChange} = useForm({email: '', password: '' });
@@ -42,10 +43,10 @@ function Login() {
                 </Button>
                 <div className={styles.registery}>
                     <p className="text text_type_main-default text_color_inactive">Вы — новый пользователь?
-                        <Link className={styles.link} to='/register'>Зарегистрироваться</Link>
+                        <Link className={styles.link} to={registerRoute}>Зарегистрироваться</Link>
                     </p>
                     <p className="text text_type_main-default text_color_inactive pt-4">Забыли пароль?
-                        <Link className={styles.link} to='/forgot-password'>Восстановить пароль</Link>
+                        <Link className={styles.link} to={forgotPasswordRoute}>Восстановить пароль</Link>
                     </p>
                 </div>
             </form>

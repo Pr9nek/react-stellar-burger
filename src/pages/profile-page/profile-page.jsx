@@ -2,7 +2,7 @@ import { NavLink, Outlet, useMatch } from "react-router-dom";
 import styles from "./profile-page.module.css";
 import { useDispatch } from "react-redux";
 import { logOutUser } from "../../services/actions/user/actions";
-import { profileRoute, profileOrdersRoute } from "../../utils/constants";
+import { profileRoute, profileOrdersRoute, loginRoute } from "../../utils/constants";
 
 export default function ProfilePage() {
     const refreshToken = localStorage.getItem("refreshToken");
@@ -54,7 +54,7 @@ export default function ProfilePage() {
                         </li>
                         <li className={styles.list}>
                             <NavLink
-                                to="/login"
+                                to={loginRoute}
                                 className={({ isActive, isPending, isTransitioning }) =>
                                     [
                                         isPending ? "" : "",

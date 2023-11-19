@@ -1,4 +1,4 @@
-import { profileOrdersRoute } from "./constants";
+import { profileOrdersRoute, loginRoute, registerRoute, ingredientsRoute } from "./constants";
 
 const Api = "https://norma.nomoreparties.space/api";
 
@@ -16,11 +16,11 @@ export const getOrderWithNumber = (number) => {
 };
 
 export const getData = () => {
-    return request(`${Api}/ingredients`);
+    return request(`${Api}${ingredientsRoute}`);
 };
 
 export const setRegistration = (email, password, name) => {
-    return request(`${Api}/auth/register`, {
+    return request(`${Api}/auth${registerRoute}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export const setRegistration = (email, password, name) => {
 }
 
 export const logIn = (email, password) => {
-    return request(`${Api}/auth/login`, {
+    return request(`${Api}/auth${loginRoute}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { connect, disconnect } from "../../services/actions/profileFeed/actions";
 import { useLocation, Link } from "react-router-dom";
+import { profileRoute, profileOrdersRoute } from "../../utils/constants";
 
 export default function Orders() {
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export default function Orders() {
                     <Link
                         className={styles.link}
                         key={order.number}
-                        to={`/profile/orders/${order.number}`}
+                        to={`${profileRoute}/${profileOrdersRoute}/${order.number}`}
                         state={{ background: location }} >
                         <CardOrder key={order._id} order={order} />
                     </Link>

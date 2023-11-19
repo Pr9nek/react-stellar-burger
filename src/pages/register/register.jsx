@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { setUserRegistration } from '../../services/actions/user/actions';
 import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
+import { loginRoute } from '../../utils/constants';
 
 export default function Register() {
     const {values, handleChange} = useForm({ name: '', email: '', password: '' });
@@ -53,7 +54,7 @@ export default function Register() {
             </form>
             <div className={styles.registery}>
                 <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы?
-                    <Link className={styles.link} to='/login'>Войти</Link>
+                    <Link className={styles.link} to={loginRoute}>Войти</Link>
                 </p>
             </div>
         </div>

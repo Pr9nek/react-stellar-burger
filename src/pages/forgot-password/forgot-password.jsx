@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { resetPassword } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
+import { loginRoute } from '../../utils/constants';
 
 function ForgotPassword() {
     const {values, handleChange} = useForm({email: ''});
@@ -42,7 +43,7 @@ function ForgotPassword() {
             </form>
             <div className={styles.registery}>
                 <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?
-                    <Link className={styles.link} to='/login'>Войти</Link>
+                    <Link className={styles.link} to={loginRoute}>Войти</Link>
                 </p>
             </div>
         </div>)

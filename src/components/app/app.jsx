@@ -20,7 +20,7 @@ import Feed from "../../pages/feed/feed";
 import Orders from "../orders/orders";
 import OrderInfo from "../modals/order-info/order-info";
 import { getIngredientsSelector } from "../../utils/constants";
-import { homeRoute, feedRoute, feedDynamicOrderRoute, lostRoute, profileRoute, profileOrdersRoute } from "../../utils/constants";
+import { homeRoute, feedRoute, feedDynamicOrderRoute, lostRoute, profileRoute, profileOrdersRoute, loginRoute, registerRoute, forgotPasswordRoute, resetPasswordRoute, dynamicIngredientRoute, profileDynamicOrderRoute } from "../../utils/constants";
 
 
 function App() {
@@ -60,12 +60,12 @@ function App() {
           <Route index element={<OnlyAuth component={<Profile />} />} />
           <Route path={profileOrdersRoute} element={<OnlyAuth component={<Orders />} />} />
         </Route>
-        <Route path="/profile/orders/:number" element={<OnlyAuth component={<OrderInfo />} />} />
-        <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
-        <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
-        <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
-        <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
-        <Route path="/ingredients/:id"
+        <Route path={profileDynamicOrderRoute} element={<OnlyAuth component={<OrderInfo />} />} />
+        <Route path={loginRoute} element={<OnlyUnAuth component={<Login />} />} />
+        <Route path={registerRoute} element={<OnlyUnAuth component={<Register />} />} />
+        <Route path={forgotPasswordRoute} element={<OnlyUnAuth component={<ForgotPassword />} />} />
+        <Route path={resetPasswordRoute} element={<OnlyUnAuth component={<ResetPassword />} />} />
+        <Route path={dynamicIngredientRoute}
           element={ingredients?.length && (
             <IngredientsDetails ingredients={ingredients} />
           )}
@@ -75,7 +75,7 @@ function App() {
       {background && (
         <Routes>
           <Route
-            path="/ingredients/:id"
+            path={dynamicIngredientRoute}
             element={ingredients?.length && (
               <Modal onClose={handleModalClose} header="Детали ингредиента">
                 <IngredientsDetails ingredients={ingredients} />
@@ -91,7 +91,7 @@ function App() {
             }
           />
           <Route
-            path="/profile/orders/:number"
+            path={profileDynamicOrderRoute}
             element={
               <OnlyAuth component=
                 {<Modal onClose={handleModalClose}>

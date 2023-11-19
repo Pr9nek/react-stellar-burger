@@ -4,7 +4,7 @@ import styles from "./reset-password.module.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { getPassword } from '../../utils/api';
 import { useForm } from '../../hooks/useForm';
-import { homeRoute } from "../../utils/constants";
+import { homeRoute, loginRoute } from "../../utils/constants";
 
 export default function ResetPassword() {
 
@@ -59,7 +59,7 @@ export default function ResetPassword() {
             </form>
             <div className={styles.registery}>
                 <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?
-                    <Link className={styles.link} to='/login'>Войти</Link>
+                    <Link className={styles.link} to={loginRoute}>Войти</Link>
                 </p>
             </div>
         </div>
