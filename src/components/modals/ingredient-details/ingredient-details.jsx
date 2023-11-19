@@ -8,8 +8,6 @@ export default function IngredientDetails({ ingredients }) {
     const { image, name, calories, proteins, fat, carbohydrates } = ingredient;
     const location = useLocation();
 
-    console.log(location.state);
-
     return (
         <div className={stylesDetails.container}>
             {location.state === null &&(<p className={`${stylesDetails.header} text text_type_main-large`}>

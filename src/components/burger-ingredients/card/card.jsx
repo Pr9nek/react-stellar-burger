@@ -6,6 +6,7 @@ import { cardPropType } from "../../../utils/prop-types";
 import { useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
 import { useMemo } from 'react';
+import { ingredientsRoute } from "../../../utils/constants";
 // import { setCurrent } from '../../../services/actions/details/actions';
 export default function Card({ ingredient }) {
     const location = useLocation();
@@ -21,7 +22,8 @@ export default function Card({ ingredient }) {
         })
     });
 
-    const constructorItems = useSelector(store => store.burgerConstructor);
+    const getBurgerConstructorSelector = store => store.burgerConstructor;
+    const constructorItems = useSelector(getBurgerConstructorSelector);
     const { bun, ingredients } = constructorItems;
 
     const counter = useMemo(
@@ -35,7 +37,7 @@ export default function Card({ ingredient }) {
         <>
             {!isDrag &&
                 <Link key={id}
-                    to={`/ingredients/${id}`}
+                    to={`${ingredientsRoute}/${id}`}
                     className={`${CardStyle.card} pl-4 pr-4`}
                     ref={dragRef}
                     // onClick={() => {

@@ -2,18 +2,15 @@ import Card from "./card/card";
 import { useSelector, useDispatch } from 'react-redux';
 import StylesIngrediets from "./burger-ingredients.module.css";
 import { useMemo, useRef } from "react";
-import IngredientDetails from '../modals/ingredient-details/ingredient-details';
-import Modal from '../modals/modal/modal';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import {switchTab} from '../../services/actions/ingredients/actions';
-import {clearCurrent} from '../../services/actions/details/actions';
+import { getIngredientsSelector } from "../../utils/constants";
 
 export default function BurgerIngredients() {
-    const ingredients = useSelector(store => store.ingredients.ingredients);
-    const currentTab = useSelector(store => store.ingredients.currentTab);
-    // const currentIngredient = useSelector(store => store.details.ingredientDetail);
-
     const dispatch = useDispatch();
+    const getCurrentTabSelector = store => store.ingredients.currentTab;
+    const currentTab = useSelector(getCurrentTabSelector);
+    const ingredients = useSelector(getIngredientsSelector);
 
     const bunsRef = useRef(null);
     const saucesRef = useRef(null);
@@ -40,10 +37,6 @@ export default function BurgerIngredients() {
             dispatch(switchTab(newTab));
         }
     };
-
-    // function closeModal() {
-    //     dispatch(clearCurrent());
-    // }
 
     const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
     const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
@@ -88,12 +81,6 @@ export default function BurgerIngredients() {
                     ))}
                 </div>
             </div>
-    {/* {
-        currentIngredient &&
-        <Modal header="Детали ингредиента" onClose={closeModal}>
-            <IngredientDetails />
-        </Modal>
-    } */}
         </>
     )
 }

@@ -5,6 +5,7 @@ import {
     logOut,
     patchUserRefresh
 } from '../../../utils/api';
+import { accessTokenString, refreshTokenString } from '../../../utils/constants';
 
 export const CHECK_USER_REGISTRATION = 'CHECK_USER_REGISTRATION';
 export const USER_REG_SUCCESS = 'USER_REG_SUCCESS';
@@ -15,12 +16,22 @@ export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const USER_LOGIN_FAILED = 'USER_LOGIN_FAILED';
 
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
-export const GET_USER = "SET_USER";
+export const GET_USER = "GET_USER";
 export const GET_USER_ERROR = "GET_USER_ERROR";
 
 export const CHEK_USER_LOGOUT = "CHEK_USER_LOGOUT";
 export const USER_LOGOUT_SUCCESS = "GEUSER_LOGOUT_SUCCESST_USER_ERROR";
 export const USER_LOGOUT_ERROR = "USER_LOGOUT_ERROR";
+
+export const setAuthChecked = (value) => ({
+    type: SET_AUTH_CHECKED,
+    payload: value,
+});
+
+export const getUser = (user) => ({
+    type: GET_USER,
+    payload: user,
+});
 
 export const editUser = (name, email, password) => (dispatch) => {
     return patchUserRefresh(name, email, password)
@@ -44,13 +55,13 @@ export const editUser = (name, email, password) => (dispatch) => {
 };
 
 export const checkUserAuth = () => (dispatch) => {
-    dispatch({
-        type: SET_AUTH_CHECKED,
-        payload: true,
-    });
+    // dispatch({
+    //     type: SET_AUTH_CHECKED,
+    //     payload: true,
+    // });
+    if (localStorage.getItem(accessTokenString)) {
     return getUserRefresh()
         .then(res => {
-            console.log(res);
             dispatch({
                 type: GET_USER,
                 payload: res.user,
@@ -61,12 +72,15 @@ export const checkUserAuth = () => (dispatch) => {
                 type: GET_USER_ERROR,
                 payload: error.message
             });
+            localStorage.removeItem(accessTokenString);
+            localStorage.removeItem(refreshTokenString);
+            dispatch(getUser(null));
         })
-        .finally(() => dispatch({
-            type: SET_AUTH_CHECKED,
-            payload: true,
-        }));
-};
+        .finally(() => dispatch(setAuthChecked(true)));
+        } else {
+            dispatch(setAuthChecked(true));
+        }
+    };
 
 export const logInUser = (email, password) => (dispatch) => {
     dispatch({
@@ -76,8 +90,8 @@ export const logInUser = (email, password) => (dispatch) => {
         .then(res => {
             const accessToken = res.accessToken;
             const refreshToken = res.refreshToken;
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', refreshToken);
+            localStorage.setItem(accessTokenString, accessToken);
+            localStorage.setItem(refreshTokenString, refreshToken);
             return res;
         })
         .then((res) => {
@@ -121,8 +135,8 @@ export const setUserRegistration = (email, password, name) => (dispatch) => {
         .then(res => {
             const accessToken = res.accessToken;
             const refreshToken = res.refreshToken;
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', refreshToken);
+            localStorage.setItem(accessTokenString, accessToken);
+            localStorage.setItem(refreshTokenString, refreshToken);
             return res;
         })
         .then((res) => {

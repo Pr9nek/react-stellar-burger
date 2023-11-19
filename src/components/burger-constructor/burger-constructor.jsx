@@ -13,14 +13,16 @@ import { useDrop } from "react-dnd";
 import { addBun, addIngredient, moveIngredient, resetConstructor } from '../../services/actions/burgerConstructor/actions';
 import { clearOrder } from '../../services/actions/orderDetails/actions';
 import { useNavigate } from 'react-router-dom';
+import { loginRoute, getOrderDataOrderSelector, getBurgerConstructorStore, getUserSelector } from "../../utils/constants";
 
 export default function BurgerConstructor() {
-    const burgerConstructor = useSelector(store => store.burgerConstructor);
-    const currentOrder = useSelector(store => store.orderData.order);
-    const isLoading = useSelector(store => store.orderData.isLoading);
+    const burgerConstructor = useSelector(getBurgerConstructorStore);
+    const getOrderDataIsLoadingSelector = store => store.orderData.isLoading
+    const currentOrder = useSelector(getOrderDataOrderSelector);
+    const isLoading = useSelector(getOrderDataIsLoadingSelector);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector(store => store.user.user);
+    const user = useSelector(getUserSelector);
 
     function CloseModal() {
         dispatch(clearOrder());
@@ -115,7 +117,7 @@ export default function BurgerConstructor() {
 
                         <Button htmlType="button" type="primary" size="large" onClick={
                             () => {
-                                if (!user) { navigate("/login");}
+                                if (!user) { navigate(loginRoute);}
                                 else
                                 {dispatch(getOrder(ids));}
                             }
@@ -125,7 +127,7 @@ export default function BurgerConstructor() {
                         </Button>
                     </div>}
             </div>
-            {currentOrder && dispatch(resetConstructor()) &&
+            {currentOrder && 
                 <Modal onClose={CloseModal}>
                     <OrderDetails price={price} />
                 </Modal>

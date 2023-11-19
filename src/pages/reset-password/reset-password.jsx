@@ -4,6 +4,7 @@ import styles from "./reset-password.module.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { getPassword } from '../../utils/api';
 import { useForm } from '../../hooks/useForm';
+import { homeRoute, loginRoute } from "../../utils/constants";
 
 export default function ResetPassword() {
 
@@ -16,12 +17,12 @@ export default function ResetPassword() {
         getPassword(values.password, values.code)
             .then(() => {
                 const resetFlag = localStorage.getItem("resetPassword");
-                if (resetFlag === 'false') { navigate("/"); }
+                if (resetFlag === 'false') { navigate(homeRoute); }
             })
     }
 
     useEffect(() => {
-        if (!resetFlag) { navigate("/") }
+        if (!resetFlag) { navigate(homeRoute) }
     }, []);
 
     return (
@@ -58,7 +59,7 @@ export default function ResetPassword() {
             </form>
             <div className={styles.registery}>
                 <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?
-                    <Link className={styles.link} to='/login'>Войти</Link>
+                    <Link className={styles.link} to={loginRoute}>Войти</Link>
                 </p>
             </div>
         </div>

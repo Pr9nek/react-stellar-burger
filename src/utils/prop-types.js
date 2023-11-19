@@ -22,3 +22,11 @@ export const modalPropType = PropTypes.shape({
   children: PropTypes.elementType,
   //укажите здесь prop-types для ингридиента
 }).isRequired;
+
+export const cardPrderPropType = {
+  order:  PropTypes.object.isRequired
+}
+
+export const protectedPropType = {
+  component: PropTypes.element.isRequired
+}

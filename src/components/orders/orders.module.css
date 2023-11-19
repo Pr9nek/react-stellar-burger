@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 852px;
+    overflow-y: auto;
+    max-width: 100%;
+    margin-right: 40px;
+    padding-left: 60px;
+}
+
+.link {
+    text-decoration: none;
+    color: rgba(242, 242, 243, 1);
+  }
