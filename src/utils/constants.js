@@ -1,6 +1,8 @@
 export const getIngredientsSelector = store => store.ingredients.ingredients;
 export const getUserSelector = store => store.user.user;
 export const getBurgerConstructorStore = store => store.burgerConstructor;
+export const getFeedSelector = store => store.feed;
+export const getOrderDataOrderSelector = store => store.orderData.order;
 export const homeRoute = "/";
 export const feedRoute = "/feed";
 export const feedDynamicOrderRoute = "/feed/:number";

@@ -1,9 +1,10 @@
 import styles from "./statistics.module.css";
 import { useSelector } from 'react-redux';
+import { getFeedSelector } from "../../utils/constants";
 
 export default function Statistics() {
 
-    const { orders, total, totalToday } = useSelector(store => store.feed);
+    const { orders, total, totalToday } = useSelector(getFeedSelector);
     const done = orders.filter((i) => i.status === 'done')
     const inwork = orders.filter((i) => i.status !== 'done')
     // console.log(orders);

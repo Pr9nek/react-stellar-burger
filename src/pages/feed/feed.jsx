@@ -6,6 +6,7 @@ import { connect, disconnect } from "../../services/actions/feed/actions";
 import CardOrder from "../../components/orders/card-order/card-order";
 import { useLocation, Link } from "react-router-dom";
 import { feedRoute } from "../../utils/constants";
+import { getFeedSelector } from "../../utils/constants";
 
 function Feed() {
     const dispatch = useDispatch();
@@ -18,7 +19,8 @@ function Feed() {
         }
     }, [dispatch]);
 
-    const { isLoading, Error, orders } = useSelector(store => store.feed);
+    // const getFeedSelector = store => store.feed
+    const { isLoading, Error, orders } = useSelector(getFeedSelector);
 
     return (
         <div className={styles.global}>

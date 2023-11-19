@@ -8,8 +8,8 @@ import { getIngredientsSelector } from "../../utils/constants";
 
 export default function BurgerIngredients() {
     const dispatch = useDispatch();
-    const getCurrentTab = store => store.ingredients.currentTab;
-    const currentTab = useSelector(getCurrentTab);
+    const getCurrentTabSelector = store => store.ingredients.currentTab;
+    const currentTab = useSelector(getCurrentTabSelector);
     const ingredients = useSelector(getIngredientsSelector);
 
     const bunsRef = useRef(null);

@@ -22,7 +22,8 @@ export default function Card({ ingredient }) {
         })
     });
 
-    const constructorItems = useSelector(store => store.burgerConstructor);
+    const getBurgerConstructorSelector = store => store.burgerConstructor;
+    const constructorItems = useSelector(getBurgerConstructorSelector);
     const { bun, ingredients } = constructorItems;
 
     const counter = useMemo(

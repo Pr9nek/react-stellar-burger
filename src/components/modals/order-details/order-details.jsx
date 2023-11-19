@@ -1,11 +1,12 @@
 import stylesOrder from "./order-details.module.css";
 import DoneIcon from "../../../images/done.png";
 import { useSelector } from 'react-redux';
+import { getOrderDataOrderSelector } from "../../../utils/constants";
 
 
 export default function OrderDetails() {
     
-    const order = useSelector(store => store.orderData.order);
+    const order = useSelector(getOrderDataOrderSelector);
 
     return (
         <div className={`${stylesOrder.container} mt-4`}>
