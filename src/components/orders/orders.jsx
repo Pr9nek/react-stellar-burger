@@ -4,14 +4,14 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { connect, disconnect } from "../../services/actions/profileFeed/actions";
 import { useLocation, Link } from "react-router-dom";
-import { profileRoute, profileOrdersRoute } from "../../utils/constants";
+import { profileRoute, profileOrdersRoute, accessTokenString } from "../../utils/constants";
 
 export default function Orders() {
     const dispatch = useDispatch();
     const location = useLocation();
     const { isLoading, Error, orders } = useSelector(store => store.profileFeed);
 
-    const token = localStorage.getItem("accessToken");
+    const token = localStorage.getItem(accessTokenString);
     const tokenShot = token.split('Bearer ')[1];
     const PROFILE_ORDERS_URL = `wss://norma.nomoreparties.space/orders?token=${tokenShot}`;
 

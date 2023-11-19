@@ -14,3 +14,5 @@ export const resetPasswordRoute = "/reset-password";
 export const dynamicIngredientRoute = "/ingredients/:id";
 export const ingredientsRoute = "/ingredients";
 export const profileDynamicOrderRoute = "/profile/orders/:number";
+export const accessTokenString = "accessToken";
+export const refreshTokenString = "refreshToken";

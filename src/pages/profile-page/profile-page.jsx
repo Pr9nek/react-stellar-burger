@@ -2,10 +2,10 @@ import { NavLink, Outlet, useMatch } from "react-router-dom";
 import styles from "./profile-page.module.css";
 import { useDispatch } from "react-redux";
 import { logOutUser } from "../../services/actions/user/actions";
-import { profileRoute, profileOrdersRoute, loginRoute } from "../../utils/constants";
+import { profileRoute, profileOrdersRoute, loginRoute, refreshTokenString } from "../../utils/constants";
 
 export default function ProfilePage() {
-    const refreshToken = localStorage.getItem("refreshToken");
+    const refreshToken = localStorage.getItem(refreshTokenString);
     const dispatch = useDispatch();
     const logOut = (e) => {
         e.preventDefault();

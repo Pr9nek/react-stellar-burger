@@ -1,4 +1,4 @@
-import { profileOrdersRoute, loginRoute, registerRoute, ingredientsRoute } from "./constants";
+import { profileOrdersRoute, loginRoute, registerRoute, ingredientsRoute, accessTokenString, refreshTokenString } from "./constants";
 
 const Api = "https://norma.nomoreparties.space/api";
 
@@ -53,12 +53,12 @@ export const logOut = (token) => {
             "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify({
-            "token": localStorage.getItem("refreshToken"),
+            "token": localStorage.getItem(refreshTokenString),
         })
     }).then(() => {
         localStorage.removeItem("resetPassword");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("accessToken");
+        localStorage.removeItem(refreshTokenString);
+        localStorage.removeItem(accessTokenString);
     });
 };
 
@@ -98,7 +98,7 @@ export const refreshToken = () => {
             "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify({
-            "token": localStorage.getItem("refreshToken"),
+            "token": localStorage.getItem(refreshTokenString),
         }),
     })
 };
@@ -115,8 +115,8 @@ export const fetchWithRefresh = async (url, options) => {
             if (!refreshData.success) {
                 return Promise.reject(refreshData);
             }
-            localStorage.setItem("refreshToken", refreshData.refreshToken);
-            localStorage.setItem("accessToken", refreshData.accessToken);
+            localStorage.setItem(refreshTokenString, refreshData.refreshToken);
+            localStorage.setItem(accessTokenString, refreshData.accessToken);
 
             options.headers.Authorization = refreshData.accessToken;
             console.log(options);
@@ -131,7 +131,7 @@ export const getUserRefresh = () => fetchWithRefresh(`${Api}/auth/user`, {
     method: 'GET',
     headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("accessToken")
+        Authorization: localStorage.getItem(accessTokenString)
     }
 });
 
@@ -140,7 +140,7 @@ export const patchUserRefresh = (name, email, password) => fetchWithRefresh(`${A
     method: 'PATCH',
     headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("accessToken")
+        Authorization: localStorage.getItem(accessTokenString)
     },
     body: JSON.stringify({
         "name": name,
@@ -166,7 +166,7 @@ export const makeOrderRefresh = (IDs) => fetchWithRefresh(
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            Authorization: localStorage.getItem("accessToken")
+            Authorization: localStorage.getItem(accessTokenString)
         },
         body: JSON.stringify({
             ingredients: IDs

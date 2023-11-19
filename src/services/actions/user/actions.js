@@ -5,6 +5,7 @@ import {
     logOut,
     patchUserRefresh
 } from '../../../utils/api';
+import { accessTokenString, refreshTokenString } from '../../../utils/constants';
 
 export const CHECK_USER_REGISTRATION = 'CHECK_USER_REGISTRATION';
 export const USER_REG_SUCCESS = 'USER_REG_SUCCESS';
@@ -58,7 +59,7 @@ export const checkUserAuth = () => (dispatch) => {
     //     type: SET_AUTH_CHECKED,
     //     payload: true,
     // });
-    if (localStorage.getItem("accessToken")) {
+    if (localStorage.getItem(accessTokenString)) {
     return getUserRefresh()
         .then(res => {
             dispatch({
@@ -71,8 +72,8 @@ export const checkUserAuth = () => (dispatch) => {
                 type: GET_USER_ERROR,
                 payload: error.message
             });
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
+            localStorage.removeItem(accessTokenString);
+            localStorage.removeItem(refreshTokenString);
             dispatch(getUser(null));
         })
         .finally(() => dispatch(setAuthChecked(true)));
@@ -89,8 +90,8 @@ export const logInUser = (email, password) => (dispatch) => {
         .then(res => {
             const accessToken = res.accessToken;
             const refreshToken = res.refreshToken;
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', refreshToken);
+            localStorage.setItem(accessTokenString, accessToken);
+            localStorage.setItem(refreshTokenString, refreshToken);
             return res;
         })
         .then((res) => {
@@ -134,8 +135,8 @@ export const setUserRegistration = (email, password, name) => (dispatch) => {
         .then(res => {
             const accessToken = res.accessToken;
             const refreshToken = res.refreshToken;
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', refreshToken);
+            localStorage.setItem(accessTokenString, accessToken);
+            localStorage.setItem(refreshTokenString, refreshToken);
             return res;
         })
         .then((res) => {
