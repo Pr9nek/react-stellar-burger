@@ -22,7 +22,6 @@ import OrderInfo from "../modals/order-info/order-info";
 import { getIngredientsSelector } from "../../utils/constants";
 import { homeRoute, feedRoute, feedDynamicOrderRoute, lostRoute, profileRoute, profileOrdersRoute, loginRoute, registerRoute, forgotPasswordRoute, resetPasswordRoute, dynamicIngredientRoute, profileDynamicOrderRoute } from "../../utils/constants";
 
-
 function App() {
 
   const location = useLocation();
