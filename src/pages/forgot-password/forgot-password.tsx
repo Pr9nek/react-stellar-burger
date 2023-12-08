@@ -10,7 +10,7 @@ function ForgotPassword() {
     const {values, handleChange} = useForm({email: ''});
     const navigate = useNavigate();
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         resetPassword(values.email)
             .then(() => {
