@@ -2,7 +2,7 @@ import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-de
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../../services/actions/user/actions';
-import { useForm } from '../../hooks/useForm';
+import { useForm } from '../../hooks/hooks';
 
 export default function Profile() {
 

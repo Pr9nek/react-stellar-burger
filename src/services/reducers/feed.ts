@@ -4,9 +4,20 @@ import {
     FEED_WS_OPEN,
     FEED_WS_CLOSE,
     FEED_WS_GET_FEED
-} from "../actions/feed/actions";
+} from "../constants/feed";
+import { TOrder } from "../types/data";
+import { TFeedActions } from "../actions/feed/actions";
 
-const initialFeedState = {
+type TFeedState = {
+    isLoading: boolean;
+    feedConnected: boolean;
+    error: null;
+    orders: TOrder[] | [];
+    total: number | null;
+    totalToday: number | null;
+}
+
+const initialFeedState: TFeedState = {
     isLoading: false,
     feedConnected: false,
     error: null,
@@ -15,7 +26,7 @@ const initialFeedState = {
     totalToday: null
 }
 
-export const feedReducer = (state = initialFeedState, action) => {
+export const feedReducer = (state = initialFeedState, action: TFeedActions): TFeedState => {
     switch (action.type) {
         case FEED_WS_CONNECTING:
             return {

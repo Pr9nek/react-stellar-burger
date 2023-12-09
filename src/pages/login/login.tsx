@@ -3,7 +3,7 @@ import styles from "./login.module.css";
 import { Link } from 'react-router-dom';
 import { logInUser } from '../../services/actions/user/actions';
 import { useDispatch } from 'react-redux';
-import { useForm } from '../../hooks/useForm';
+import { useForm } from '../../hooks/hooks';
 import { registerRoute, forgotPasswordRoute } from '../../utils/constants';
 
 function Login() {

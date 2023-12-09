@@ -3,7 +3,7 @@ import styles from "./register.module.css";
 import { Link } from 'react-router-dom';
 import { setUserRegistration } from '../../services/actions/user/actions';
 import { useDispatch } from 'react-redux';
-import { useForm } from '../../hooks/useForm';
+import { useForm } from '../../hooks/hooks';
 import { loginRoute } from '../../utils/constants';
 
 export default function Register() {

@@ -7,20 +7,24 @@ import CardOrder from "../../components/orders/card-order/card-order";
 import { useLocation, Link } from "react-router-dom";
 import { feedRoute } from "../../utils/constants";
 import { getFeedSelector } from "../../utils/constants";
+import { TOrder } from "../../services/types/data";
+import { ReactElement, FC } from "react";
 
-function Feed() {
+function Feed(): ReactElement {
     const dispatch = useDispatch();
     const location = useLocation();
     const ORDERS_ALL_URL = "wss://norma.nomoreparties.space/orders/all";
     useEffect(() => {
         dispatch(connect(ORDERS_ALL_URL));
         return () => {
-            dispatch(disconnect(ORDERS_ALL_URL));
+            dispatch(disconnect());
         }
     }, [dispatch]);
 
     // const getFeedSelector = store => store.feed
     const { isLoading, Error, orders } = useSelector(getFeedSelector);
+    console.log(orders);
+    
 
     return (
         <div className={styles.global}>
@@ -34,7 +38,7 @@ function Feed() {
                     {!isLoading &&
                         !Error &&
                         orders !== null &&
-                        orders.map((order) => (
+                        orders.map((order: TOrder) => (
                             <Link
                                 className={styles.link}
                                 key={order.number}

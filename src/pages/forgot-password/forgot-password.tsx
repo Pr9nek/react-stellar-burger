@@ -3,10 +3,11 @@ import styles from "./forgot-password.module.css";
 import { Link } from 'react-router-dom';
 import { resetPassword } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from '../../hooks/useForm';
+import { useForm } from '../../hooks/hooks';
 import { loginRoute } from '../../utils/constants';
+import { ReactElement } from 'react';
 
-function ForgotPassword() {
+function ForgotPassword(): ReactElement {
     const {values, handleChange} = useForm({email: ''});
     const navigate = useNavigate();
 

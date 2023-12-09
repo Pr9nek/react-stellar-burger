@@ -3,7 +3,7 @@ import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burg
 import styles from "./reset-password.module.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { getPassword } from '../../utils/api';
-import { useForm } from '../../hooks/useForm';
+import { useForm } from '../../hooks/hooks';
 import { homeRoute, loginRoute } from "../../utils/constants";
 
 export default function ResetPassword() {

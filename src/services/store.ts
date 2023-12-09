@@ -8,7 +8,8 @@ import { feedReducer } from './reducers/feed';
 import { currentOrderReducer } from './reducers/currentOrder';
 import { profileFeedReducer } from './reducers/profileFeed';
 import { socketMiddleware } from './middleware/socket-middleware';
-import { FEED_CONNECT, FEED_WS_CONNECTING, FEED_WS_ERROR, FEED_WS_OPEN, FEED_WS_CLOSE, FEED_WS_GET_FEED, FEED_DISCONNECT } from "./actions/feed/actions";
+import { TFeedActions } from './actions/feed/actions';
+import { FEED_CONNECT, FEED_WS_CONNECTING, FEED_WS_ERROR, FEED_WS_OPEN, FEED_WS_CLOSE, FEED_WS_GET_FEED, FEED_DISCONNECT } from "./constants/feed";
 import { ORDERS_CONNECT, ORDERS_WS_CONNECTING, ORDERS_WS_ERROR, ORDERS_WS_OPEN, ORDERS_WS_CLOSE, ORDERS_WS_GET_FEED, ORDERS_DISCONNECT } from "./actions/profileFeed/actions";
 
 const feedMiddleware = socketMiddleware({
