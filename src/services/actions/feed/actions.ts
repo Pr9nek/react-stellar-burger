@@ -13,6 +13,7 @@ export interface IFeedConnectingAction {
 }
 export interface IFeedErrorAction {
     readonly type: typeof FEED_WS_ERROR;
+    readonly payload: string;
 }
 export interface IFeedOpenAction {
     readonly type: typeof FEED_WS_OPEN;

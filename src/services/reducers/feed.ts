@@ -11,7 +11,7 @@ import { TFeedActions } from "../actions/feed/actions";
 type TFeedState = {
     isLoading: boolean;
     feedConnected: boolean;
-    error: null;
+    error: null | string;
     orders: TOrder[] | [];
     total: number | null;
     totalToday: number | null;

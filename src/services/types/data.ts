@@ -2,7 +2,7 @@ export type TOrder = {
     createdAt: string;
     ingredients: string[];
     name: string;
-    number: number;
+    number: number | string;
     status: string;
     updatedAt: string;
     _id: string;
@@ -31,7 +31,7 @@ export type TIngredient = {
     id?: string;
 };
 
-export type TInsredientsRequest = {
+export type TIngredientsRequest = {
     data: TIngredient[];
     success: boolean;
 }; 

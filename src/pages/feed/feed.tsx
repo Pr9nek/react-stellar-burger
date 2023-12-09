@@ -23,8 +23,6 @@ const Feed: FC = () => {
 
     // const getFeedSelector = store => store.feed
     const { isLoading, Error, orders } = useSelector(getFeedSelector);
-    console.log(orders);
-    
 
     return (
         <div className={styles.global}>
