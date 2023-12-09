@@ -10,10 +10,10 @@ import { getFeedSelector } from "../../utils/constants";
 import { TOrder } from "../../services/types/data";
 import { ReactElement, FC } from "react";
 
-function Feed(): ReactElement {
+const Feed: FC = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    const ORDERS_ALL_URL = "wss://norma.nomoreparties.space/orders/all";
+    const ORDERS_ALL_URL: string = "wss://norma.nomoreparties.space/orders/all";
     useEffect(() => {
         dispatch(connect(ORDERS_ALL_URL));
         return () => {

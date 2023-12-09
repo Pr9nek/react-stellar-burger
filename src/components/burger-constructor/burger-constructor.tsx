@@ -14,6 +14,7 @@ import { addBun, addIngredient, moveIngredient, resetConstructor } from '../../s
 import { clearOrder } from '../../services/actions/orderDetails/actions';
 import { useNavigate } from 'react-router-dom';
 import { loginRoute, getOrderDataOrderSelector, getBurgerConstructorStore, getUserSelector } from "../../utils/constants";
+import { TIngredient } from "../../services/types/data";
 
 export default function BurgerConstructor() {
     const burgerConstructor = useSelector(getBurgerConstructorStore);
@@ -31,19 +32,19 @@ export default function BurgerConstructor() {
     const { bun, ingredients } = burgerConstructor;
 
     const price = useMemo(() =>
-        bun ? ingredients.reduce((acc, i) => acc + i.price, 0) + bun.price * 2 : ingredients.reduce((acc, i) => acc + i.price, 0)
+        bun ? ingredients.reduce((acc: number, i: TIngredient) => acc + i.price, 0) + bun.price * 2 : ingredients.reduce((acc: number, i: TIngredient) => acc + i.price, 0)
         , [burgerConstructor]);
 
-    const ingredientIds = useMemo(() =>
-        ingredients.map((ingredient) => ingredient._id)
+    const ingredientIds: string[] = useMemo(() =>
+        ingredients.map((ingredient: TIngredient) => ingredient._id)
         , [burgerConstructor]);
 
-    const ids = useMemo(() =>
+    const ids: string[] | null = useMemo(() =>
         bun !== null && ingredients.length !== 0 ?
             [bun._id, ...ingredientIds, bun._id] : null
         , [burgerConstructor]);
 
-    const add = (item) => {
+    const add = (item: TIngredient) => {
         item.type === "bun" ?
             dispatch(addBun(item)) :
             dispatch(addIngredient(item))
@@ -51,7 +52,7 @@ export default function BurgerConstructor() {
 
     const [{ isHover }, dropTarget] = useDrop({
         accept: "ingredient",
-        drop(item) {
+        drop(item: {ingredient: TIngredient}) {
             add(item.ingredient);
         },
         collect: monitor => ({
@@ -59,7 +60,7 @@ export default function BurgerConstructor() {
         })
     });
 
-    const background = isHover ? { background: 'grey' } : { background: 'transparent' };
+    const background: {background: string} = isHover ? { background: 'grey' } : { background: 'transparent' };
 
     const moveIngredients = useCallback(
         (dragIndex, hoverIndex) => {
@@ -85,7 +86,7 @@ export default function BurgerConstructor() {
                 <ul className={`${StylesConstructor.lists} custom-scroll`}>
                     {ingredients.length !== 0 &&
 
-                        ingredients.map((ingredient, index) => (
+                        ingredients.map((ingredient: TIngredient, index: number) => (
                             <li className={StylesConstructor.lists_li} key={ingredient.id}>
                                 <ListItem name={ingredient.name} price={ingredient.price} image={ingredient.image} index={index} moveIngredient={moveIngredients} id={ingredient.id} />
                             </li>

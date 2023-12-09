@@ -5,9 +5,9 @@ import { resetPassword } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/hooks';
 import { loginRoute } from '../../utils/constants';
-import { ReactElement } from 'react';
+import { ReactElement, FC } from 'react';
 
-function ForgotPassword(): ReactElement {
+const ForgotPassword: FC = () => {
     const {values, handleChange} = useForm({email: ''});
     const navigate = useNavigate();
 
