@@ -3,15 +3,22 @@ import {
     ORDER__LOAD_SUCCESS,
     ORDER_ERROR,
     CLEAR_ORDER
-} from '../actions/orderDetails/actions';
+} from '../constants/orderDetails';
+import { TOrderDetailsActions } from '../actions/orderDetails/actions';
 
-const initialOrderState = {
+type TOrderState = {
+    readonly error: null | string;
+    readonly order: null | number;
+    readonly isLoading: boolean;
+};
+
+const initialOrderState: TOrderState = {
     error: null,
     order: null,
     isLoading: false
 }
 
-export const orderReducer = (state = initialOrderState, action) => {
+export const orderReducer = (state = initialOrderState, action: TOrderDetailsActions): TOrderState => {
     switch (action.type) {
         case ORDER_LOADING:
             return {

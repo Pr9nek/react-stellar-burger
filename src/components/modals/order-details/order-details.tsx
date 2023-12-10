@@ -2,16 +2,17 @@ import stylesOrder from "./order-details.module.css";
 import DoneIcon from "../../../images/done.png";
 import { useSelector } from 'react-redux';
 import { getOrderDataOrderSelector } from "../../../utils/constants";
+import { FC } from "react";
 
 
-export default function OrderDetails() {
-    
-    const order = useSelector(getOrderDataOrderSelector);
+const OrderDetails: FC = () => {
+
+    const order: number = useSelector(getOrderDataOrderSelector);
 
     return (
         <div className={`${stylesOrder.container} mt-4`}>
             {order === null ? "Соберите бургер" :
-            <p className="text text_type_digits-large"> {order}</p>}
+                <p className="text text_type_digits-large"> {order}</p>}
             <p className="text text_type_main-medium mt-8 mb-15">
                 идентификатор заказа
             </p>
@@ -26,3 +27,5 @@ export default function OrderDetails() {
         </div>
     )
 }
+
+export default OrderDetails;

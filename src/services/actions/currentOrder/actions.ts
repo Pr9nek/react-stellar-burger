@@ -18,14 +18,14 @@ export interface ISetErrorAction {
     readonly payload: string;
 }
 
-export function setCurrent(order: TOrder): ISetCurrentOrderAction {
+export function setCurrent(order: TOrder): ISetCurrentAction {
     return {
         type: SET_CURRENT_ORDER,
         payload: order
     }
 }
 
-export function clearCurrentOrder(): IClearCurrentOrderAction {
+export function clearCurrentOrder(): IClearCurrentAction {
     return {
         type: CLEAR_CURRENT_ORDER,
     }

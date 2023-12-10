@@ -11,8 +11,8 @@ import { TIngredient } from '../types/data';
 type TConstructorState = {
     bun: TIngredient | null;
     ingredients: TIngredient[] | [];
-
 };
+
 const initialConstructorState: TConstructorState = {
     bun: null,
     ingredients: []

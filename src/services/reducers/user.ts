@@ -15,9 +15,31 @@ import {
     USER_LOGOUT_SUCCESS,
     USER_LOGOUT_ERROR
 
-} from '../actions/user/actions';
+} from '../constants/user';
+import { TUserActions } from '../actions/user/actions';
+import { TUser } from '../types/data';
 
-const initialUserState = {
+type TUserState = {
+    isAuthChecked: boolean;
+    user: null | TUser;
+
+    registerUserRequest: boolean;
+    registerUserError: null | string;
+
+    loginUserRequest: boolean;
+    loginUserError: null | string;
+
+    getUserRequest: boolean;
+    getUserError: null | string;
+
+    updateUserRequest: boolean;
+    updateUserError: null | string;
+
+    logoutUserRequest: boolean;
+    logoutUserError: null | string;
+}
+
+const initialUserState: TUserState = {
     isAuthChecked: false,
     user: null,
 
@@ -37,7 +59,7 @@ const initialUserState = {
     logoutUserError: null,
 }
 
-export const userReducer = (state = initialUserState, action) => {
+export const userReducer = (state = initialUserState, action: TUserActions): TUserState => {
     switch (action.type) {
         case SET_AUTH_CHECKED:
             return {

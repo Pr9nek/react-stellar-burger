@@ -28,7 +28,6 @@ export interface IMoveIngredientAction {
 }
 export interface IResetConstructorAction {
     readonly type: typeof RESET_CONSTRUCTOR_INGREDIENTS;
-    readonly payload: { dragIndex: number, hoverIndex: number };
 }
 
 export type TBurgerConstructorActions = 

@@ -9,7 +9,7 @@ import Login from "../../pages/login/login";
 import Register from "../../pages/register/register";
 import ForgotPassword from "../../pages/forgot-password/forgot-password";
 import ResetPassword from "../../pages/reset-password/reset-password";
-import IngredientsDetails from "../modals/ingredient-details/ingredient-details";
+import IngredientDetails from "../modals/ingredient-details/ingredient-details";
 import Modal from "../modals/modal/modal";
 import { getIngredients } from '../../services/actions/ingredients/actions';
 import ProfilePage from "../../pages/profile-page/profile-page";
@@ -20,6 +20,7 @@ import Feed from "../../pages/feed/feed";
 import Orders from "../orders/orders";
 import OrderInfo from "../modals/order-info/order-info";
 import { getIngredientsSelector } from "../../utils/constants";
+import { TIngredient } from "../../services/types/data";
 import { homeRoute, feedRoute, feedDynamicOrderRoute, lostRoute, profileRoute, profileOrdersRoute, loginRoute, registerRoute, forgotPasswordRoute, resetPasswordRoute, dynamicIngredientRoute, profileDynamicOrderRoute } from "../../utils/constants";
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const background = location.state?.background;
-  const ingredients = useSelector(getIngredientsSelector);
+  const ingredients: TIngredient[] = useSelector(getIngredientsSelector);
 
   const token = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
@@ -66,7 +67,7 @@ function App() {
         <Route path={resetPasswordRoute} element={<OnlyUnAuth component={<ResetPassword />} />} />
         <Route path={dynamicIngredientRoute}
           element={ingredients?.length && (
-            <IngredientsDetails ingredients={ingredients} />
+            <IngredientDetails ingredients={ingredients} />
           )}
         />
       </Routes>
@@ -77,7 +78,7 @@ function App() {
             path={dynamicIngredientRoute}
             element={ingredients?.length && (
               <Modal onClose={handleModalClose} header="Детали ингредиента">
-                <IngredientsDetails ingredients={ingredients} />
+                <IngredientDetails ingredients={ingredients} />
               </Modal>
             )}
           />

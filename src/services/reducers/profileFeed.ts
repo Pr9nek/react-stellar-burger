@@ -4,9 +4,20 @@ import {
     ORDERS_WS_OPEN,
     ORDERS_WS_CLOSE,
     ORDERS_WS_GET_FEED
-} from "../actions/profileFeed/actions";
+} from "../constants/profileFeed";
+import { TProfileFeedActions } from "../actions/profileFeed/actions";
+import { TOrder } from "../types/data";
 
-const initialProfileFeedState = {
+type TProfileFeedState = {
+    isLoading: boolean;
+    feedConnected: boolean;
+    error: null | string;
+    orders: TOrder[];
+    total: null | number;
+    totalToday: null | number;
+}
+
+const initialProfileFeedState: TProfileFeedState = {
     isLoading: false,
     feedConnected: false,
     error: null,
@@ -15,7 +26,7 @@ const initialProfileFeedState = {
     totalToday: null
 }
 
-export const profileFeedReducer = (state = initialProfileFeedState, action) => {
+export const profileFeedReducer = (state = initialProfileFeedState, action: TProfileFeedActions): TProfileFeedState => {
     switch (action.type) {
         case ORDERS_WS_CONNECTING:
             return {

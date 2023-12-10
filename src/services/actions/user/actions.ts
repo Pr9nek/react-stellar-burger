@@ -6,34 +6,77 @@ import {
     patchUserRefresh
 } from '../../../utils/api';
 import { accessTokenString, refreshTokenString } from '../../../utils/constants';
+import { TUser } from '../../types/data';
+import { CHECK_USER_REGISTRATION, USER_REG_SUCCESS, USER_REG_FAILED, CHECK_USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILED, SET_AUTH_CHECKED, GET_USER, GET_USER_ERROR, CHEK_USER_LOGOUT, USER_LOGOUT_SUCCESS, USER_LOGOUT_ERROR } from '../../constants/user';
 
-export const CHECK_USER_REGISTRATION = 'CHECK_USER_REGISTRATION';
-export const USER_REG_SUCCESS = 'USER_REG_SUCCESS';
-export const USER_REG_FAILED = 'USER_REG_FAILED';
+export interface ICheckUserRegistration {
+    readonly type: typeof CHECK_USER_REGISTRATION;
+}
+export interface IRegistrationSuccess {
+    readonly type: typeof USER_REG_SUCCESS;
+    readonly payload: TUser;
+}
+export interface IRegistrationFailed {
+    readonly type: typeof USER_REG_FAILED;
+}
+export interface ICheckUserLogin {
+    readonly type: typeof CHECK_USER_LOGIN;
+}
+export interface ILoginSuccess {
+    readonly type: typeof USER_LOGIN_SUCCESS;
+    readonly payload: TUser;
+}
+export interface ILoginFailed {
+    readonly type: typeof USER_LOGIN_FAILED;
+}
+export interface ISetAuthChecked {
+    readonly type: typeof SET_AUTH_CHECKED;
+    readonly payload: boolean
+}
+export interface IGetUser {
+    readonly type: typeof GET_USER;
+    readonly payload: TUser;
+}
+export interface IGetUserError {
+    readonly type: typeof GET_USER_ERROR;
+    readonly payload: string
+}
+export interface ICheckUserLogout {
+    readonly type: typeof CHEK_USER_LOGOUT;
+}
+export interface ILogoutSuccess {
+    readonly type: typeof USER_LOGOUT_SUCCESS;
+}
+export interface ILogoutError{
+    readonly type: typeof USER_LOGOUT_ERROR;
+    readonly payload: string
+}
 
-export const CHECK_USER_LOGIN = 'CHECK_USER_LOGIN';
-export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
-export const USER_LOGIN_FAILED = 'USER_LOGIN_FAILED';
+export type TUserActions =
+| ICheckUserRegistration
+| IRegistrationSuccess
+| IRegistrationFailed
+| ICheckUserLogin
+| ILoginSuccess
+| ILoginFailed
+| ISetAuthChecked
+| IGetUser
+| IGetUserError
+| ICheckUserLogout
+| ILogoutSuccess
+| ILogoutError;
 
-export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
-export const GET_USER = "GET_USER";
-export const GET_USER_ERROR = "GET_USER_ERROR";
-
-export const CHEK_USER_LOGOUT = "CHEK_USER_LOGOUT";
-export const USER_LOGOUT_SUCCESS = "GEUSER_LOGOUT_SUCCESST_USER_ERROR";
-export const USER_LOGOUT_ERROR = "USER_LOGOUT_ERROR";
-
-export const setAuthChecked = (value) => ({
+export const setAuthChecked = (value: boolean): ISetAuthChecked => ({
     type: SET_AUTH_CHECKED,
     payload: value,
 });
 
-export const getUser = (user) => ({
+export const getUser = (user: null | TUser) => ({
     type: GET_USER,
     payload: user,
 });
 
-export const editUser = (name, email, password) => (dispatch) => {
+export const editUser = (name: string, email: string, password: string) => (dispatch) => {
     return patchUserRefresh(name, email, password)
         .then(res => {
             console.log(res);
@@ -60,29 +103,29 @@ export const checkUserAuth = () => (dispatch) => {
     //     payload: true,
     // });
     if (localStorage.getItem(accessTokenString)) {
-    return getUserRefresh()
-        .then(res => {
-            dispatch({
-                type: GET_USER,
-                payload: res.user,
-            });
-        })
-        .catch(error => {
-            dispatch({
-                type: GET_USER_ERROR,
-                payload: error.message
-            });
-            localStorage.removeItem(accessTokenString);
-            localStorage.removeItem(refreshTokenString);
-            dispatch(getUser(null));
-        })
-        .finally(() => dispatch(setAuthChecked(true)));
-        } else {
-            dispatch(setAuthChecked(true));
-        }
-    };
+        return getUserRefresh()
+            .then(res => {
+                dispatch({
+                    type: GET_USER,
+                    payload: res.user,
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: GET_USER_ERROR,
+                    payload: error.message
+                });
+                localStorage.removeItem(accessTokenString);
+                localStorage.removeItem(refreshTokenString);
+                dispatch(getUser(null));
+            })
+            .finally(() => dispatch(setAuthChecked(true)));
+    } else {
+        dispatch(setAuthChecked(true));
+    }
+};
 
-export const logInUser = (email, password) => (dispatch) => {
+export const logInUser = (email: string, password: string) => (dispatch) => {
     dispatch({
         type: CHECK_USER_LOGIN
     });
@@ -108,7 +151,7 @@ export const logInUser = (email, password) => (dispatch) => {
         });
 }
 
-export const logOutUser = (token) => (dispatch) => {
+export const logOutUser = (token: string) => (dispatch) => {
     dispatch({
         type: CHEK_USER_LOGOUT
     });
@@ -127,7 +170,7 @@ export const logOutUser = (token) => (dispatch) => {
         });
 };
 
-export const setUserRegistration = (email, password, name) => (dispatch) => {
+export const setUserRegistration = (email: string, password: string, name: string) => (dispatch) => {
     dispatch({
         type: CHECK_USER_REGISTRATION
     });

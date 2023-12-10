@@ -3,16 +3,25 @@ import {
     INGREDIENTS__LOAD_SUCCESS,
     INGREDIENTS_ERROR,
     SWITCHTAB
-} from '../actions/ingredients/actions';
+} from '../constants/ingredients';
+import { TIngredientsActions } from '../actions/ingredients/actions';
+import { TIngredient } from '../types/data';
 
-const initialState = {
+type TIngredientsState = {
+    isLoading: boolean;
+    error: null | string;
+    ingredients: null | TIngredient[];
+    currentTab: string;
+};
+
+const initialState: TIngredientsState = {
     isLoading: false,
     error: null,
     ingredients: null,
     currentTab: 'Булки'
 };
 
-export const ingredientsReducer = (state = initialState, action) => {
+export const ingredientsReducer = (state = initialState, action: TIngredientsActions): TIngredientsState => {
     switch (action.type) {
         case INGREDIENTS_LOADING:
             return {

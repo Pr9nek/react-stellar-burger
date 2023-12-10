@@ -10,7 +10,7 @@ import { profileFeedReducer } from './reducers/profileFeed';
 import { socketMiddleware } from './middleware/socket-middleware';
 import { TFeedActions } from './actions/feed/actions';
 import { FEED_CONNECT, FEED_WS_CONNECTING, FEED_WS_ERROR, FEED_WS_OPEN, FEED_WS_CLOSE, FEED_WS_GET_FEED, FEED_DISCONNECT } from "./constants/feed";
-import { ORDERS_CONNECT, ORDERS_WS_CONNECTING, ORDERS_WS_ERROR, ORDERS_WS_OPEN, ORDERS_WS_CLOSE, ORDERS_WS_GET_FEED, ORDERS_DISCONNECT } from "./actions/profileFeed/actions";
+import { ORDERS_CONNECT, ORDERS_WS_CONNECTING, ORDERS_WS_ERROR, ORDERS_WS_OPEN, ORDERS_WS_CLOSE, ORDERS_WS_GET_FEED, ORDERS_DISCONNECT } from "./constants/profileFeed";
 
 const feedMiddleware = socketMiddleware({
   wsConnect: FEED_CONNECT,

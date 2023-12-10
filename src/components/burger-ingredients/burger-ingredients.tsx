@@ -5,8 +5,10 @@ import { useMemo, useRef } from "react";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import {switchTab} from '../../services/actions/ingredients/actions';
 import { getIngredientsSelector } from "../../utils/constants";
+import { TIngredient } from "../../services/types/data";
+import { FC } from "react";
 
-export default function BurgerIngredients() {
+ const BurgerIngredients: FC = () => {
     const dispatch = useDispatch();
     const getCurrentTabSelector = store => store.ingredients.currentTab;
     const currentTab = useSelector(getCurrentTabSelector);
@@ -38,9 +40,9 @@ export default function BurgerIngredients() {
         }
     };
 
-    const buns = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
-    const mains = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
-    const sauces = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
+    const buns: TIngredient[] = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
+    const mains: TIngredient[] = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
+    const sauces: TIngredient[] = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
 
     return (
         <>
@@ -84,3 +86,5 @@ export default function BurgerIngredients() {
         </>
     )
 }
+
+export default BurgerIngredients;

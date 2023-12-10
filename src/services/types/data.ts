@@ -35,3 +35,8 @@ export type TIngredientsRequest = {
     data: TIngredient[];
     success: boolean;
 }; 
+
+export type TUser = {
+    email: string;
+    name: string;
+}
