@@ -1,6 +1,7 @@
 import { getOrderWithNumber } from "../../../utils/api";
 import { SET_CURRENT_ORDER, CLEAR_CURRENT_ORDER, SET_CURRENT_ORDER_ERROR } from "../../constants/currentOrder";
 import { TOrder } from "../../types/data";
+import { AppThunk } from "../../types";
 
 // export const SET_CURRENT_ORDER= 'SET_CURRENT_INGREDIENT';
 // export const CLEAR_CURRENT_ORDER= 'CLEAR_CURRENT_INGREDIENT';
@@ -36,7 +37,7 @@ export type TCurrentOrderActions =
 | IClearCurrentAction
 | ISetErrorAction;
 
-export const setCurrentOrder = (number) => (dispatch) => {
+export const setCurrentOrder: AppThunk = (number) => (dispatch) => {
     return getOrderWithNumber(number)
         .then (res => {
             dispatch(setCurrent(res))

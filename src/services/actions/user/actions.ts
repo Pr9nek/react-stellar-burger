@@ -8,6 +8,7 @@ import {
 import { accessTokenString, refreshTokenString } from '../../../utils/constants';
 import { TUser } from '../../types/data';
 import { CHECK_USER_REGISTRATION, USER_REG_SUCCESS, USER_REG_FAILED, CHECK_USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILED, SET_AUTH_CHECKED, GET_USER, GET_USER_ERROR, CHEK_USER_LOGOUT, USER_LOGOUT_SUCCESS, USER_LOGOUT_ERROR } from '../../constants/user';
+import { AppThunk } from '../../types';
 
 export interface ICheckUserRegistration {
     readonly type: typeof CHECK_USER_REGISTRATION;
@@ -31,11 +32,11 @@ export interface ILoginFailed {
 }
 export interface ISetAuthChecked {
     readonly type: typeof SET_AUTH_CHECKED;
-    readonly payload: boolean
+    readonly payload: boolean;
 }
 export interface IGetUser {
     readonly type: typeof GET_USER;
-    readonly payload: TUser;
+    readonly payload: TUser | null;
 }
 export interface IGetUserError {
     readonly type: typeof GET_USER_ERROR;
@@ -71,12 +72,12 @@ export const setAuthChecked = (value: boolean): ISetAuthChecked => ({
     payload: value,
 });
 
-export const getUser = (user: null | TUser) => ({
+export const getUser = (user: null | TUser): IGetUser => ({
     type: GET_USER,
     payload: user,
 });
 
-export const editUser = (name: string, email: string, password: string) => (dispatch) => {
+export const editUser: AppThunk = (name: string, email: string, password: string) => (dispatch) => {
     return patchUserRefresh(name, email, password)
         .then(res => {
             console.log(res);
@@ -97,11 +98,7 @@ export const editUser = (name: string, email: string, password: string) => (disp
         }));
 };
 
-export const checkUserAuth = () => (dispatch) => {
-    // dispatch({
-    //     type: SET_AUTH_CHECKED,
-    //     payload: true,
-    // });
+export const checkUserAuth: AppThunk = () => (dispatch: any) => {
     if (localStorage.getItem(accessTokenString)) {
         return getUserRefresh()
             .then(res => {
@@ -125,7 +122,7 @@ export const checkUserAuth = () => (dispatch) => {
     }
 };
 
-export const logInUser = (email: string, password: string) => (dispatch) => {
+export const logInUser: AppThunk = (email: string, password: string) => (dispatch) => {
     dispatch({
         type: CHECK_USER_LOGIN
     });
@@ -151,7 +148,7 @@ export const logInUser = (email: string, password: string) => (dispatch) => {
         });
 }
 
-export const logOutUser = (token: string) => (dispatch) => {
+export const logOutUser: AppThunk = (token: string) => (dispatch) => {
     dispatch({
         type: CHEK_USER_LOGOUT
     });
@@ -170,7 +167,7 @@ export const logOutUser = (token: string) => (dispatch) => {
         });
 };
 
-export const setUserRegistration = (email: string, password: string, name: string) => (dispatch) => {
+export const setUserRegistration: AppThunk = (email: string, password: string, name: string) => (dispatch) => {
     dispatch({
         type: CHECK_USER_REGISTRATION
     });

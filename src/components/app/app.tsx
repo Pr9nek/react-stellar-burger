@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks/hooks';
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import styles from "./app.module.css";
 import AppHeader from "../app-header/app-header";
@@ -26,10 +26,12 @@ import { homeRoute, feedRoute, feedDynamicOrderRoute, lostRoute, profileRoute, p
 function App() {
 
   const location = useLocation();
+  console.log(location);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const background = location.state?.background;
-  const ingredients: TIngredient[] = useSelector(getIngredientsSelector);
+  const ingredients = useSelector(store => store.ingredients.ingredients);
 
   const token = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
@@ -67,7 +69,7 @@ function App() {
         <Route path={resetPasswordRoute} element={<OnlyUnAuth component={<ResetPassword />} />} />
         <Route path={dynamicIngredientRoute}
           element={ingredients?.length && (
-            <IngredientDetails ingredients={ingredients} />
+            <IngredientDetails />
           )}
         />
       </Routes>
@@ -78,7 +80,7 @@ function App() {
             path={dynamicIngredientRoute}
             element={ingredients?.length && (
               <Modal onClose={handleModalClose} header="Детали ингредиента">
-                <IngredientDetails ingredients={ingredients} />
+                <IngredientDetails />
               </Modal>
             )}
           />

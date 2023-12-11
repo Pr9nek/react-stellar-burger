@@ -1,8 +1,11 @@
 import { checkUserAuth } from "../actions/user/actions";
+import { AnyAction, Middleware, MiddlewareAPI } from "redux";
+import { TwsActions } from "../types";
 
-export const socketMiddleware = (wsActions) => {
-    return store => {
-        let socket = null;
+
+export const socketMiddleware = (wsActions: TwsActions): Middleware => {
+    return (store: MiddlewareAPI) => {
+        let socket: WebSocket | null = null;
         let isConnected = false;
         let reconnectTimer = 0;
 
@@ -41,7 +44,7 @@ export const socketMiddleware = (wsActions) => {
                     const parsedData = JSON.parse(data);
                     if (parsedData.message === "Invalid or missing token")
                     {
-                        dispatch (checkUserAuth());
+                        dispatch(checkUserAuth() as unknown as AnyAction);
                         dispatch({type: wsConnect});
                     }
                     else {

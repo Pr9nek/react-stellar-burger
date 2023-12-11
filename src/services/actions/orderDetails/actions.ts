@@ -2,6 +2,7 @@ import {makeOrder} from '../../../utils/api';
 import { makeOrderRefresh } from '../../../utils/api';
 import { resetConstructor } from '../burgerConstructor/actions';
 import { ORDER_LOADING, ORDER__LOAD_SUCCESS, ORDER_ERROR, CLEAR_ORDER } from '../../constants/orderDetails';
+import { AppThunk } from '../../types';
 
 export interface IOrderLoading {
     readonly type: typeof ORDER_LOADING;
@@ -30,7 +31,7 @@ export function clearOrder(): IClearOrder {
     }
 }
 
-export const getOrder = (IDs: string[]) => (dispatch) => {
+export const getOrder: AppThunk = (IDs: string[]) => (dispatch) => {
     dispatch({
         type: ORDER_LOADING
     });

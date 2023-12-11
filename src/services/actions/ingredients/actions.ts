@@ -3,6 +3,7 @@ import {
 } from '../../../utils/api';
 import { INGREDIENTS_LOADING, INGREDIENTS__LOAD_SUCCESS, INGREDIENTS_ERROR, SWITCHTAB } from '../../constants/ingredients';
 import { TIngredient } from '../../types/data';
+import { AppThunk } from '../../types';
 
 export interface IIngredientsLoading {
     readonly type: typeof INGREDIENTS_LOADING;
@@ -35,7 +36,7 @@ export function switchTab (tab: string): ISwitchTab {
     }
 }
 
-export const getIngredients = (payload) => (dispatch) => {
+export const getIngredients: AppThunk = () => (dispatch) => {
 
     dispatch({
         type: INGREDIENTS_LOADING
