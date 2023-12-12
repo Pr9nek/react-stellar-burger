@@ -12,6 +12,8 @@ import { TProfileFeedActions } from "../actions/profileFeed/actions";
 import { TUserActions } from "../actions/user/actions";
 import { FEED_CONNECT, FEED_WS_CONNECTING, FEED_WS_ERROR, FEED_WS_OPEN, FEED_WS_CLOSE, FEED_WS_GET_FEED, FEED_DISCONNECT } from "../constants/feed";
 import { ORDERS_CONNECT, ORDERS_WS_CONNECTING, ORDERS_WS_ERROR, ORDERS_WS_OPEN, ORDERS_WS_CLOSE, ORDERS_WS_GET_FEED, ORDERS_DISCONNECT } from "../constants/profileFeed";
+import { ReactNode } from "react";
+import { TOrder } from "./data";
 
 export type RootState = ReturnType<typeof store.getState>;
 export type TAppActions =
@@ -35,4 +37,29 @@ export type TwsActions = {
     onError: string | typeof FEED_WS_ERROR | typeof ORDERS_WS_ERROR;
     onMessage: string | typeof FEED_WS_GET_FEED | typeof ORDERS_WS_GET_FEED;
     wsSendMessage?: string
+}
+
+export interface IModal {
+    onClose: () => void;
+    header?: string;
+    children: ReactNode;
+}
+
+export type TDragItem = {
+    index: number;
+};
+
+export interface IListItem {
+    name: string; 
+    price: number; 
+    index: number; 
+    moveIngredient: (dragIndex: number, hoverIndex: number) => void;
+    id?: string;
+    image: string;
+}
+export interface ICardIngredient {
+    ingredient: TIngredient;
+}
+export interface ICardOrder {
+    order: TOrder;
 }

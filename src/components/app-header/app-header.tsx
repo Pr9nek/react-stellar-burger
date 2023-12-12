@@ -5,8 +5,9 @@ import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink, useLocation } from 'react-router-dom';
 import { homeRoute, feedRoute, profileRoute } from "../../utils/constants";
+import { FC } from "react";
 
-export default function AppHeader() {
+ const AppHeader: FC = () => {
     const location = useLocation();
 
     return (
@@ -61,3 +62,5 @@ export default function AppHeader() {
         </header>
     )
 }
+
+export default AppHeader;

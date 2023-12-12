@@ -7,7 +7,7 @@ import { FC } from "react";
 
 const OrderDetails: FC = () => {
 
-    const order: number = useSelector(getOrderDataOrderSelector);
+    const order: number | null= useSelector(getOrderDataOrderSelector);
 
     return (
         <div className={`${stylesOrder.container} mt-4`}>

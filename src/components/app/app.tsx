@@ -26,12 +26,10 @@ import { homeRoute, feedRoute, feedDynamicOrderRoute, lostRoute, profileRoute, p
 function App() {
 
   const location = useLocation();
-  console.log(location);
-  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const background = location.state?.background;
-  const ingredients = useSelector(store => store.ingredients.ingredients);
+  const ingredients = useSelector(getIngredientsSelector);
 
   const token = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');

@@ -4,22 +4,23 @@ import StylesIngrediets from "./burger-ingredients.module.css";
 import { useMemo, useRef } from "react";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import {switchTab} from '../../services/actions/ingredients/actions';
-import { getIngredientsSelector } from "../../utils/constants";
+import { getIngredientsSelector, getCurrentTabSelector } from "../../utils/constants";
 import { TIngredient } from "../../services/types/data";
 import { FC } from "react";
 
  const BurgerIngredients: FC = () => {
     const dispatch = useDispatch();
-    const getCurrentTabSelector = store => store.ingredients.currentTab;
+    
     const currentTab = useSelector(getCurrentTabSelector);
     const ingredients = useSelector(getIngredientsSelector);
 
-    const bunsRef = useRef(null);
-    const saucesRef = useRef(null);
-    const mainsRef = useRef(null);
-    const tabsRef = useRef(null);
+    const bunsRef = useRef<HTMLParagraphElement>(null);
+    const saucesRef = useRef<HTMLParagraphElement>(null);
+    const mainsRef = useRef<HTMLParagraphElement>(null);
+    const tabsRef = useRef<HTMLDivElement>(null);
 
     const handleScrollGroups = () => {
+
         const tabsBottom = tabsRef.current?.getBoundingClientRect().bottom;
         const bunsTop = bunsRef.current?.getBoundingClientRect().top;
         const mainsTop = mainsRef.current?.getBoundingClientRect().top;

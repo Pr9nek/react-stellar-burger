@@ -2,13 +2,14 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import CardStyle from "./card.module.css";
 import { useLocation, Link } from "react-router-dom";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import { cardPropType } from "../../../utils/prop-types";
 import { useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { ingredientsRoute } from "../../../utils/constants";
-// import { setCurrent } from '../../../services/actions/details/actions';
-export default function Card({ ingredient }) {
+import { getBurgerConstructorSelector } from "../../../utils/constants";
+import { ICardIngredient } from "../../../services/types";
+
+const Card: FC<ICardIngredient> = ({ ingredient }) => {
     const location = useLocation();
     const id = ingredient['_id'];
 
@@ -22,7 +23,6 @@ export default function Card({ ingredient }) {
         })
     });
 
-    const getBurgerConstructorSelector = store => store.burgerConstructor;
     const constructorItems = useSelector(getBurgerConstructorSelector);
     const { bun, ingredients } = constructorItems;
 
@@ -50,10 +50,10 @@ export default function Card({ ingredient }) {
                         <CurrencyIcon type="primary" />
                     </div>
                     <p className={`text text_type_main-default pb-6 ${CardStyle.name}`}>{ingredient.name}</p>
-                    {counter() > 0 && <Counter count={counter()} size="default" extraClass="m-1" className={CardStyle.counter} />}
+                    {counter() > 0 && <Counter count={counter()} size="default" extraClass="m-1" />}
                 </Link>}
         </>
     )
 }
 
-Card.propTypes = cardPropType;
+export default Card;

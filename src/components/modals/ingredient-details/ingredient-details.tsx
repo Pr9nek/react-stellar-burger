@@ -1,5 +1,5 @@
 import stylesDetails from "./ingredient-details.module.css";
-// import { useSelector } from 'react-redux';
+import { getIngredientsSelector } from "../../../utils/constants";
 import { useParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FC } from "react";
@@ -7,12 +7,11 @@ import { TIngredient } from "../../../services/types/data";
 
 const IngredientDetails: FC = () => {
     const { id } = useParams();
-    const ingredients = useSelector(store => store.ingredients.ingredients);
+    const ingredients = useSelector(getIngredientsSelector);
     const ingredient = ingredients.find((item: TIngredient) => item._id === id);
     const location = useLocation();
-
+    if (!ingredient) {return null};
     return (
-        ingredient &&
         <div className={stylesDetails.container}>
             {location.state === null && (<p className={`${stylesDetails.header} text text_type_main-large`}>
                 Детали ингредиента

@@ -8,7 +8,7 @@ import { TOrderDetailsActions } from '../actions/orderDetails/actions';
 
 type TOrderState = {
     readonly error: null | string;
-    readonly order: null | number;
+    readonly order: number | null;
     readonly isLoading: boolean;
 };
 

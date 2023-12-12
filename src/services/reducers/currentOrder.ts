@@ -7,11 +7,11 @@ import { TOrder } from "../types/data";
 import { TCurrentOrderActions } from "../actions/currentOrder/actions";
 
 type TOrderState = {
-    current: TOrder | null;
+    orders: [TOrder] | null;
     error: string | null;
 }
 const initialOrderState: TOrderState = {
-    current: null,
+    orders: null,
     error: null
 }
 
@@ -20,12 +20,12 @@ export const currentOrderReducer = (state = initialOrderState, action: TCurrentO
         case SET_CURRENT_ORDER:
             return {
                 ...state,
-                current: action.payload
+                orders: [action.payload]
             };
         case CLEAR_CURRENT_ORDER:
             return {
                 ...state,
-                current: null
+                orders: null
             };
         case SET_CURRENT_ORDER_ERROR:
             return {

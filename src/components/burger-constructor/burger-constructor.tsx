@@ -15,10 +15,10 @@ import { clearOrder } from '../../services/actions/orderDetails/actions';
 import { useNavigate } from 'react-router-dom';
 import { loginRoute, getOrderDataOrderSelector, getBurgerConstructorStore, getUserSelector } from "../../utils/constants";
 import { TIngredient } from "../../services/types/data";
+import { getOrderDataIsLoadingSelector } from "../../utils/constants";
 
 export default function BurgerConstructor() {
     const burgerConstructor = useSelector(getBurgerConstructorStore);
-    const getOrderDataIsLoadingSelector = store => store.orderData.isLoading
     const currentOrder = useSelector(getOrderDataOrderSelector);
     const isLoading = useSelector(getOrderDataIsLoadingSelector);
     const dispatch = useDispatch();
@@ -31,18 +31,18 @@ export default function BurgerConstructor() {
 
     const { bun, ingredients } = burgerConstructor;
 
-    const price = useMemo(() =>
-        bun ? ingredients.reduce((acc: number, i: TIngredient) => acc + i.price, 0) + bun.price * 2 : ingredients.reduce((acc: number, i: TIngredient) => acc + i.price, 0)
-        , [burgerConstructor]);
+    const price = useMemo<number>(() =>
+        bun && ingredients ? ingredients.reduce((acc: number, i: TIngredient) => acc + i.price, 0) + bun.price * 2 : ingredients.reduce((acc: number, i: TIngredient) => acc + i.price, 0)
+        , [bun, ingredients]);
 
     const ingredientIds: string[] = useMemo(() =>
         ingredients.map((ingredient: TIngredient) => ingredient._id)
-        , [burgerConstructor]);
+        , [ingredients]);
 
     const ids: string[] | null = useMemo(() =>
         bun !== null && ingredients.length !== 0 ?
             [bun._id, ...ingredientIds, bun._id] : null
-        , [burgerConstructor]);
+        , [bun, ingredients, ingredientIds]);
 
     const add = (item: TIngredient) => {
         item.type === "bun" ?
@@ -63,9 +63,9 @@ export default function BurgerConstructor() {
     const background: {background: string} = isHover ? { background: 'grey' } : { background: 'transparent' };
 
     const moveIngredients = useCallback(
-        (dragIndex, hoverIndex) => {
+        (dragIndex: number, hoverIndex: number) => {
             dispatch(moveIngredient(dragIndex, hoverIndex))
-        }, [ingredients])
+        }, [dispatch])
 
 
     return (
@@ -130,7 +130,7 @@ export default function BurgerConstructor() {
             </div>
             {currentOrder && 
                 <Modal onClose={CloseModal}>
-                    <OrderDetails price={price} />
+                    <OrderDetails />
                 </Modal>
             }
         </>

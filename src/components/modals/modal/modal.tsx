@@ -3,13 +3,14 @@ import { useEffect } from "react";
 import StylesModal from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
-import { modalPropType } from "../../../utils/prop-types";
+import { FC } from "react";
+import { IModal } from "../../../services/types";
 
-export default function Modal({ onClose, header, children }) {
-    const modalRoot = document.getElementById("react-modals");
+ const Modal: FC<IModal> = ({ onClose, header, children }) => {
+    const modalRoot = document.getElementById("react-modals") as HTMLElement;
 
     useEffect(() => {
-        const closeWithEsc = (e) => {
+        const closeWithEsc = (e: KeyboardEvent) => {
             if (e.key === "Escape") {
                 onClose();
             }
@@ -40,4 +41,4 @@ export default function Modal({ onClose, header, children }) {
     );
 }
 
-Modal.propTypes = modalPropType;
+export default Modal

@@ -8,15 +8,15 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getIngredientsSelector } from "../../../utils/constants";
 import { TOrder, TIngredient } from "../../../services/types/data";
-
+import { RootState } from "../../../services/types";
 
 export default function OrderInfo() {
     const dispatch = useDispatch();
-    const { number } = useParams<string>();
+    const { number } = useParams();
     const location = useLocation();
 
     const background = location.state?.background;
-    const findOrder = store => {
+    const findOrder = (store: RootState) => {
         let order;
         order = store.feed.orders?.find((order: TOrder) => order.number == number);
         if (order) {
@@ -26,30 +26,28 @@ export default function OrderInfo() {
         if (order) {
             return order;
         }
-
-        order = store.currentOrder.current?.orders.find((order: TOrder) => order.number == number);
+        if (store.currentOrder.orders) {
+        order = store.currentOrder.orders?.find((order) => order.number == number);
         if (order) {
             return order;
-        }
+        }}
     };  
-
+   
     const order = useSelector(findOrder);
     const ingredients = useSelector(getIngredientsSelector);
 
-    const orderIngredients: TIngredient[] = useMemo(() =>
+    const orderIngredients = useMemo(() =>
         order?.ingredients.map((ingredientId: string) =>
-            ingredients?.find((ingredient: TIngredient) =>
+            ingredients.find((ingredient: TIngredient) =>
                 ingredientId === ingredient._id
             ))
-        , [order?.ingredients, ingredients]);
-
+        , [ingredients, order]) as TIngredient[];
 
     useEffect(() => {
         if (!order) {
             dispatch(setCurrentOrder(number))
         }
     }, []);
-
 
     const multiply = (ingredient: TIngredient) => {
         let res = orderIngredients?.filter((x) => x._id === ingredient._id);
@@ -58,7 +56,6 @@ export default function OrderInfo() {
 
     const getUnique = (arr: TIngredient[] ) => 
         arr?.filter((el, ind) => ind === arr.indexOf(el));
-    
 
     const uniqueOrderIngredients = getUnique(orderIngredients);
 
@@ -69,7 +66,6 @@ export default function OrderInfo() {
     if (!order) {
         return null;
     }
-
 
     return (
         <div className={background ? styles.container : styles.page}>

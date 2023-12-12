@@ -5,11 +5,13 @@ import { useSelector } from 'react-redux';
 import { useMemo } from "react";
 import { useMatch } from "react-router-dom";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
-import { cardPrderPropType } from "../../../utils/prop-types";
 import { getIngredientsSelector } from "../../../utils/constants";
 import { profileRoute, profileOrdersRoute } from "../../../utils/constants";
+import { ICardOrder } from "../../../services/types";
+import { FC } from "react";
 
-export default function CardOrder({ order }) {
+
+const CardOrder: FC<ICardOrder> = ({ order }) => {
     const ingredients = useSelector(getIngredientsSelector);
     const isProfileInfo = useMatch(`${profileRoute}/${profileOrdersRoute}`);
     const orderIngredients = useMemo(() =>
@@ -33,7 +35,7 @@ export default function CardOrder({ order }) {
 
     const orderPrice = () => {
         return orderIngredients?.reduce((acc, i) =>
-            acc + i.price, 0);
+            acc + i!.price, 0);
         } 
 
     return (
@@ -66,7 +68,7 @@ export default function CardOrder({ order }) {
                             if (index < 6) {
                                 return (
                                     <div className={styles.imgbox} key={uuidv4()}>
-                                        <img alt={ingredient.name} src={ingredient.image} className={styles.picture} />
+                                        <img alt={ingredient!.name} src={ingredient!.image} className={styles.picture} />
                                         {index === 5 && sliced !== 0 && (<div className={styles.counter}><p className="text text_type_digits-default">{`+${sliced}`}</p></div>
                                         )}
                                     </div>
@@ -85,4 +87,4 @@ export default function CardOrder({ order }) {
     )
 }
 
-CardOrder.propTypes = cardPrderPropType;
+export default CardOrder;

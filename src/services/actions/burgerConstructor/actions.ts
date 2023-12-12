@@ -37,7 +37,7 @@ export type TBurgerConstructorActions =
     | IMoveIngredientAction
     | IResetConstructorAction;
 
-export function deleteItem(id: string): IDeleteIngredientAction {
+export function deleteItem(id): IDeleteIngredientAction {
     return {
         type: DELETE_INGREDIENT_FROM_CONSTRUCTOR,
         payload: id,

@@ -1,11 +1,13 @@
-import { store } from "../services/store";
 import { RootState } from "../services/types";
 
-export const getIngredientsSelector = store => store.ingredients.ingredients;
-export const getUserSelector = store => store.user.user;
-export const getBurgerConstructorStore = store => store.burgerConstructor;
-export const getFeedSelector = store => store.feed;
-export const getOrderDataOrderSelector = store => store.orderData.order;
+export const getIngredientsSelector = (store: RootState) => store.ingredients.ingredients;
+export const getUserSelector = (store: RootState) => store.user.user;
+export const getBurgerConstructorStore = (store: RootState) => store.burgerConstructor;
+export const getFeedSelector = (store: RootState) => store.feed;
+export const getOrderDataOrderSelector = (store: RootState) => store.orderData.order;
+export const getOrderDataIsLoadingSelector = (store: RootState) => store.orderData.isLoading;
+export const getCurrentTabSelector = (store: RootState)  => store.ingredients.currentTab;
+export const getBurgerConstructorSelector = (store: RootState) => store.burgerConstructor;
 
 export const homeRoute: string = "/";
 export const feedRoute: string = "/feed";
