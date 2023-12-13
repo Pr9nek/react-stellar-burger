@@ -39,4 +39,8 @@ export type TIngredientsRequest = {
 export type TUser = {
     email: string;
     name: string;
-}
+};
+
+export type TRefreshOption = {
+    headers: { Authorization: string };
+};

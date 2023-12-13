@@ -150,11 +150,11 @@ export const logInUser: AppThunk = (email: string, password: string) => (dispatc
         });
 }
 
-export const logOutUser: AppThunk = (token: string) => (dispatch) => {
+export const logOutUser: AppThunk = () => (dispatch) => {
     dispatch({
         type: CHEK_USER_LOGOUT
     });
-    return logOut(token)
+    return logOut()
         .then(res => {
             dispatch({
                 type: USER_LOGOUT_SUCCESS

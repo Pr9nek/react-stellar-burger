@@ -1,17 +1,18 @@
 import { profileOrdersRoute, loginRoute, registerRoute, ingredientsRoute, accessTokenString, refreshTokenString } from "./constants";
+import { TRefreshOption } from "../services/types/data";
 
 const Api = "https://norma.nomoreparties.space/api";
 
-function onResponse(res) {
+function onResponse(res: Response): Promise<any> {
     return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
-function request(url, options) {
+function request(url: string, options?: RequestInit) {
     // принимает два аргумента: урл и объект опций, как и `fetch`
     return fetch(url, options).then(onResponse);
 }
 
-export const getOrderWithNumber = (number) => {
+export const getOrderWithNumber = (number: string) => {
     return request(`${Api}/${profileOrdersRoute}/${number}`);
 };
 
@@ -19,7 +20,7 @@ export const getData = () => {
     return request(`${Api}${ingredientsRoute}`);
 };
 
-export const setRegistration = (email, password, name) => {
+export const setRegistration = (email: string, password: string, name: string) => {
     return request(`${Api}/auth${registerRoute}`, {
         method: 'POST',
         headers: {
@@ -33,7 +34,7 @@ export const setRegistration = (email, password, name) => {
     })
 }
 
-export const logIn = (email, password) => {
+export const logIn = (email: string, password: string) => {
     return request(`${Api}/auth${loginRoute}`, {
         method: 'POST',
         headers: {
@@ -46,7 +47,7 @@ export const logIn = (email, password) => {
     })
 }
 
-export const logOut = (token) => {
+export const logOut = () => {
     return request(`${Api}/auth/logout`, {
         method: "POST",
         headers: {
@@ -62,7 +63,7 @@ export const logOut = (token) => {
     });
 };
 
-export const resetPassword = (email) => {
+export const resetPassword = (email: string) => {
     return request(`${Api}/password-reset`, {
         method: "POST",
         headers: {
@@ -76,7 +77,7 @@ export const resetPassword = (email) => {
     });
 };
 
-export const getPassword = (newPassword, token) => {
+export const getPassword = (newPassword: string, token: string) => {
     return request(`${Api}/password-reset/reset`, {
         method: "POST",
         headers: {
@@ -104,10 +105,10 @@ export const refreshToken = () => {
 };
 
 
-export const fetchWithRefresh = async (url, options) => {
+export const fetchWithRefresh = async (url: string, options: RequestInit & TRefreshOption) => {
     try {
         return await request(url, options);
-    } catch (err) {
+    } catch (err: any) {
         console.log(err.message);
         if (err.message === "jwt expired") {
             const refreshData = await refreshToken(); //обновляем токен
@@ -131,16 +132,16 @@ export const getUserRefresh = () => fetchWithRefresh(`${Api}/auth/user`, {
     method: 'GET',
     headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem(accessTokenString)
+        Authorization: localStorage.getItem(accessTokenString) as string
     }
 });
 
 
-export const patchUserRefresh = (name, email, password) => fetchWithRefresh(`${Api}/auth/user`, {
+export const patchUserRefresh = (name: string, email: string, password: string) => fetchWithRefresh(`${Api}/auth/user`, {
     method: 'PATCH',
     headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem(accessTokenString)
+        Authorization: localStorage.getItem(accessTokenString) as string
     },
     body: JSON.stringify({
         "name": name,
@@ -149,7 +150,7 @@ export const patchUserRefresh = (name, email, password) => fetchWithRefresh(`${A
     })
 });
 
-export const makeOrder = (IDs) => {
+export const makeOrder = (IDs: string[]) => {
     return request(`${Api}/${profileOrdersRoute}`, {
         method: 'POST',
         headers: {
@@ -161,12 +162,12 @@ export const makeOrder = (IDs) => {
     })
 }
 
-export const makeOrderRefresh = (IDs) => fetchWithRefresh(
+export const makeOrderRefresh = (IDs: string[]) => fetchWithRefresh(
     `${Api}/${profileOrdersRoute}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            Authorization: localStorage.getItem(accessTokenString)
+            Authorization: localStorage.getItem(accessTokenString) as string
         },
         body: JSON.stringify({
             ingredients: IDs
