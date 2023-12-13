@@ -40,7 +40,7 @@ export type TCurrentOrderActions =
 export const setCurrentOrder: AppThunk = (number) => (dispatch) => {
     return getOrderWithNumber(number)
         .then (res => {
-            dispatch(setCurrent(res))
+            dispatch(setCurrent(res.orders))
         })
         .catch(error => {
             dispatch({

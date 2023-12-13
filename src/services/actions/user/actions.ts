@@ -100,7 +100,7 @@ export const editUser: AppThunk = (name: string, email: string, password: string
         }));
 };
 
-export const checkUserAuth: AppThunk = () => (dispatch: any) => {
+export const checkUserAuth: AppThunk = () => (dispatch) => {
     if (localStorage.getItem(accessTokenString)) {
         return getUserRefresh()
             .then(res => {

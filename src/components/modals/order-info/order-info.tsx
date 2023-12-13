@@ -76,6 +76,7 @@ export default function OrderInfo() {
             dispatch(setCurrentOrder(number));
         }
     }, []);
+    // console.log(current);
     
     
     console.log(feed);

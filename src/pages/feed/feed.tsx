@@ -8,7 +8,7 @@ import { useLocation, Link } from "react-router-dom";
 import { feedRoute } from "../../utils/constants";
 import { getFeedSelector } from "../../utils/constants";
 import { TOrder } from "../../services/types/data";
-import { ReactElement, FC } from "react";
+import { FC } from "react";
 
 const Feed: FC = () => {
     const dispatch = useDispatch();

@@ -1,27 +1,27 @@
 import { profileOrdersRoute, loginRoute, registerRoute, ingredientsRoute, accessTokenString, refreshTokenString } from "./constants";
-import { TRefreshOption } from "../services/types/data";
+import { TRefreshOption, TOrderWithNumber, TGetIngredients, TRegistration, TRefresh, TGetUser, TMakeOrder } from "../services/types/data";
 
 const Api = "https://norma.nomoreparties.space/api";
 
-function onResponse(res: Response): Promise<any> {
+function onResponse<T>(res: Response): Promise<T> {
     return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
-function request(url: string, options?: RequestInit) {
+function request<T>(url: string, options?: RequestInit) {
     // принимает два аргумента: урл и объект опций, как и `fetch`
-    return fetch(url, options).then(onResponse);
+    return fetch(url, options).then(onResponse<T>);
 }
 
 export const getOrderWithNumber = (number: string) => {
-    return request(`${Api}/${profileOrdersRoute}/${number}`);
+    return request<TOrderWithNumber>(`${Api}/${profileOrdersRoute}/${number}`);
 };
 
 export const getData = () => {
-    return request(`${Api}${ingredientsRoute}`);
+    return request<TGetIngredients>(`${Api}${ingredientsRoute}`);
 };
 
 export const setRegistration = (email: string, password: string, name: string) => {
-    return request(`${Api}/auth${registerRoute}`, {
+    return request<TRegistration>(`${Api}/auth${registerRoute}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -93,7 +93,7 @@ export const getPassword = (newPassword: string, token: string) => {
 };
 
 export const refreshToken = () => {
-    return request(`${Api}/auth/token`, {
+    return request<TRefresh>(`${Api}/auth/token`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -105,7 +105,7 @@ export const refreshToken = () => {
 };
 
 
-export const fetchWithRefresh = async (url: string, options: RequestInit & TRefreshOption) => {
+export const fetchWithRefresh = async (url: string, options: RequestInit & TRefreshOption): Promise<TGetUser> => {
     try {
         return await request(url, options);
     } catch (err: any) {
@@ -128,7 +128,7 @@ export const fetchWithRefresh = async (url: string, options: RequestInit & TRefr
     }
 };
 
-export const getUserRefresh = () => fetchWithRefresh(`${Api}/auth/user`, {
+export const getUserRefresh = () => fetchWithRefresh (`${Api}/auth/user`, {
     method: 'GET',
     headers: {
         "Content-Type": "application/json",
@@ -151,7 +151,7 @@ export const patchUserRefresh = (name: string, email: string, password: string) 
 });
 
 export const makeOrder = (IDs: string[]) => {
-    return request(`${Api}/${profileOrdersRoute}`, {
+    return request<TMakeOrder>(`${Api}/${profileOrdersRoute}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",

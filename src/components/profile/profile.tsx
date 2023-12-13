@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../../services/actions/user/actions';
 import { useForm } from '../../hooks/hooks';
 import { getUserNameSelector, getUserEmailSelector } from '../../utils/constants';
+import { useEffect } from 'react';
 
 export default function Profile() {
 
