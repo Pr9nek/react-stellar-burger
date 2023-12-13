@@ -8,7 +8,7 @@ import { TIngredient } from "../../../services/types/data";
 const IngredientDetails: FC = () => {
     const { id } = useParams();
     const ingredients = useSelector(getIngredientsSelector);
-    const ingredient = ingredients.find((item: TIngredient) => item._id === id);
+    const ingredient = ingredients?.find((item: TIngredient) => item._id === id);
     const location = useLocation();
     if (!ingredient) {return null};
     return (

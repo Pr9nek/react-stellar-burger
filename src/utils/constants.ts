@@ -8,6 +8,10 @@ export const getOrderDataOrderSelector = (store: RootState) => store.orderData.o
 export const getOrderDataIsLoadingSelector = (store: RootState) => store.orderData.isLoading;
 export const getCurrentTabSelector = (store: RootState)  => store.ingredients.currentTab;
 export const getBurgerConstructorSelector = (store: RootState) => store.burgerConstructor;
+export const getUserNameSelector = (store: RootState) => store.user.user?.name; 
+export const getUserEmailSelector = (store: RootState) => store.user.user?.email; 
+export const getAuthSelector = (store: RootState) => store.user.isAuthChecked;
+export const getIngredientsStore = (store: RootState) => store.ingredients;
 
 export const homeRoute: string = "/";
 export const feedRoute: string = "/feed";

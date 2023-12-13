@@ -22,7 +22,7 @@ const Feed: FC = () => {
     }, [dispatch]);
 
     // const getFeedSelector = store => store.feed
-    const { isLoading, Error, orders } = useSelector(getFeedSelector);
+    const { isLoading, error, orders } = useSelector(getFeedSelector);
 
     return (
         <div className={styles.global}>
@@ -32,9 +32,9 @@ const Feed: FC = () => {
             <main className={`${styles.main} `}>
                 <section className={`${styles.section1} pb-10 custom-scroll`}>
                     {isLoading && 'Загрузка...'}
-                    {Error && 'Произошла ошибка'}
+                    {error && 'Произошла ошибка'}
                     {!isLoading &&
-                        !Error &&
+                        !error &&
                         orders !== null &&
                         orders.map((order: TOrder) => (
                             <Link
@@ -50,9 +50,9 @@ const Feed: FC = () => {
 
                 <section className={`${styles.section2} pb-10`}>
                     {isLoading && 'Загрузка...'}
-                    {Error && 'Произошла ошибка'}
+                    {error && 'Произошла ошибка'}
                     {!isLoading &&
-                        !Error &&
+                        !error &&
                         orders !== null && <Statistics />}
 
                 </section>

@@ -9,7 +9,7 @@ import { FC } from "react";
 import { TDragItem, IListItem } from "../../../services/types";
 
 const ListItem: FC <IListItem> = ({ name, price, image, index, moveIngredient, id }) => {
-
+    const dispatchId = id as string;
     const dispatch = useDispatch();
     const ref = useRef<HTMLDivElement>(null);
 
@@ -47,14 +47,13 @@ const ListItem: FC <IListItem> = ({ name, price, image, index, moveIngredient, i
     const opacity = isDragging ? { opacity: 0 } : { opacity: 1 };
    
     return (
-
         <div ref={ref} className={ListStyles.list} style={opacity}>
             <DragIcon type="primary" />
             <ConstructorElement
                 text={name}
                 price={price}
                 thumbnail={image}
-                handleClose={ () => dispatch(deleteItem({ id })) }
+                handleClose={ () => dispatch(deleteItem(dispatchId)) }
             />
         </div>
     )

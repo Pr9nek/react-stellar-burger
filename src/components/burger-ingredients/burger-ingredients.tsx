@@ -41,9 +41,9 @@ import { FC } from "react";
         }
     };
 
-    const buns: TIngredient[] = useMemo(() => ingredients.filter(x => x.type === "bun"), [ingredients]);
-    const mains: TIngredient[] = useMemo(() => ingredients.filter(x => x.type === "main"), [ingredients]);
-    const sauces: TIngredient[] = useMemo(() => ingredients.filter(x => x.type === "sauce"), [ingredients]);
+    const buns: TIngredient[] = useMemo(() => ingredients?.filter(x => x.type === "bun"), [ingredients]) as TIngredient[];
+    const mains: TIngredient[] = useMemo(() => ingredients?.filter(x => x.type === "main"), [ingredients]) as TIngredient[];
+    const sauces: TIngredient[] = useMemo(() => ingredients?.filter(x => x.type === "sauce"), [ingredients]) as TIngredient[];
 
     return (
         <>
@@ -66,7 +66,7 @@ import { FC } from "react";
             <div className={`${StylesIngrediets.lists} custom-scroll`} onScroll={handleScrollGroups}>
                 <p ref={bunsRef} className="text text_type_main-medium">Булки</p>
                 <div className={`${StylesIngrediets.cards} pt-6 `}>
-                    {ingredients.length === 0 ? (<div>Loading...</div>) :
+                    {ingredients?.length === 0 ? (<div>Loading...</div>) :
                         buns.map((bun) => (
                             <Card key={bun._id} ingredient={bun} />
                         ))}

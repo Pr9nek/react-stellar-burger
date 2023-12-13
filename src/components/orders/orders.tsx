@@ -5,14 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { connect, disconnect } from "../../services/actions/profileFeed/actions";
 import { useLocation, Link } from "react-router-dom";
 import { profileRoute, profileOrdersRoute, accessTokenString } from "../../utils/constants";
+import { RootState } from "../../services/types";
 
 export default function Orders() {
     const dispatch = useDispatch();
     const location = useLocation();
-    const { isLoading, Error, orders } = useSelector(store => store.profileFeed);
+    const { isLoading, error, orders } = useSelector((store: RootState) => store.profileFeed);
 
     const token = localStorage.getItem(accessTokenString);
-    const tokenShot = token.split('Bearer ')[1];
+    const tokenShot = token?.split('Bearer ')[1];
     const PROFILE_ORDERS_URL = `wss://norma.nomoreparties.space/orders?token=${tokenShot}`;
 
     useEffect(() => {
@@ -27,9 +28,9 @@ export default function Orders() {
     return (
         <div className={`${styles.container} custom-scroll`}>
             {isLoading && 'Загрузка...'}
-            {Error && 'Произошла ошибка'}
+            {error && 'Произошла ошибка'}
             {!isLoading &&
-                !Error &&
+                !error &&
                 orders !== null &&
                 [...orders].reverse().map((order) => (
                     <Link

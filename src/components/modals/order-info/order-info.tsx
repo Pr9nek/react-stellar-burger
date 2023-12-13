@@ -38,7 +38,7 @@ export default function OrderInfo() {
 
     const orderIngredients = useMemo(() =>
         order?.ingredients.map((ingredientId: string) =>
-            ingredients.find((ingredient: TIngredient) =>
+            ingredients?.find((ingredient: TIngredient) =>
                 ingredientId === ingredient._id
             ))
         , [ingredients, order]) as TIngredient[];

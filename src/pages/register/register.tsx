@@ -10,7 +10,7 @@ export default function Register() {
     const {values, handleChange} = useForm({ name: '', email: '', password: '' });
     const dispatch = useDispatch();
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         dispatch(setUserRegistration(values.email, values.password, values.name));
     }

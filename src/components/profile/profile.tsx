@@ -3,23 +3,23 @@ import styles from "./profile.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../../services/actions/user/actions';
 import { useForm } from '../../hooks/hooks';
+import { getUserNameSelector, getUserEmailSelector } from '../../utils/constants';
 
 export default function Profile() {
 
     const dispatch = useDispatch();
-    const getUserNameSelector = store => store.user.user.name; 
-    const getUserEmailSelector = store => store.user.user.email; 
-    const name = useSelector(getUserNameSelector);
-    const login = useSelector(getUserEmailSelector);
+    
+    const name = useSelector(getUserNameSelector) as string;
+    const login = useSelector(getUserEmailSelector) as string;
     const {values, handleChange, setValues} = useForm({name: name, email: login, password: '******'});
 
-    const onReset = (e) => {
+    const onReset = (e: React.FormEvent) => {
         setValues({
             name: name, email: login, password: '******'
         });
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         dispatch(editUser(values.name, values.email, values.password));
     }
@@ -37,12 +37,12 @@ export default function Profile() {
                     size={'default'}
                     icon={'EditIcon'}
                 />
-                <EmailInput
+                <Input
                     placeholder={'Логин'}
                     onChange={handleChange}
                     value={values.email}
                     name={'email'}
-                    isIcon={false}
+                    // isIcon={false}
                     icon={'EditIcon'}
                 />
                 <PasswordInput

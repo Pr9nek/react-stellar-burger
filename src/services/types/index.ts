@@ -14,6 +14,7 @@ import { FEED_CONNECT, FEED_WS_CONNECTING, FEED_WS_ERROR, FEED_WS_OPEN, FEED_WS_
 import { ORDERS_CONNECT, ORDERS_WS_CONNECTING, ORDERS_WS_ERROR, ORDERS_WS_OPEN, ORDERS_WS_CLOSE, ORDERS_WS_GET_FEED, ORDERS_DISCONNECT } from "../constants/profileFeed";
 import { ReactNode } from "react";
 import { TOrder } from "./data";
+import { boolean } from "yargs";
 
 export type RootState = ReturnType<typeof store.getState>;
 export type TAppActions =
@@ -62,4 +63,13 @@ export interface ICardIngredient {
 }
 export interface ICardOrder {
     order: TOrder;
+}
+
+export interface IProtected {
+    onlyUnAuth?: boolean;
+    component: JSX.Element;
+}
+
+export interface INotProtected {
+    component: JSX.Element;
 }

@@ -7,7 +7,7 @@ import { profileRoute, profileOrdersRoute, loginRoute, refreshTokenString } from
 export default function ProfilePage() {
     const refreshToken = localStorage.getItem(refreshTokenString);
     const dispatch = useDispatch();
-    const logOut = (e) => {
+    const logOut = (e: React.FormEvent) => {
         e.preventDefault();
         dispatch(logOutUser(refreshToken));
     }

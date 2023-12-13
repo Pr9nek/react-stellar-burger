@@ -12,7 +12,7 @@ export default function ResetPassword() {
     const navigate = useNavigate();
     const resetFlag = localStorage.getItem("resetPassword");
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         getPassword(values.password, values.code)
             .then(() => {

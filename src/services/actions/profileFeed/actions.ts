@@ -3,9 +3,11 @@ import { TWSMessage } from "../../types/data";
 
 export interface IConnect {
     readonly type: typeof ORDERS_CONNECT;
+    readonly payload: string;
 }
 export interface IDisconnect {
     readonly type: typeof ORDERS_DISCONNECT;
+    readonly payload: string;
 }
 export interface IError {
     readonly type: typeof ORDERS_WS_ERROR;
@@ -40,6 +42,7 @@ export const connect = (url: string): IConnect => ({
     payload: url
 });
 
-export const disconnect = (): IDisconnect => ({
-    type: ORDERS_DISCONNECT
+export const disconnect = (url: string): IDisconnect => ({
+    type: ORDERS_DISCONNECT,
+    payload: url
 });

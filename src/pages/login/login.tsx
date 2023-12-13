@@ -10,7 +10,7 @@ function Login() {
     const {values, handleChange} = useForm({email: '', password: '' });
     const dispatch = useDispatch();
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         dispatch(logInUser(values.email, values.password));
     }

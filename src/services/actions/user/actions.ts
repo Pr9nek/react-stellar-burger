@@ -19,6 +19,7 @@ export interface IRegistrationSuccess {
 }
 export interface IRegistrationFailed {
     readonly type: typeof USER_REG_FAILED;
+    readonly payload: string;
 }
 export interface ICheckUserLogin {
     readonly type: typeof CHECK_USER_LOGIN;
@@ -29,6 +30,7 @@ export interface ILoginSuccess {
 }
 export interface ILoginFailed {
     readonly type: typeof USER_LOGIN_FAILED;
+    readonly payload: string;
 }
 export interface ISetAuthChecked {
     readonly type: typeof SET_AUTH_CHECKED;

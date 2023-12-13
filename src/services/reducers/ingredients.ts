@@ -10,7 +10,7 @@ import { TIngredient } from '../types/data';
 type TIngredientsState = {
     isLoading: boolean;
     error: null | string;
-    ingredients: TIngredient[];
+    ingredients: TIngredient[] | null;
     currentTab: string;
 };
 
