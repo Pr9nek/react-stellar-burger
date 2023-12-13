@@ -23,6 +23,8 @@ export default function Orders() {
         }
     }, [dispatch]);
 
+    if (error) {console.log(error);
+    }
     // console.log(orders);
 
     return (

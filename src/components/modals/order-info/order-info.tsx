@@ -9,6 +9,7 @@ import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-component
 import { getIngredientsSelector } from "../../../utils/constants";
 import { TOrder, TIngredient } from "../../../services/types/data";
 import { RootState } from "../../../services/types";
+import { connect, disconnect } from "../../../services/actions/profileFeed/actions";
 
 export default function OrderInfo() {
     const dispatch = useDispatch();
@@ -32,8 +33,8 @@ export default function OrderInfo() {
             return order;
         }}
     };  
-   
     const order = useSelector(findOrder);
+    
     const ingredients = useSelector(getIngredientsSelector);
 
     const orderIngredients = useMemo(() =>
@@ -42,12 +43,6 @@ export default function OrderInfo() {
                 ingredientId === ingredient._id
             ))
         , [ingredients, order]) as TIngredient[];
-
-    useEffect(() => {
-        if (!order) {
-            dispatch(setCurrentOrder(number))
-        }
-    }, []);
 
     const multiply = (ingredient: TIngredient) => {
         let res = orderIngredients?.filter((x) => x._id === ingredient._id);
@@ -63,23 +58,45 @@ export default function OrderInfo() {
     orderIngredients?.reduce((acc, i) => acc + i.price, 0)
     , [orderIngredients]);
 
+    const current = useSelector((store: RootState) => store.currentOrder.orders)
+    const feed = useSelector((store: RootState) => store.feed.orders)
+    
+
+    const ORDERS_ALL_URL: string = "wss://norma.nomoreparties.space/orders/all";
+
+    useEffect(() => {
+        dispatch(connect(ORDERS_ALL_URL));
+        return () => {
+            dispatch(disconnect(ORDERS_ALL_URL));
+        }
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (!order) {
+            dispatch(setCurrentOrder(number));
+        }
+    }, []);
+    
+    
+    console.log(feed);
     if (!order) {
+        console.log('FFFFF');
         return null;
     }
 
     return (
         <div className={background ? styles.container : styles.page}>
-            <p className={`${styles.number} text text_type_digits-default`}>{`#0${order.number}`}</p>
+            <p className={`${styles.number} text text_type_digits-default`}>{`#0${order?.number}`}</p>
             <p className="text text_type_main-medium mt-10 mb-3">
-                {order.name}
+                {order?.name}
             </p>
-            {order.status === 'done' ? (
+            {order?.status === 'done' ? (
                 <p className={`${styles.statusDone} text text_type_main-default mb-15`} >
                     {order.status === 'done' ? 'Выполнен' : order.status === 'pending' ? 'Готовится' : order.status === 'created' ? 'Создан' : null}
                 </p>
             ) : (
                 <p className="text text_type_main-default mb-15" >
-                    {order.status === 'done' ? 'Выполнен' : order.status === 'pending' ? 'Готовится' : order.status === 'created' ? 'Создан' : null}
+                    {order?.status === 'done' ? 'Выполнен' : order?.status === 'pending' ? 'Готовится' : order?.status === 'created' ? 'Создан' : null}
                 </p>
             )
             }

@@ -43,6 +43,7 @@ export const profileFeedReducer = (state = initialProfileFeedState, action: TPro
             return {
                 ...state,
                 error: action.payload,
+                
             };
         case ORDERS_WS_GET_FEED:
             return {

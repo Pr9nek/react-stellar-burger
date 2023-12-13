@@ -10,7 +10,6 @@ import { profileRoute, profileOrdersRoute } from "../../../utils/constants";
 import { ICardOrder } from "../../../services/types";
 import { FC } from "react";
 
-
 const CardOrder: FC<ICardOrder> = ({ order }) => {
     const ingredients = useSelector(getIngredientsSelector);
     const isProfileInfo = useMatch(`${profileRoute}/${profileOrdersRoute}`);
