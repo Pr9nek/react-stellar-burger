@@ -1,10 +1,9 @@
-import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from "./profile.module.css";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { editUser } from '../../services/actions/user/actions';
 import { useForm } from '../../hooks/hooks';
 import { getUserNameSelector, getUserEmailSelector } from '../../utils/constants';
-import { useEffect } from 'react';
 
 export default function Profile() {
 

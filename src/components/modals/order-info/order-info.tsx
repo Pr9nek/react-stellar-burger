@@ -1,5 +1,5 @@
 import { useParams, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from '../../../hooks/hooks';
 import { setCurrentOrder } from "../../../services/actions/currentOrder/actions";
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useMemo } from "react";
@@ -58,10 +58,6 @@ export default function OrderInfo() {
     orderIngredients?.reduce((acc, i) => acc + i.price, 0)
     , [orderIngredients]);
 
-    const current = useSelector((store: RootState) => store.currentOrder.orders)
-    const feed = useSelector((store: RootState) => store.feed.orders)
-    
-
     const ORDERS_ALL_URL: string = "wss://norma.nomoreparties.space/orders/all";
 
     useEffect(() => {
@@ -75,11 +71,8 @@ export default function OrderInfo() {
         if (!order) {
             dispatch(setCurrentOrder(number));
         }
-    }, []);
-    // console.log(current);
-    
-    
-    console.log(feed);
+    }, [dispatch, number, order]);
+
     if (!order) {
         console.log('FFFFF');
         return null;

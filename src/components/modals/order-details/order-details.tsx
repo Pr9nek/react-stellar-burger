@@ -1,13 +1,13 @@
 import stylesOrder from "./order-details.module.css";
 import DoneIcon from "../../../images/done.png";
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../hooks/hooks';
 import { getOrderDataOrderSelector } from "../../../utils/constants";
 import { FC } from "react";
 
 
 const OrderDetails: FC = () => {
 
-    const order: number | null= useSelector(getOrderDataOrderSelector);
+    const order: string | null= useSelector(getOrderDataOrderSelector);
 
     return (
         <div className={`${stylesOrder.container} mt-4`}>

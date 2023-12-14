@@ -2,7 +2,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import CardStyle from "./card.module.css";
 import { useLocation, Link } from "react-router-dom";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../hooks/hooks';
 import { useDrag } from "react-dnd";
 import { FC, useMemo } from 'react';
 import { ingredientsRoute } from "../../../utils/constants";
@@ -12,8 +12,6 @@ import { ICardIngredient } from "../../../services/types";
 const Card: FC<ICardIngredient> = ({ ingredient }) => {
     const location = useLocation();
     const id = ingredient['_id'];
-
-    // const dispatch = useDispatch();
 
     const [{ isDrag }, dragRef] = useDrag({
         type: "ingredient",
@@ -40,9 +38,6 @@ const Card: FC<ICardIngredient> = ({ ingredient }) => {
                     to={`${ingredientsRoute}/${id}`}
                     className={`${CardStyle.card} pl-4 pr-4`}
                     ref={dragRef}
-                    // onClick={() => {
-                    //     dispatch(setCurrent(ingredient));
-                    // }}
                     state={{ background: location }}>
                     <img alt={ingredient.name} src={ingredient.image_large} className="pl-4 pr-4" />
                     <div className={`${CardStyle.price} pb-1 pt-1`}>

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks/hooks';
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import ListItem from "./list-item/list-item";
 import StylesConstructor from "./burger-constructor.module.css";
@@ -10,7 +10,7 @@ import Modal from "../modals/modal/modal";
 import OrderDetails from "../modals/order-details/order-details";
 import { getOrder } from '../../services/actions/orderDetails/actions';
 import { useDrop } from "react-dnd";
-import { addBun, addIngredient, moveIngredient, resetConstructor } from '../../services/actions/burgerConstructor/actions';
+import { addBun, addIngredient, moveIngredient } from '../../services/actions/burgerConstructor/actions';
 import { clearOrder } from '../../services/actions/orderDetails/actions';
 import { useNavigate } from 'react-router-dom';
 import { loginRoute, getOrderDataOrderSelector, getBurgerConstructorStore, getUserSelector } from "../../utils/constants";

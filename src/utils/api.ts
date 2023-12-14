@@ -1,5 +1,5 @@
 import { profileOrdersRoute, loginRoute, registerRoute, ingredientsRoute, accessTokenString, refreshTokenString } from "./constants";
-import { TRefreshOption, TOrderWithNumber, TGetIngredients, TRegistration, TRefresh, TGetUser, TMakeOrder } from "../services/types/data";
+import { TRefreshOption, TOrderWithNumber, TGetIngredients, TRegistration, TRefresh, TGetUser, TMakeOrder, TLogOut, TResetPassword, TNewPassword } from "../services/types/data";
 
 const Api = "https://norma.nomoreparties.space/api";
 
@@ -35,7 +35,7 @@ export const setRegistration = (email: string, password: string, name: string) =
 }
 
 export const logIn = (email: string, password: string) => {
-    return request(`${Api}/auth${loginRoute}`, {
+    return request<TRegistration>(`${Api}/auth${loginRoute}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export const logIn = (email: string, password: string) => {
 }
 
 export const logOut = () => {
-    return request(`${Api}/auth/logout`, {
+    return request<TLogOut>(`${Api}/auth/logout`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -64,7 +64,7 @@ export const logOut = () => {
 };
 
 export const resetPassword = (email: string) => {
-    return request(`${Api}/password-reset`, {
+    return request<TResetPassword>(`${Api}/password-reset`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -78,7 +78,7 @@ export const resetPassword = (email: string) => {
 };
 
 export const getPassword = (newPassword: string, token: string) => {
-    return request(`${Api}/password-reset/reset`, {
+    return request<TNewPassword>(`${Api}/password-reset/reset`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -105,7 +105,7 @@ export const refreshToken = () => {
 };
 
 
-export const fetchWithRefresh = async (url: string, options: RequestInit & TRefreshOption): Promise<TGetUser> => {
+export const fetchWithRefresh = async (url: string, options: RequestInit & TRefreshOption): Promise<TGetUser | TMakeOrder> => {
     try {
         return await request(url, options);
     } catch (err: any) {
@@ -134,8 +134,7 @@ export const getUserRefresh = () => fetchWithRefresh (`${Api}/auth/user`, {
         "Content-Type": "application/json",
         Authorization: localStorage.getItem(accessTokenString) as string
     }
-});
-
+}) as Promise<TGetUser>;
 
 export const patchUserRefresh = (name: string, email: string, password: string) => fetchWithRefresh(`${Api}/auth/user`, {
     method: 'PATCH',
@@ -148,7 +147,7 @@ export const patchUserRefresh = (name: string, email: string, password: string) 
         "email": email,
         "password": password
     })
-});
+}) as Promise<TGetUser>;
 
 export const makeOrder = (IDs: string[]) => {
     return request<TMakeOrder>(`${Api}/${profileOrdersRoute}`, {
@@ -172,4 +171,4 @@ export const makeOrderRefresh = (IDs: string[]) => fetchWithRefresh(
         body: JSON.stringify({
             ingredients: IDs
         })
-    })
+    }) as Promise<TMakeOrder>

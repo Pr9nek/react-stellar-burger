@@ -1,5 +1,5 @@
 import styles from "./statistics.module.css";
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../hooks/hooks';
 import { getFeedSelector } from "../../utils/constants";
 
 export default function Statistics() {
@@ -7,8 +7,6 @@ export default function Statistics() {
     const { orders, total, totalToday } = useSelector(getFeedSelector);
     const done = orders.filter((i) => i.status === 'done')
     const inwork = orders.filter((i) => i.status !== 'done')
-    // console.log(orders);
-    // console.log(inwork);
 
     return (
         <>

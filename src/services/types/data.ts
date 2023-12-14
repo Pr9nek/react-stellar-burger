@@ -1,8 +1,9 @@
+// todo неправильно
 export type TOrder = {
     createdAt: string;
     ingredients: string[];
     name: string;
-    number: number | string;
+    number: string;
     status: string;
     updatedAt: string;
     _id: string;
@@ -13,12 +14,17 @@ export type TOwner = {
     email: string;
     createdAt: string;
     updatedAt: string;
-}
+};
 
-export type TOrderDetails = TOrder & {
-    price: number;
-    owner: TOwner;
-}
+type TOrderInDetails = Omit<TOrder, 'ingredients'> & TOwner & {
+    ingredients: TIngredient[];
+};
+
+export type TMakeOrder = {
+    name: string;
+    order: TOrderInDetails;
+    success: boolean;
+};
 
 export type TWSMessage = {
     orders: TOrder[];
@@ -71,7 +77,20 @@ export type TRegistration = {
 
 export type TRefresh = Omit<TRegistration, 'user'>
 export type TGetUser = Omit<TRegistration, 'accessToken' | 'refreshToken'>
-export type TMakeOrder = {
-    name: string;
-    order: TOrderDetails;
-};
+
+export type TLogOut = {
+    success: boolean;
+    message: string;
+}
+
+export type TResetPassword = {
+    success: boolean;
+    message: string;
+}
+
+export type TNewPassword = {
+    success: boolean;
+    message: string;
+}
+
+

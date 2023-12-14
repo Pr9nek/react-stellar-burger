@@ -1,5 +1,5 @@
 import Card from "./card/card";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks/hooks';
 import StylesIngrediets from "./burger-ingredients.module.css";
 import { useMemo, useRef } from "react";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';

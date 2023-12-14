@@ -1,6 +1,6 @@
 import {
     ORDER_LOADING,
-    ORDER__LOAD_SUCCESS,
+    ORDER_LOAD_SUCCESS,
     ORDER_ERROR,
     CLEAR_ORDER
 } from '../constants/orderDetails';
@@ -8,7 +8,7 @@ import { TOrderDetailsActions } from '../actions/orderDetails/actions';
 
 type TOrderState = {
     readonly error: null | string;
-    readonly order: number | null;
+    readonly order: string | null;
     readonly isLoading: boolean;
 };
 
@@ -26,7 +26,7 @@ export const orderReducer = (state = initialOrderState, action: TOrderDetailsAct
                 error: null,
                 isLoading: true,
             };
-        case ORDER__LOAD_SUCCESS:
+        case ORDER_LOAD_SUCCESS:
             return {
                 ...state,
                 order: action.payload,

@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useMatch } from "react-router-dom";
 import styles from "./profile-page.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../../hooks/hooks';
 import { logOutUser } from "../../services/actions/user/actions";
 import { profileRoute, profileOrdersRoute, loginRoute, refreshTokenString } from "../../utils/constants";
 

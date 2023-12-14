@@ -124,7 +124,7 @@ export const checkUserAuth: AppThunk = () => (dispatch) => {
     }
 };
 
-export const logInUser: AppThunk = (email: string, password: string) => (dispatch) => {
+export const logInUser: AppThunk  = (email: string, password: string) => (dispatch) => {
     dispatch({
         type: CHECK_USER_LOGIN
     });

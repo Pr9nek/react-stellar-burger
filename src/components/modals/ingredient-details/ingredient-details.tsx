@@ -1,7 +1,7 @@
 import stylesDetails from "./ingredient-details.module.css";
 import { getIngredientsSelector } from "../../../utils/constants";
 import { useParams, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from '../../../hooks/hooks';
 import { FC } from "react";
 import { TIngredient } from "../../../services/types/data";
 

@@ -1,7 +1,7 @@
 import styles from "./orders.module.css";
 import CardOrder from "./card-order/card-order";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks/hooks';
 import { connect, disconnect } from "../../services/actions/profileFeed/actions";
 import { useLocation, Link } from "react-router-dom";
 import { profileRoute, profileOrdersRoute, accessTokenString } from "../../utils/constants";
@@ -21,11 +21,10 @@ export default function Orders() {
         return () => {
             dispatch(disconnect(PROFILE_ORDERS_URL));
         }
-    }, [dispatch]);
+    }, [dispatch, PROFILE_ORDERS_URL]);
 
     if (error) {console.log(error);
     }
-    // console.log(orders);
 
     return (
         <div className={`${styles.container} custom-scroll`}>

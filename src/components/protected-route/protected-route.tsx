@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector } from '../../hooks/hooks';
 import { Navigate, useLocation } from "react-router-dom";
 import { getUserSelector } from "../../utils/constants";
 import { homeRoute, loginRoute, getAuthSelector } from "../../utils/constants";

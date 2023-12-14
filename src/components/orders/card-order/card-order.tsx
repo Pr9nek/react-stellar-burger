@@ -1,7 +1,7 @@
 import styles from "./card.order.module.css";
 import { v4 as uuidv4 } from 'uuid';
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../hooks/hooks';
 import { useMemo } from "react";
 import { useMatch } from "react-router-dom";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";

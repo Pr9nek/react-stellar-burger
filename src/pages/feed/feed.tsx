@@ -1,5 +1,5 @@
 import styles from "./feed.module.css";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks/hooks';
 import Statistics from "../../components/statistics/statistics";
 import { useEffect } from "react";
 import { connect, disconnect } from "../../services/actions/feed/actions";
