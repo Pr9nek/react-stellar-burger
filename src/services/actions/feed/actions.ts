@@ -7,6 +7,7 @@ export interface IFeedConnectAction{
 }
 export interface IFeedDisconnectAction {
     readonly type: typeof FEED_DISCONNECT;
+    readonly payload: string;
 }
 export interface IFeedConnectingAction {
     readonly type: typeof FEED_WS_CONNECTING;
@@ -40,6 +41,7 @@ export const connect = (url: string): IFeedConnectAction => ({
     payload: url
 });
 
-export const disconnect = (): IFeedDisconnectAction => ({
-    type: FEED_DISCONNECT
+export const disconnect = (url: string): IFeedDisconnectAction => ({
+    type: FEED_DISCONNECT,
+    payload: url
 });

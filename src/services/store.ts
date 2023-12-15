@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { orderReducer} from './reducers/orderData';
+import { combineReducers } from '@reduxjs/toolkit';
+import { orderReducer } from './reducers/orderData';
 import { ingredientsReducer } from './reducers/ingredients';
 import { ingredientDetailsReducer } from './reducers/details';
 import { burgerConstructorReducer } from './reducers/burgerConstructor';
@@ -31,18 +32,20 @@ const profileFeedMiddleware = socketMiddleware({
   onMessage: ORDERS_WS_GET_FEED
 });
 
+export const reducer = combineReducers({
+  ingredients: ingredientsReducer,
+  details: ingredientDetailsReducer,
+  burgerConstructor: burgerConstructorReducer,
+  orderData: orderReducer,
+  user: userReducer,
+  feed: feedReducer,
+  profileFeed: profileFeedReducer,
+  currentOrder: currentOrderReducer
+})
+
 export const store = configureStore({
-    reducer: {
-      ingredients: ingredientsReducer,
-      details: ingredientDetailsReducer,
-      burgerConstructor: burgerConstructorReducer,
-      orderData: orderReducer,
-      user: userReducer,
-      feed: feedReducer,
-      profileFeed: profileFeedReducer,
-      currentOrder: currentOrderReducer
-    },
-    middleware: (getDefaultMiddleware) => {
-      return getDefaultMiddleware().concat(feedMiddleware,profileFeedMiddleware);
+  reducer: reducer,
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(feedMiddleware, profileFeedMiddleware);
   }
-  });
+});

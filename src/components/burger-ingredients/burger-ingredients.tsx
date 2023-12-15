@@ -52,13 +52,13 @@ import { FC } from "react";
             </h1>
             <div ref={tabsRef} className="mb-10">
                 <div className={StylesIngrediets.tabsContaiber}>
-                <Tab value="Булки" active={currentTab === 'Булки'} >
+                <Tab value="Булки" active={currentTab === 'Булки'} onClick={() => {}} >
                     Булки
                 </Tab>
-                <Tab value="Соусы" active={currentTab === 'Соусы'} >
+                <Tab value="Соусы" active={currentTab === 'Соусы'} onClick={() => {}} >
                     Соусы
                 </Tab>
-                <Tab value="Начинки" active={currentTab === 'Начинки'} >
+                <Tab value="Начинки" active={currentTab === 'Начинки'} onClick={() => {}} >
                     Начинки
                 </Tab>
                 </div>

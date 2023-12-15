@@ -63,7 +63,7 @@ export default function OrderInfo() {
     useEffect(() => {
         dispatch(connect(ORDERS_ALL_URL));
         return () => {
-            dispatch(disconnect(ORDERS_ALL_URL));
+            // dispatch(disconnect(ORDERS_ALL_URL));
         }
     }, [dispatch]);
 

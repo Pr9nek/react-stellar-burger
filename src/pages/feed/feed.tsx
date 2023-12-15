@@ -17,7 +17,7 @@ const Feed: FC = () => {
     useEffect(() => {
         dispatch(connect(ORDERS_ALL_URL));
         return () => {
-            dispatch(disconnect());
+            dispatch(disconnect(ORDERS_ALL_URL));
         }
     }, [dispatch]);
 
