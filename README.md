@@ -42,4 +42,10 @@ Oсвоить технологии React, Redux, React Router, WebSocket, TypeSc
 
 Страница ленты заказов
 
+**ЗАПУСК ПРОЕКТА**
+```sh
+npm i
+npm run dev
+```
+
 
